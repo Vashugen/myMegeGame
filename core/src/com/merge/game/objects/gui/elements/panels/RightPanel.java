@@ -5,15 +5,20 @@ import com.merge.game.objects.DisplayObject;
 
 public class RightPanel extends DisplayObject {
 
-    TrashPanel _trashPanel;
+    private TrashPanel _trashPanel;
 
     public void init() {
-        setSizeOfParent();
         setWidth(Globals.offsetX);
+        setHeight(Globals.screenHeight - Globals.offsetY * 2);
         setX(Globals.screenWidth - Globals.offsetX);
+        setY(Globals.offsetY);
 
         initUpgradePanel();
         initTrashPanel();
+    }
+
+    public DisplayObject getTrashPanel() {
+        return _trashPanel;
     }
 
     private void initUpgradePanel() {
@@ -24,4 +29,6 @@ public class RightPanel extends DisplayObject {
         addChild(_trashPanel);
         _trashPanel.init();
     }
+
+
 }

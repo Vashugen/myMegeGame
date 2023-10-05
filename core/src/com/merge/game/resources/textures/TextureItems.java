@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TextureItems {
 
-    public static TextureRegion buttonStart, generateKettle, score, gold, level, trash;
-    public static TextureRegion[] gridCell, kettle1;
+    public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, taskField, taskButton;
+    public static TextureRegion[] gridCell, kettle1, kettle2;
 
     public static void initItems(){
         initFields();
@@ -30,9 +30,13 @@ public class TextureItems {
 
         //in const
         kettle1 = new TextureRegion[4];
-
         for (int i = 0; i < 4; i++) {
             kettle1[i] = new TextureRegion(texture, 14 + i * 120, 11, 112, 112);
+        }
+
+        kettle2 = new TextureRegion[4];
+        for (int i = 0; i < 4; i++) {
+            kettle2[i] = new TextureRegion(texture,14 + i * 120, 146, 112, 112);
         }
     }
 
@@ -42,6 +46,7 @@ public class TextureItems {
         gold = new TextureRegion(texture, 707, 13,109, 109);
         level = new TextureRegion(texture, 834, 13, 138, 109);
         trash = new TextureRegion(texture, 581, 137, 109, 109);
+        task = new TextureRegion(texture, 706, 137, 284, 116);
     }
 
 }

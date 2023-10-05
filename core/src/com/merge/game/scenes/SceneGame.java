@@ -5,6 +5,7 @@ import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
 import com.merge.game.objects.Background;
+import com.merge.game.objects.game_elements.Trash;
 import com.merge.game.objects.grid.GenerateItem;
 import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.objects.grid.GridCell;
@@ -43,6 +44,8 @@ public class SceneGame extends Scene {
     private int _goldCount = 0;
     private int _levelCount = 0;
 
+    private Trash _trash;
+
     public SceneGame() {
         GameSound.playBackgroundMusic(GameSound.mainTheme);
         initGameSettings();
@@ -50,6 +53,7 @@ public class SceneGame extends Scene {
         initGrid();
         initItems();
         initPanels();
+        initTrash();
         initTasks();
     }
 
@@ -57,6 +61,7 @@ public class SceneGame extends Scene {
         super.update();
         initActiveObject();
         updateItems();
+        updateTopPanel();
     }
 
     private void initGameSettings() {
@@ -104,6 +109,12 @@ public class SceneGame extends Scene {
         _leftPanel = new LeftPanel();
         addChild(_leftPanel);
         _leftPanel.init();
+    }
+
+    private void initTrash() {
+        _trash = new Trash(TextureItems.trash);
+        _rightPanel.getTrashPanel().addChild(_trash);
+        _trash.init();
     }
 
     private void initTasks(){
@@ -157,12 +168,30 @@ public class SceneGame extends Scene {
                 }
             }
 
+            //проверяем пересечение с trash
+            if(_trash.isMouseOver()){
+                putInTrash();
+                _goldCount ++;
+            }
+
             if(!isOverlap){
                 returnActiveObject();
             }
 
             _activeObject = null;
         }
+    }
+
+    private void updateTopPanel() {
+        _topPanel.getScorePanel().setLabel(_scoreCount);
+        _topPanel.getGoldPanel().setLabel(_goldCount);
+        _topPanel.getLevelPanel().setLabel(_levelCount);
+    }
+
+    private void putInTrash() {
+        removeChild(_activeObject);
+        _items[_activeObject.getGridX()][_activeObject.getGridY()].destroy();
+        _items[_activeObject.getGridX()][_activeObject.getGridY()] = null;
     }
 
     private void updateItem(int i, int j) {

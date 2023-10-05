@@ -22,6 +22,18 @@ public class TopPanel extends DisplayObject {
         this._levelCount = _levelCount;
     }
 
+    public PLPanel getScorePanel() {
+        return _scorePanel;
+    }
+
+    public PLPanel getGoldPanel() {
+        return _goldPanel;
+    }
+
+    public PLPanel getLevelPanel() {
+        return _levelPanel;
+    }
+
     public void init() {
         setSizeOfParent();
         setHeight(Globals.offsetY);

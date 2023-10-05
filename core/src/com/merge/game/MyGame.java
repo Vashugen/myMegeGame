@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.logic.player_data.Player;
+import com.merge.game.resources.Fonts;
 import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.Textures;
 import com.merge.game.scenes.SceneManager;
@@ -49,6 +50,7 @@ public class MyGame extends ApplicationAdapter {
 
 	private void updateLoading() {
 		Textures.loadTextures();
+		Fonts.loadFonts();
 		GameSound.initMusic();
 		GameSound.initSound();
 

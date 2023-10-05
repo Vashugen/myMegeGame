@@ -19,6 +19,14 @@ public class PLPanel extends DisplayObject {
         return _label;
     }
 
+    public void setLabel(String string) {
+        _label.setString(string);
+    }
+
+    public void setLabel(int string) {
+        _label.setString(string);
+    }
+
     private void initPicture(TextureRegion texture) {
         _picture = new DisplayObject(texture);
         addChild(_picture);
@@ -35,6 +43,4 @@ public class PLPanel extends DisplayObject {
         //_label.setX(_picture.x + _picture.getWidth() + 0.05f + _label.getWidth() / 2);
         //float labelScoreCoeffX = 0.45f + 0.1f + ((labelScore.getWidth() / 2) / labelScore.getParentWidth());
     }
-
-
 }

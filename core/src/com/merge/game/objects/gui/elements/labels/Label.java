@@ -51,6 +51,9 @@ public class Label extends DisplayObject {
         setCenterCoeffY(coeffY);
     }
 
+    public static void dispose() {
+    }
+
     private void setCenterCoeffX(float coeffX) {
         _x = coeffX * getParentWidth();
         _x += -_layout.width / 2;
