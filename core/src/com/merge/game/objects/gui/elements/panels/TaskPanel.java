@@ -21,6 +21,7 @@ public class TaskPanel extends DisplayObject {
     private ArrayList<Task> addedTasks = new ArrayList<>();
 
     private int _countTask;
+    private int _countCoeff;
 
     public TaskPanel(TextureRegion texture) {
         super(texture);
@@ -28,7 +29,8 @@ public class TaskPanel extends DisplayObject {
 
     public void init() {
         _countTask = Tools.randomInt(1, 3);
-        scaleToFit(0.5f, 0.5f);
+        _countCoeff = _countTask == 1 ? 2 : 1;
+        scaleToFit(0.9f, 0.9f);
         setCenterCoeff(0.5f,0.4f);
 
         createTasks();
@@ -38,7 +40,7 @@ public class TaskPanel extends DisplayObject {
         int type, level, count;
         for (int i = 0; i < _countTask; i++){
             boolean createTask = true;
-            type = Tools.randomInt(0, TextureItems.kettle1.length) + 1;
+            type = Tools.randomInt(1, TextureItems.kettle1.length);
             level = Tools.randomInt(0, MAX_LEVEL_QUANTITY) + 1;
             //level = Math.random() > 0.5 ? 2 : 3;
             count = Math.random() > 0.5 ? 1 : 2;
@@ -75,8 +77,8 @@ public class TaskPanel extends DisplayObject {
         float fontSizeCoeff = this._countTask == 1 ? 0.03f : (0.03f / 1.5f);
         Label taskCountLabel = new Label(0, 0, fontSizeCoeff, Color.WHITE);
         this.addChild(taskCountLabel);
-        taskCountLabel.setStr(count);
-        float centerCoeffXLabel = this._countTask == 1 ? 0.75f : centerCoeffX * _countCoeff;
+        taskCountLabel.setString(task.count);
+        float centerCoeffXLabel = this._countTask == 1 ? 0.75f : CENTER_COEFF_X * _countCoeff;
         taskCountLabel.setCenterCoeff(centerCoeffXLabel, 0.4f);
 
         _countCoeff += 2;

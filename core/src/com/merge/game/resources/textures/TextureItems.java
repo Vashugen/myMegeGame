@@ -29,13 +29,15 @@ public class TextureItems {
         generateKettle = new TextureRegion(texture, 11, 9, 120, 120);
 
         //in const
-        kettle1 = new TextureRegion[4];
-        for (int i = 0; i < 4; i++) {
+        kettle1 = new TextureRegion[5];
+        kettle1[0] = new TextureRegion(texture, 11, 9, 120, 120);
+        for (int i = 1; i <= 4; i++) {
             kettle1[i] = new TextureRegion(texture, 14 + i * 112, 11, 112, 112);
         }
 
-        kettle2 = new TextureRegion[4];
-        for (int i = 0; i < 4; i++) {
+        kettle2 = new TextureRegion[5];
+        kettle2[0] = new TextureRegion(texture, 11, 9, 120, 120);
+        for (int i = 1; i <= 4; i++) {
             kettle2[i] = new TextureRegion(texture,14 + i * 112, 146, 112, 112);
         }
     }

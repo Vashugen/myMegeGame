@@ -15,11 +15,11 @@ public class MergeItem extends GridObject {
     private static TextureRegion getTexture(int type, int level, String generateType) {
         switch (generateType){
             case GenerateItemType.KETTLE:
-                switch (type){
+                switch (level){
                     case 1:
-                        return TextureItems.kettle1[level];
+                        return TextureItems.kettle1[type];
                     case 2:
-                        return TextureItems.kettle2[level];
+                        return TextureItems.kettle2[type];
                 }
         }
 

@@ -10,7 +10,7 @@ public class Trash extends GameObject {
 
     public Trash(TextureRegion texture) {
         super(texture);
-        type = GameObjectType.TRASH;
+        _type = GameObjectType.TRASH;
     }
 
     public void init() {
