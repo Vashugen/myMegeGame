@@ -1,23 +1,26 @@
 package com.merge.game.objects.game_elements;
 
 import com.merge.game.objects.DisplayObject;
+import com.merge.game.objects.grid.GridObject;
+import com.merge.game.objects.grid.MergeItem;
 import com.merge.game.objects.gui.elements.Button;
 import com.merge.game.resources.textures.TextureItems;
 
-public class Task extends DisplayObject {
+public class Task {
 
-    private DisplayObject _taskField;
-    private Button _taskButton;
+    public int type;
+    public int level;
+    public String generateType;
+    public int count;
 
-    public void init() {
-        initTaskField();
-        initTaskButton();
-
+    public Task(int type, int level, String generateType, int count) {
+        this.type = type;
+        this.level = level;
+        this.generateType = generateType;
+        this.count = count;
     }
 
-    private void initTaskField() {
-        _taskField = new DisplayObject(TextureItems.taskField);
-        scaleToFit(0.5f, 0.5f);
-        setCenterCoeff(0.5f, 0.5f);
+    public boolean exists(Task task) {
+        return this.type == task.type && this.level == task.level && this.generateType.equals(task.generateType);
     }
 }

@@ -36,6 +36,10 @@ public class GridObject extends GameObject {
         return gridY;
     }
 
+    public int getLevel() {
+        return _level;
+    }
+
     public void placeAtGrid(int x, int y) {
         setGridPosition(x, y);
         setPosition(getXByGridX(x), getYByGridY(y));
@@ -66,11 +70,11 @@ public class GridObject extends GameObject {
 
 
     public void setType(int type) {
-        this.type = type;
+        this._type = type;
     }
 
     public int getType() {
-        return type;
+        return _type;
     }
 
     public int getMaxCount() {

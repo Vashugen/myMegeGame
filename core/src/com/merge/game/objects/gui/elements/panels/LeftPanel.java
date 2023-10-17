@@ -5,21 +5,21 @@ import com.merge.game.objects.DisplayObject;
 
 public class LeftPanel extends DisplayObject {
 
-    private static final int TASKS_COUNT = 1;
+    private static final int TASKS_COUNT = 2;
 
     public void init() {
         setWidth(Globals.offsetX);
         setHeight(Globals.screenHeight - Globals.offsetY * 2);
         setY(Globals.offsetY);
 
-        initTasksPanel();
+        initTasksArea();
     }
 
-    private void initTasksPanel() {
+    private void initTasksArea() {
         for (int i = 0; i < TASKS_COUNT; i++) {
-            TaskPanel taskPanel = new TaskPanel();
-            addChild(taskPanel);
-            taskPanel.init(i);
+            TaskArea taskArea = new TaskArea();
+            addChild(taskArea);
+            taskArea.init(i);
         }
     }
 }

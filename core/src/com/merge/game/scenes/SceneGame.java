@@ -118,8 +118,7 @@ public class SceneGame extends Scene {
     }
 
     private void initTasks(){
-/*        initTaskPanel();
-        createTask();*/
+
     }
 
     private void initGenerateItem() {
