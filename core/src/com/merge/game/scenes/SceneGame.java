@@ -221,8 +221,6 @@ public class SceneGame extends Scene {
         else {
             returnActiveObject();
         }
-
-
     }
 
     private void updateMergeItem(int i, int j) {
@@ -237,6 +235,15 @@ public class SceneGame extends Scene {
 
         if(_items[i][j] == null){
             return true;
+        }
+
+        if(((MergeItem) _activeObject).match(_items[i][j])){
+            return true;
+        }
+
+        //сравнение ссылок
+        if(_activeObject == _items[i][j]){
+            return false;
         }
 
         return false;

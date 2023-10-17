@@ -29,4 +29,8 @@ public class MergeItem extends GridObject {
     public MergeItem(TextureRegion texture, float x, float y, float width, float height, int gridX, int gridY, int level, String generateType) {
         super(texture, x, y, width, height, gridX, gridY, level, generateType);
     }
+
+    public boolean match(GridObject gridObject) {
+        return this.getLevel() == gridObject.getLevel() && this.getType() == gridObject.getType() && this.getGenerateType().equals(gridObject.getGenerateType());
+    }
 }
