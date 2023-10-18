@@ -16,6 +16,8 @@ public class MergeItem extends GridObject {
 
     public MergeItem(TextureRegion texture, float x, float y, float width, float height, int gridX, int gridY, int type,  int level, String generateType) {
         super(texture, x, y, width, height, gridX, gridY, type, level, generateType);
+        _gameObjectType = GameObjectType.MERGE;
+
     }
 
     private static TextureRegion getTexture(int type, int level, String generateType) {

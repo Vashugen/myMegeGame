@@ -197,7 +197,7 @@ public class SceneGame extends Scene {
     }
 
     private void updateItem(int i, int j) {
-        if(_activeObject.getType() == GameObjectType.GENERATE){
+        if(_activeObject.getGameObjectType() == GameObjectType.GENERATE){
             updateGenerateItem(i, j);
         }else{
             updateMergeItem(i, j);
@@ -262,7 +262,7 @@ public class SceneGame extends Scene {
         removeChild(_items[i][j]);
 
         //generate items moved by this function too
-        if(_activeObject.getType() == GameObjectType.MERGE && _items[i][j] != null){
+        if(_activeObject.getGameObjectType() == GameObjectType.MERGE && _items[i][j] != null){
             ((MergeItem)_activeObject).updateLevel();
         }
 
