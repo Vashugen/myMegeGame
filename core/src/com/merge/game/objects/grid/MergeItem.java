@@ -12,6 +12,10 @@ public class MergeItem extends GridObject {
         _generateType = generateType;
     }
 
+    public MergeItem(TextureRegion texture, float x, float y, float width, float height, int gridX, int gridY, int type,  int level, String generateType) {
+        super(texture, x, y, width, height, gridX, gridY, type, level, generateType);
+    }
+
     private static TextureRegion getTexture(int type, int level, String generateType) {
         switch (generateType){
             case GenerateItemType.KETTLE:
@@ -26,11 +30,16 @@ public class MergeItem extends GridObject {
         return null;
     }
 
-    public MergeItem(TextureRegion texture, float x, float y, float width, float height, int gridX, int gridY, int level, String generateType) {
-        super(texture, x, y, width, height, gridX, gridY, level, generateType);
-    }
-
     public boolean match(GridObject gridObject) {
         return this.getLevel() == gridObject.getLevel() && this.getType() == gridObject.getType() && this.getGenerateType().equals(gridObject.getGenerateType());
+    }
+
+    public boolean isFinalLevel() {
+        return MergeItemData.getFinalLevel(this) == this.getLevel();
+    }
+
+    public void updateLevel() {
+        _level ++;
+        setTexture(getTexture(this.getType(), this.getLevel(), this.getGenerateType()));
     }
 }

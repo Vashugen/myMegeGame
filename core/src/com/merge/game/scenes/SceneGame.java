@@ -124,7 +124,7 @@ public class SceneGame extends Scene {
     private void initGenerateItem() {
         int x = Tools.randomInt(GRID_COUNT_WIDTH);
         int y = Tools.randomInt(GRID_COUNT_HEIGHT);
-        _items[x][y] = new GenerateItem(TextureItems.kettle1[0], _grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, 1, GenerateItemType.KETTLE);
+        _items[x][y] = new GenerateItem(TextureItems.kettle1[0], _grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, 1, 1, GenerateItemType.KETTLE);
         _items[x][y].setType(GameObjectType.GENERATE);
         addChild(_items[x][y]);
     }
@@ -246,21 +246,25 @@ public class SceneGame extends Scene {
             return false;
         }
 
+        //не финальный уровень у итемсов
+        if(((MergeItem) _activeObject).isFinalLevel()){
+            return false;
+        }
+
         return false;
     }
 
     private void moveItem(int i, int j) {
 
-        //TODO ?
         removeChild(_items[i][j]);
 
+        //generate items moved by this function too
         if(_activeObject.getType() == GameObjectType.MERGE && _items[i][j] != null){
-            _activeObject.updateLevel();
+            ((MergeItem)_activeObject).updateLevel();
         }
 
-        _activeObject.placeAtGrid(i, j);
-
         _items[_activeObject.getGridX()][_activeObject.getGridY()] = null;
+        _activeObject.placeAtGrid(i, j);
         _items[i][j] = _activeObject;
 
     }
@@ -275,7 +279,7 @@ public class SceneGame extends Scene {
                 int y = Tools.randomInt(GRID_COUNT_HEIGHT);
                 int index = Tools.randomInt(1, TextureItems.kettle1.length);
                 if(_items[x][y] == null){
-                    _items[x][y] = new MergeItem(TextureItems.kettle1[index], _grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, 1, generateType);
+                    _items[x][y] = new MergeItem(TextureItems.kettle1[index], _grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, index, 1, generateType);
                     itemIsCreate = true;
                     energyCount --;
                     addChild(_items[x][y]);

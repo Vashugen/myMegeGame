@@ -17,8 +17,9 @@ public class GridObject extends GameObject {
         super(texture);
     }
 
-    public GridObject(TextureRegion texture, float x, float y, float width, float height, int gridX, int gridY, int level, String generateType){
+    public GridObject(TextureRegion texture, float x, float y, float width, float height, int gridX, int gridY, int type, int level, String generateType){
         super(texture);
+        _type = type;
         _level = level;
         _generateType = generateType;
         setX(x);
@@ -83,11 +84,6 @@ public class GridObject extends GameObject {
 
     public void setMaxCount(int maxCount) {
         _maxCount = maxCount;
-    }
-
-    public void updateLevel() {
-        _level ++;
-        //setTexture(getTexture());
     }
 
     /*private TextureRegion getTexture() {
