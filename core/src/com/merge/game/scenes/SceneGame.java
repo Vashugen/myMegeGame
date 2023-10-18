@@ -240,13 +240,13 @@ public class SceneGame extends Scene {
             return true;
         }
 
-        if(((MergeItem) _activeObject).match(_items[i][j])){
-            return true;
-        }
-
         //сравнение ссылок
         if(_activeObject == _items[i][j]){
             return false;
+        }
+
+        if(((MergeItem) _activeObject).match(_items[i][j])){
+            return true;
         }
 
         //не финальный уровень у итемсов
