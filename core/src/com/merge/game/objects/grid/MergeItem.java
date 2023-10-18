@@ -1,6 +1,7 @@
 package com.merge.game.objects.grid;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.merge.game.objects.GameObjectType;
 import com.merge.game.resources.textures.TextureItems;
 
 public class MergeItem extends GridObject {
@@ -10,6 +11,7 @@ public class MergeItem extends GridObject {
         _type = type;
         _level = level;
         _generateType = generateType;
+        _gameObjectType = GameObjectType.MERGE;
     }
 
     public MergeItem(TextureRegion texture, float x, float y, float width, float height, int gridX, int gridY, int type,  int level, String generateType) {

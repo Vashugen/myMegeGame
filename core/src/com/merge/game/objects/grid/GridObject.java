@@ -11,6 +11,7 @@ public class GridObject extends GameObject {
 
     protected int _maxCount = 10;
     protected int _level = 0;
+    protected int _type = 0;
     protected String _generateType;
 
     public GridObject(TextureRegion texture) {

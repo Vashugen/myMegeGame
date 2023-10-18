@@ -146,7 +146,10 @@ public class SceneGame extends Scene {
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                     if(_items[i][j] != null && _items[i][j].isTouched()){
-                        _activeObject = _items[i][j].getType() == GameObjectType.GENERATE ? (GenerateItem) _items[i][j] : (MergeItem) _items[i][j];
+                        if(_items[i][j].getType() == GameObjectType.GENERATE){
+                            int a = 1;
+                        }
+                        _activeObject = _items[i][j].getGameObjectType() == GameObjectType.GENERATE ? (GenerateItem) _items[i][j] : (MergeItem) _items[i][j];
                     }
                 }
             }
