@@ -21,7 +21,6 @@ public class Background extends DisplayObject {
         if(getHeight() < Globals.screenHeight){
             scaleToHeight(1.0f);
         }
-
         setCenterCoeff(0.5f, 0.5f);
     }
 }

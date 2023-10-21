@@ -28,6 +28,12 @@ public class MergeItem extends GridObject {
                         return TextureItems.kettle1[type];
                     case 2:
                         return TextureItems.kettle2[type];
+                    case 3:
+                        return TextureItems.kettle3[type];
+                    case 4:
+                        return TextureItems.kettle4[type];
+                    case 5:
+                        return TextureItems.kettle5[type];
                 }
         }
 

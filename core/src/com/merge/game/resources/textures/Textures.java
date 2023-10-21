@@ -5,13 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Textures {
     public static Texture TexBackground, TexBackgroundGame;
-    public static Texture fields1, items;
+    public static Texture fields, items;
 
 
     public static void loadTextures(){
         TexBackground = loadTextureMipmap("scenes/start/background.jpg", true);
         TexBackgroundGame = loadTextureMipmap("scenes/game/backgroundGame.jpg", true);
-        fields1 = loadTextureMipmap("InterfaceB.png", true);
+        fields = loadTextureMipmap("scenes/game/Fields.png", true);
         items = loadTextureMipmap("scenes/game/MergeItems.png", true);
 
         TextureItems.initItems();
