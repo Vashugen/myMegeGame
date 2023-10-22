@@ -21,6 +21,8 @@ import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.TextureItems;
 import com.merge.game.resources.textures.Textures;
 
+import java.util.ArrayList;
+
 public class SceneGame extends Scene {
 
     private static final int GRID_COUNT_WIDTH = 9;
@@ -194,20 +196,22 @@ public class SceneGame extends Scene {
     }
 
     private void updateTaskPanel(){
+
         for (int i = 0; i < _leftPanel.getTasks().size(); i++) {
+
             TaskArea area = _leftPanel.getTasks().get(i);
 
-            //кнопка неактивна
-            area.inactiveButton();
+            area.update();
+            ArrayList <Task> addedTasks = area.getTaskPanel().getAddedTasks();
 
             //подсчёт количества подходящих для задания итемсов
             for (int j = 0; j < GRID_COUNT_WIDTH; j++) {
                 for (int k = 0; k < GRID_COUNT_HEIGHT; k++) {
                     if(_items[j][k] != null && _items[j][k].canBeMerge()){
-                        for (int l = 0; l < area.getTaskPanel().getAddedTasks().size(); l++) {
-                            if(area.getTaskPanel().getAddedTasks().get(l).exists(_items[j][k])){
-                                area.getTaskPanel().getAddedTasks().get(l).existsCount++;
-                                area.getTaskPanel().getAddedTasks().get(l).itemsToRemove.add((_items[j][k]);
+                        for (int l = 0; l < addedTasks.size(); l++) {
+                            if(addedTasks.get(l).exists(_items[j][k])){
+                                addedTasks.get(l).existsCount++;
+                                addedTasks.get(l).itemsToRemove.add((_items[j][k]));
                             }
                         }
                     }
@@ -215,8 +219,8 @@ public class SceneGame extends Scene {
             }
 
             //проверка количества имеющихся на поле итемсов
-            for (int j = 0; j < area.getTaskPanel().getAddedTasks().size(); j++) {
-                if(area.getTaskPanel().getAddedTasks().get(j).existsCount >= area.getTaskPanel().getAddedTasks().get(j).count){
+            for (int j = 0; j < addedTasks.size(); j++) {
+                if(addedTasks.get(j).existsCount >= addedTasks.get(j).count){
                     area.inactiveButton();
                 }else {
                     area.activeButton();
@@ -225,8 +229,8 @@ public class SceneGame extends Scene {
 
             if(area.buttonIsPressed()){
                 //убираем с поля итемсы из задания
-                for (int j = 0; j < area.getTaskPanel().getAddedTasks().size(); j++) {
-                    Task currentTask = area.getTaskPanel().getAddedTasks().get(i);
+                for (int j = 0; j < addedTasks.size(); j++) {
+                    Task currentTask = addedTasks.get(i);
                     for (int k = 0; k < currentTask.count; k++) {
                         GridObject itemToRemove = currentTask.itemsToRemove.get(j);
                         removeChild(itemToRemove);
@@ -235,7 +239,7 @@ public class SceneGame extends Scene {
                 }
 
                 //меняем задание
-                generateTask();
+                area.generateTask();
 
                 //подсчитываем баллы
                 //scoreCount ++;

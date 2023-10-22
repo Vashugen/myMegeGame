@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TextureItems {
 
-    public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, taskField, taskButton;
+    public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, taskField, taskAbledButton, taskDisabledButton;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
 
     public static void initItems(){
@@ -24,7 +24,8 @@ public class TextureItems {
         }
 
         taskField = new TextureRegion(texture, 198, 0, 367, 149);
-        taskButton = new TextureRegion(texture, 309, 448, 246, 121);
+        taskAbledButton = new TextureRegion(texture, 309, 448, 246, 121);
+        taskDisabledButton = new TextureRegion(texture, 316, 568, 231, 114);
     }
 
     private static void initMergeItems() {

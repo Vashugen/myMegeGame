@@ -3,12 +3,13 @@ package com.merge.game.objects.gui.elements.panels;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.gui.elements.Button;
+import com.merge.game.objects.gui.elements.buttons.TaskButton;
 import com.merge.game.resources.textures.TextureItems;
 
 public class TaskArea extends DisplayObject {
 
     TaskPanel taskPanel;
-    Button taskButton;
+    TaskButton taskButton;
 
     public void init(int count) {
         setSizeOfParent();
@@ -26,6 +27,18 @@ public class TaskArea extends DisplayObject {
         return taskButton;
     }
 
+    public void generateTask(){
+        initTaskPanel();
+    }
+
+    public void update(){
+        for (int i = 0; i < this.getTaskPanel().getAddedTasks().size(); i++) {
+            this.getTaskPanel().getAddedTasks().get(i).existsCount = 0;
+            this.getTaskPanel().getAddedTasks().get(i).itemsToRemove.clear();
+        }
+        inactiveButton();
+    }
+
     private void initTaskPanel() {
         taskPanel = new TaskPanel(TextureItems.taskField);
         addChild(taskPanel);
@@ -33,19 +46,17 @@ public class TaskArea extends DisplayObject {
     }
 
     private void initTaskButton() {
-        taskButton = new Button(TextureItems.taskButton);
+        taskButton = new TaskButton();
         addChild(taskButton);
-        taskButton.scaleToFit(0.25f, 0.25f);
-        taskButton.setCenterCoeff(0.5f, 0.5f);
-        taskButton.setY(taskPanel.y + taskPanel.getHeight() + 0.05f); //TODO исправить на coeff
+        taskButton.init();
     }
 
     public void inactiveButton() {
-        taskButton.setDisabled(true);
+        taskButton.setDisabled();
     }
 
     public void activeButton() {
-        taskButton.setDisabled(false);
+        taskButton.setAbled();
     }
 
     public boolean buttonIsPressed() {

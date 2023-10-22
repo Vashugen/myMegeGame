@@ -6,7 +6,11 @@ import com.merge.game.objects.DisplayObject;
 
 public class Button extends DisplayObject {
 
-    private boolean _isDisabled = false;
+    protected boolean _isDisabled = false;
+
+    public Button() {
+        super();
+    }
 
     public Button(Texture texture) {
         super(texture);
