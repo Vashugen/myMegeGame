@@ -5,6 +5,7 @@ import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
 import com.merge.game.objects.Background;
+import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.game_elements.Trash;
 import com.merge.game.objects.grid.GenerateItem;
 import com.merge.game.objects.grid.GenerateItemType;
@@ -14,6 +15,7 @@ import com.merge.game.objects.GameObjectType;
 import com.merge.game.objects.grid.MergeItem;
 import com.merge.game.objects.gui.elements.panels.LeftPanel;
 import com.merge.game.objects.gui.elements.panels.RightPanel;
+import com.merge.game.objects.gui.elements.panels.TaskArea;
 import com.merge.game.objects.gui.elements.panels.TopPanel;
 import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.TextureItems;
@@ -62,6 +64,7 @@ public class SceneGame extends Scene {
         initActiveObject();
         updateItems();
         updateTopPanel();
+        updateTaskPanel();
     }
 
     private void initGameSettings() {
@@ -188,6 +191,58 @@ public class SceneGame extends Scene {
         _topPanel.getScorePanel().setLabel(_scoreCount);
         _topPanel.getGoldPanel().setLabel(_goldCount);
         _topPanel.getLevelPanel().setLabel(_levelCount);
+    }
+
+    private void updateTaskPanel(){
+        for (int i = 0; i < _leftPanel.getTasks().size(); i++) {
+            TaskArea area = _leftPanel.getTasks().get(i);
+
+            //кнопка неактивна
+            area.inactiveButton();
+
+            //подсчёт количества подходящих для задания итемсов
+            for (int j = 0; j < GRID_COUNT_WIDTH; j++) {
+                for (int k = 0; k < GRID_COUNT_HEIGHT; k++) {
+                    if(_items[j][k] != null && _items[j][k].canBeMerge()){
+                        for (int l = 0; l < area.getTaskPanel().getAddedTasks().size(); l++) {
+                            if(area.getTaskPanel().getAddedTasks().get(l).exists(_items[j][k])){
+                                area.getTaskPanel().getAddedTasks().get(l).existsCount++;
+                                area.getTaskPanel().getAddedTasks().get(l).itemsToRemove.add((_items[j][k]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            //проверка количества имеющихся на поле итемсов
+            for (int j = 0; j < area.getTaskPanel().getAddedTasks().size(); j++) {
+                if(area.getTaskPanel().getAddedTasks().get(j).existsCount >= area.getTaskPanel().getAddedTasks().get(j).count){
+                    area.inactiveButton();
+                }else {
+                    area.activeButton();
+                }
+            }
+
+            if(area.buttonIsPressed()){
+                //убираем с поля итемсы из задания
+                for (int j = 0; j < area.getTaskPanel().getAddedTasks().size(); j++) {
+                    Task currentTask = area.getTaskPanel().getAddedTasks().get(i);
+                    for (int k = 0; k < currentTask.count; k++) {
+                        GridObject itemToRemove = currentTask.itemsToRemove.get(j);
+                        removeChild(itemToRemove);
+                        _items[itemToRemove.getGridX()][itemToRemove.getGridY()] = null;
+                    }
+                }
+
+                //меняем задание
+                generateTask();
+
+                //подсчитываем баллы
+                //scoreCount ++;
+
+                //проверка на баллы и расширение поля
+            }
+        }
     }
 
     private void putInTrash() {

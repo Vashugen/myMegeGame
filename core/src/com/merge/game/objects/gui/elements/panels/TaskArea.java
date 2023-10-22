@@ -18,6 +18,14 @@ public class TaskArea extends DisplayObject {
         initTaskButton();
     }
 
+    public TaskPanel getTaskPanel() {
+        return taskPanel;
+    }
+
+    public Button getTaskButton() {
+        return taskButton;
+    }
+
     private void initTaskPanel() {
         taskPanel = new TaskPanel(TextureItems.taskField);
         addChild(taskPanel);
@@ -30,5 +38,17 @@ public class TaskArea extends DisplayObject {
         taskButton.scaleToFit(0.25f, 0.25f);
         taskButton.setCenterCoeff(0.5f, 0.5f);
         taskButton.setY(taskPanel.y + taskPanel.getHeight() + 0.05f); //TODO исправить на coeff
+    }
+
+    public void inactiveButton() {
+        taskButton.setDisabled(true);
+    }
+
+    public void activeButton() {
+        taskButton.setDisabled(false);
+    }
+
+    public boolean buttonIsPressed() {
+        return taskButton.isPressed();
     }
 }

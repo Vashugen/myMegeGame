@@ -23,4 +23,8 @@ public class Button extends DisplayObject {
 
         return false;
     }
+
+    public void setDisabled(boolean state) {
+        _isDisabled = state;
+    }
 }

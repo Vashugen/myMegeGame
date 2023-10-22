@@ -36,6 +36,10 @@ public class TaskPanel extends DisplayObject {
         createTasks();
     }
 
+    public ArrayList<Task> getAddedTasks() {
+        return addedTasks;
+    }
+
     private void createTasks() {
         int type, level, count;
         for (int i = 0; i < _countTask; i++){
