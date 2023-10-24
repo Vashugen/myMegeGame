@@ -14,8 +14,7 @@ public class TaskArea extends DisplayObject {
         setSizeOfParent();
         setHeight(getParentHeight() / 2);
         setY(count * getHeight());
-        initTaskPanel();
-        initTaskButton();
+        generateTask();
     }
 
     public TaskPanel getTaskPanel() {
@@ -28,6 +27,7 @@ public class TaskArea extends DisplayObject {
 
     public void generateTask(){
         initTaskPanel();
+        initTaskButton();
     }
 
     public void update(){

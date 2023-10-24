@@ -227,9 +227,9 @@ public class SceneGame extends Scene {
             if(area.buttonIsPressed()){
                 //убираем с поля итемсы из задания
                 for (int j = 0; j < addedTasks.size(); j++) {
-                    Task currentTask = addedTasks.get(i);
+                    Task currentTask = addedTasks.get(j);
                     for (int k = 0; k < currentTask.count; k++) {
-                        GridObject itemToRemove = currentTask.itemsToRemove.get(j);
+                        GridObject itemToRemove = currentTask.itemsToRemove.get(k);
                         removeChild(itemToRemove);
                         _items[itemToRemove.getGridX()][itemToRemove.getGridY()] = null;
                     }
