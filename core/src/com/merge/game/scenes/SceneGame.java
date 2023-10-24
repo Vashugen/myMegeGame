@@ -218,13 +218,10 @@ public class SceneGame extends Scene {
                 }
             }
 
-            //проверка количества имеющихся на поле итемсов
-            for (int j = 0; j < addedTasks.size(); j++) {
-                if(addedTasks.get(j).existsCount >= addedTasks.get(j).count){
-                    area.inactiveButton();
-                }else {
-                    area.activeButton();
-                }
+            if(area.tasksComplete()){
+                area.activeButton();
+            }else {
+                area.inactiveButton();
             }
 
             if(area.buttonIsPressed()){
@@ -241,7 +238,7 @@ public class SceneGame extends Scene {
                 //меняем задание
                 area.generateTask();
 
-                //подсчитываем баллы
+                //получаем золото - подсчёт в зависимости от уровня типа и пр
                 //scoreCount ++;
 
                 //проверка на баллы и расширение поля

@@ -7,7 +7,7 @@ import com.merge.game.resources.textures.TextureItems;
 public class TaskButton extends Button {
 
     public TaskButton() {
-        super(TextureItems.taskAbledButton);
+        super(TextureItems.taskDisabledButton);
     }
 
     public void init() {

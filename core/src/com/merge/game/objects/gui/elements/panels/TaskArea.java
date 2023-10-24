@@ -1,7 +1,6 @@
 package com.merge.game.objects.gui.elements.panels;
 
 import com.merge.game.objects.DisplayObject;
-import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.gui.elements.Button;
 import com.merge.game.objects.gui.elements.buttons.TaskButton;
 import com.merge.game.resources.textures.TextureItems;
@@ -61,5 +60,16 @@ public class TaskArea extends DisplayObject {
 
     public boolean buttonIsPressed() {
         return taskButton.isPressed();
+    }
+
+    public boolean tasksComplete() {
+        //проверка количества имеющихся на поле итемсов
+        for (int i = 0; i < taskPanel.getAddedTasks().size(); i++) {
+            if(taskPanel.getAddedTasks().get(i).existsCount < taskPanel.getAddedTasks().get(i).count){
+                return false;
+            }
+        }
+
+        return true;
     }
 }
