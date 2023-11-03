@@ -24,6 +24,8 @@ import com.merge.game.resources.textures.Textures;
 
 import java.util.ArrayList;
 
+import javax.tools.Tool;
+
 public class SceneGame extends Scene {
 
     private static final int GRID_COUNT_WIDTH = 9;
@@ -147,9 +149,6 @@ public class SceneGame extends Scene {
         }
     }
 
-    private int coordsStartX = 0;
-    private int ciirdsStartY = 0;
-
     private void initActiveObject() {
         if(_activeObject == null){
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
@@ -164,7 +163,7 @@ public class SceneGame extends Scene {
                 }
             }
         }else{
-            if(true){
+            if(Tools.getDistance(_activeObject) >= Globals.itemSize * 0.8f){
                 _activeObject.setCenterPosition(Input.GetTouchX(), Input.GetTouchY());
             }
         }

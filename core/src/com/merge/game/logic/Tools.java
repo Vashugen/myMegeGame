@@ -1,6 +1,7 @@
 package com.merge.game.logic;
 
 import com.badlogic.gdx.Gdx;
+import com.merge.game.objects.grid.GridObject;
 
 public class Tools {
 
@@ -24,5 +25,11 @@ public class Tools {
     //от min до max не включительно
     public static int randomInt(int min, int max) {
         return min + randomInt(max - min);
+    }
+
+    public static float getDistance(GridObject object) {
+        float moveX = object.getMoveX();
+        float moveY = object.getMoveY();
+        return (float) Math.sqrt(moveX * moveX + moveY * moveY);
     }
 }

@@ -58,6 +58,14 @@ public class GridObject extends GameObject {
         _startMoveY = _moveY = Input.GetTouchY();
     }
 
+    public float getMoveX() {
+        return _moveX - _startMoveX;
+    }
+
+    public float getMoveY() {
+        return _moveY - _startMoveY;
+    }
+
     private void setGridPosition(int x, int y) {
         setGridPositionX(x);
         setGridPositionY(y);
