@@ -2,6 +2,7 @@ package com.merge.game.objects.grid;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.logic.Globals;
+import com.merge.game.logic.Input;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.GameObject;
 
@@ -13,6 +14,10 @@ public class GridObject extends GameObject {
     protected int _level = 0;
     protected int _type = 0;
     protected String _generateType;
+
+    private boolean _isMoving = false;
+    private float _startMoveX = 0, _startMoveY = 0;
+    private float _moveX = 0, _moveY = 0;
 
     public GridObject(TextureRegion texture) {
         super(texture);
@@ -45,6 +50,12 @@ public class GridObject extends GameObject {
     public void placeAtGrid(int x, int y) {
         setGridPosition(x, y);
         setPosition(getXByGridX(x), getYByGridY(y));
+    }
+
+    public void startMove() {
+        _isMoving = true;
+        _startMoveX = _moveX = Input.GetTouchX();
+        _startMoveY = _moveY = Input.GetTouchY();
     }
 
     private void setGridPosition(int x, int y) {

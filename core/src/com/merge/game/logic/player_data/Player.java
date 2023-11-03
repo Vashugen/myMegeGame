@@ -30,6 +30,7 @@ public class Player {
     private ArrayList<String> _itemsMergeType = new ArrayList<>(); //тип_уровень_generateType 0 null
 
     public void init() {
+
         _preferences = Gdx.app.getPreferences(PreferencesParams.GAME_NAME);
         _exists = _preferences.getBoolean(PreferencesParams.EXISTS, false);
         _score = _preferences.getInteger(PreferencesParams.SCORE, 0);

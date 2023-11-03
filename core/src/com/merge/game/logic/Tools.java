@@ -21,6 +21,7 @@ public class Tools {
         return (int) Math.floor(Math.random() * i);
     }
 
+    //от min до max не включительно
     public static int randomInt(int min, int max) {
         return min + randomInt(max - min);
     }

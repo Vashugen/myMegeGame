@@ -7,6 +7,7 @@ public class TextureItems {
 
     public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, taskField, taskAbledButton, taskDisabledButton;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
+    public static TextureRegion[] amulet1, amulet2, amulet3, amulet4;
 
     public static void initItems(){
         initFields();
@@ -30,6 +31,7 @@ public class TextureItems {
 
     private static void initMergeItems() {
         initKettle();
+        initAmulet();
     }
 
     private static void initKettle() {
@@ -67,6 +69,36 @@ public class TextureItems {
             kettle5[i] = new TextureRegion(texture, i * 112, 528, 112, 112);
         }
 
+    }
+
+    private static void initAmulet(){
+
+        Texture texture = Textures.amulet;
+
+        //in const
+        amulet1 = new TextureRegion[5];
+        amulet1[0] = new TextureRegion(texture, 0, 0, 112, 112);
+        for (int i = 1; i <= 1; i++) {
+            amulet1[i] = new TextureRegion(texture, i * 112, 0, 112, 112);
+        }
+
+        amulet2 = new TextureRegion[5];
+        amulet2[0] = new TextureRegion(texture, 0, 132, 112, 112);
+        for (int i = 1; i <= 1; i++) {
+            amulet2[i] = new TextureRegion(texture,i * 112, 132, 112, 112);
+        }
+
+        amulet3 = new TextureRegion[5];
+        amulet3[0] = new TextureRegion(texture, 0, 264, 112, 112);
+        for (int i = 1; i <= 1; i++) {
+            amulet3[i] = new TextureRegion(texture, i * 112, 264, 112, 112);
+        }
+
+        amulet4 = new TextureRegion[5];
+        amulet4[0] = new TextureRegion(texture, 0, 396, 112, 112);
+        for (int i = 1; i <= 1; i++) {
+            amulet4[i] = new TextureRegion(texture, i * 112, 396, 112, 112);
+        }
     }
 
     private static void initGameItems() {

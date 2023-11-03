@@ -49,6 +49,7 @@ public class MyGame extends ApplicationAdapter {
 	}
 
 	private void updateLoading() {
+
 		Textures.loadTextures();
 		Fonts.loadFonts();
 		GameSound.initMusic();

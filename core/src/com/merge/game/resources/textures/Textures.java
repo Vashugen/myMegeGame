@@ -2,10 +2,11 @@ package com.merge.game.resources.textures;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.merge.game.objects.grid.GenerateItemType;
 
 public class Textures {
     public static Texture TexBackground, TexBackgroundGame;
-    public static Texture fields, items;
+    public static Texture fields, items, amulet;
 
 
     public static void loadTextures(){
@@ -13,8 +14,10 @@ public class Textures {
         TexBackgroundGame = loadTextureMipmap("scenes/game/backgroundGame.jpg", true);
         fields = loadTextureMipmap("scenes/game/Fields.png", true);
         items = loadTextureMipmap("scenes/game/MergeItems.png", true);
+        amulet = loadTextureMipmap("scenes/game/AmuletItems.png", true);
 
         TextureItems.initItems();
+        GenerateItemType.init();
     }
 
     private static Texture loadTextureMipmap(String name, boolean useMipMap) {

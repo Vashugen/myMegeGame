@@ -19,4 +19,12 @@ public class Input {
     public static boolean isJustTouched(){
         return _isJustTouched;
     }
+
+    public static float GetTouchX() {
+        return Gdx.input.getX();
+    }
+
+    public static float GetTouchY() {
+        return Gdx.input.getY();
+    }
 }

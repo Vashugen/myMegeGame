@@ -14,30 +14,16 @@ public class MergeItem extends GridObject {
         _gameObjectType = GameObjectType.MERGE;
     }
 
-    public MergeItem(TextureRegion texture, float x, float y, float width, float height, int gridX, int gridY, int type,  int level, String generateType) {
+    public MergeItem(TextureRegion texture, float x, float y, float width, float height, int gridX, int gridY, int type, int level, String generateType) {
         super(texture, x, y, width, height, gridX, gridY, type, level, generateType);
         _gameObjectType = GameObjectType.MERGE;
 
     }
 
     private static TextureRegion getTexture(int type, int level, String generateType) {
-        switch (generateType){
-            case GenerateItemType.KETTLE:
-                switch (level){
-                    case 1:
-                        return TextureItems.kettle1[type];
-                    case 2:
-                        return TextureItems.kettle2[type];
-                    case 3:
-                        return TextureItems.kettle3[type];
-                    case 4:
-                        return TextureItems.kettle4[type];
-                    case 5:
-                        return TextureItems.kettle5[type];
-                }
-        }
 
-        return null;
+        TextureRegion[] textureRegions = GenerateItemType.getTexture(generateType, level);
+        return textureRegions[type];
     }
 
     public boolean match(GridObject gridObject) {
@@ -51,5 +37,9 @@ public class MergeItem extends GridObject {
     public void updateLevel() {
         _level ++;
         setTexture(getTexture(this.getType(), this.getLevel(), this.getGenerateType()));
+        if(isFinalLevel()){
+            _gameObjectType = GameObjectType.GENERATE;
+            _generateType = GenerateItemType.getGenerateType(getGenerateType(), getType());
+        }
     }
 }
