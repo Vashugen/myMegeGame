@@ -1,9 +1,21 @@
 package com.merge.game.logic;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+import com.merge.game.logic.player_data.PreferencesParams;
 import com.merge.game.objects.grid.GridObject;
 
 public class Tools {
+
+    private static Preferences _preferences = null;
+
+    public static void setPreferences(Preferences preferences) {
+        _preferences = preferences;
+    }
+
+    public static Preferences getPreferences(){
+        return _preferences;
+    }
 
     public static boolean isRectTouched(float x, float y, float w, float h){
         return rectsOverlap(x, y, w, h, Gdx.input.getX(), Gdx.input.getY(), 1, 1);

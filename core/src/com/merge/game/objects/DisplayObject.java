@@ -17,7 +17,7 @@ public class DisplayObject {
     protected DisplayObject parent;
     protected ArrayList<DisplayObject> childs = new ArrayList<>();
 
-    protected float rotation = 0.0f, rotationSpeed = 0.0f;
+    protected float rotation = 0.0f, rotationSpeed = 0.0f, _scale = 1.0f;
 
     public DisplayObject() {}
 

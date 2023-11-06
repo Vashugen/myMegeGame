@@ -6,6 +6,8 @@ import com.merge.game.objects.DisplayObject;
 
 public class Button extends DisplayObject {
 
+    private static final float SCALE_AFTER_PRESS = 0.9f;
+    
     protected boolean _isDisabled = false;
 
     public Button() {
@@ -26,6 +28,10 @@ public class Button extends DisplayObject {
         }
 
         return false;
+    }
+
+    private void setScale(float scale) {
+        _scale = scale;
     }
 
     public void setDisabled(boolean state) {

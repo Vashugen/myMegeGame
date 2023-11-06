@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
+import com.merge.game.logic.Tools;
 import com.merge.game.logic.player_data.Player;
+import com.merge.game.logic.player_data.PreferencesParams;
 import com.merge.game.resources.Fonts;
 import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.Textures;
@@ -54,7 +56,7 @@ public class MyGame extends ApplicationAdapter {
 		Fonts.loadFonts();
 		GameSound.initMusic();
 		GameSound.initSound();
-
+		Tools.setPreferences(Gdx.app.getPreferences(PreferencesParams.GAME_NAME));
 		Player.get().init();
 
 		SceneManager.get().setScene(SceneType.SCENE_START);

@@ -2,6 +2,7 @@ package com.merge.game.logic.player_data;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.merge.game.logic.Tools;
 import com.merge.game.resources.GameSound;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class Player {
 
     public void init() {
 
-        _preferences = Gdx.app.getPreferences(PreferencesParams.GAME_NAME);
+        _preferences = Tools.getPreferences();
         _exists = _preferences.getBoolean(PreferencesParams.EXISTS, false);
         _score = _preferences.getInteger(PreferencesParams.SCORE, 0);
         _level = _preferences.getInteger(PreferencesParams.LEVEL, 0);
@@ -54,5 +55,24 @@ public class Player {
     }
 
     public void savePreferences() {
+
+        Preferences preferences = Tools.getPreferences();
+
+        preferences.putBoolean(PreferencesParams.EXISTS, true);
+
+        for (int i = 0; i < PlayerItem.ITEM_COUNT; i++)
+            preferences.putInteger(PreferencesParams.ITEM + i, _Items.get(i));
+
+        for (int i = 0; i < Tutorials.NUM_OF_TUTORIALS; i++)
+            preferences.putBoolean(PreferencesParams.TUTORIAL + i, _Tutorials.get(i));
+
+        preferences.putBoolean(PreferencesParams.VOTED, _IsRated);
+        preferences.putInteger(PreferencesParams.CHALLENGES_COUNT, _ChallengesCount);
+        preferences.putInteger(PreferencesParams.DAILY_REWARD_DAY, _DailyRewardAddedDay);
+        preferences.putLong(PreferencesParams.REGULAR_REWARD, _LastRegularRewardTime);
+        preferences.putInteger(PreferencesParams.TREASURE_MAPS, _TreasureMaps);
+        preferences.putBoolean(PreferencesParams.MUSIC, GameSound.IsMusicOn());
+        preferences.putBoolean(PreferencesParams.SOUND, GameSound.IsSoundOn());
+        preferences.flush();
     }
 }

@@ -5,12 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.merge.game.objects.grid.GenerateItemType;
 
 public class Textures {
-    public static Texture TexBackground, TexBackgroundGame;
+    public static Texture TexBackground, TexBackgroundMain, TexBackgroundGame;
     public static Texture fields, items, amulet;
 
 
     public static void loadTextures(){
         TexBackground = loadTextureMipmap("scenes/start/background.jpg", true);
+        TexBackgroundMain =  loadTextureMipmap();
         TexBackgroundGame = loadTextureMipmap("scenes/game/backgroundGame.jpg", true);
         fields = loadTextureMipmap("scenes/game/Fields.png", true);
         items = loadTextureMipmap("scenes/game/MergeItems.png", true);
