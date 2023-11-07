@@ -41,7 +41,7 @@ public class SceneStart extends Scene {
     public void update() {
         super.update();
         if(_startButton.isPressed()){
-            SceneManager.get().setScene(SceneType.SCENE_GAME);
+            SceneManager.get().setScene(SceneType.SCENE_MAIN);
         }
     }
 }

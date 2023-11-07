@@ -56,7 +56,7 @@ public class Player {
 
     public void savePreferences() {
 
-        Preferences preferences = Tools.getPreferences();
+/*        Preferences preferences = Tools.getPreferences();
 
         preferences.putBoolean(PreferencesParams.EXISTS, true);
 
@@ -73,6 +73,6 @@ public class Player {
         preferences.putInteger(PreferencesParams.TREASURE_MAPS, _TreasureMaps);
         preferences.putBoolean(PreferencesParams.MUSIC, GameSound.IsMusicOn());
         preferences.putBoolean(PreferencesParams.SOUND, GameSound.IsSoundOn());
-        preferences.flush();
+        preferences.flush();*/
     }
 }

@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class TextureItems {
 
     public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, taskField, taskAbledButton, taskDisabledButton;
+    public static TextureRegion mainScenePlay, mainSceneShop, mainSceneRewards;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
     public static TextureRegion[] amulet1, amulet2, amulet3, amulet4;
 
     public static void initItems(){
         initFields();
+        initMain();
         initMergeItems();
         initGameItems();
     }
@@ -27,6 +29,13 @@ public class TextureItems {
         taskField = new TextureRegion(texture, 198, 0, 367, 149);
         taskAbledButton = new TextureRegion(texture, 309, 448, 246, 121);
         taskDisabledButton = new TextureRegion(texture, 316, 568, 231, 114);
+    }
+
+    private static void initMain(){
+        Texture texture = Textures.mainScene;
+        mainScenePlay = new TextureRegion(texture, 0, 0, 210, 210);
+        mainSceneShop = new TextureRegion(texture, 210 * 1, 0, 210, 210);
+        mainSceneRewards = new TextureRegion(texture, 210 * 2, 0, 210, 210);
     }
 
     private static void initMergeItems() {
