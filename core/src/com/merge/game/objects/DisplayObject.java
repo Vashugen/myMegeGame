@@ -17,7 +17,8 @@ public class DisplayObject {
     protected DisplayObject parent;
     protected ArrayList<DisplayObject> childs = new ArrayList<>();
 
-    protected float rotation = 0.0f, rotationSpeed = 0.0f, _scale = 1.0f;
+    protected float _rotation = 0.0f, rotationSpeed = 0.0f, _scale = 1.0f;
+    protected float _hotspotX = 0.5f, _hotspotY = 0.5f;
 
     public DisplayObject() {}
 
@@ -69,6 +70,14 @@ public class DisplayObject {
     public void setPosition(float x, float y){
         setX(x);
         setY(y);
+    }
+
+    protected void setScale(float scale) {
+        _scale = scale;
+    }
+
+    public float getScale() {
+        return _scale;
     }
 
     public void moveX(float x) {
@@ -153,7 +162,7 @@ public class DisplayObject {
 
         //TODO this
         if(rotationSpeed != 0){
-            rotation += rotationSpeed * Globals.deltaTime;
+            _rotation += rotationSpeed * Globals.deltaTime;
         }
 
         for (int i = 0; i < childs.size(); i++) {
@@ -165,7 +174,7 @@ public class DisplayObject {
 
         //TODO this
         if(texture != null){
-            batch.draw(texture, getX(), Gdx.graphics.getHeight() - (getY() + height), width, height);
+            batch.draw(texture, getX(), Gdx.graphics.getHeight() - (getY() + height), _hotspotX * width, _hotspotY * height, width, height, _scale, _scale, -_rotation);
         }
 
         for (int i = 0; i < childs.size(); i++) {

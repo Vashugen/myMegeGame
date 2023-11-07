@@ -73,4 +73,12 @@ public class SceneMain extends Scene{
         _rewards.scaleToFit(0.9f, 0.9f);
         _rewards.setCenterCoeff(0.5f, 0.5f);
     }
+
+    @Override
+    public void update() {
+        super.update();
+        if(_play.isPressed()){
+            SceneManager.get().setScene(SceneType.SCENE_GAME);
+        }
+    }
 }

@@ -9,7 +9,7 @@ public class GameSound {
     public static final float VOLUME  = 0.75f;
 
     public static Music mainTheme;
-    public static Sound merge1, generate1;
+    public static Sound button, merge1, generate1;
 
     private static boolean _soundOn = true, _musicOn = true;
     private static Music _currentPlayingMusic = null;
@@ -19,6 +19,7 @@ public class GameSound {
     }
 
     public static void initSound(){
+        button = loadSound("button.mp3");
         merge1 = loadSound("merge1.mp3");
         //generate1 = loadSound("generate1.mp3");
     }
@@ -51,6 +52,40 @@ public class GameSound {
         _currentPlayingMusic.play();
 
     }
+
+/*    public static void playSound(final Sound sound, final float volMod) {
+        if (!IsSoundOn())
+            return;
+
+        if (_LockedSounds.contains(sound))
+            return;
+        _LockedSounds.add(sound);
+        try {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        if (_PlayingSounds != null && _PlayingSounds.contains(sound))
+                            try {
+                                sound.stop();
+                                _PlayingSounds.remove(sound);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        sound.play(volMod);
+
+                        if (_PlayingSounds != null)
+                            _PlayingSounds.add(sound);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
 
     private static Music loadMusic(String name){
         return Gdx.audio.newMusic(Gdx.files.internal("music/" + name));
