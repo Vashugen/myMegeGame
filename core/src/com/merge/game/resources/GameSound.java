@@ -3,16 +3,28 @@ package com.merge.game.resources;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.merge.game.logic.Globals;
 import com.merge.game.logic.player_data.Player;
 
+import java.util.ArrayList;
+
 public class GameSound {
+
     public static final float VOLUME  = 0.75f;
+    public static final float SOUND_VOLUME = 1.0f;
+    public static final float SOUND_VOLUME_BUTTON = 0.3f;
 
     public static Music mainTheme;
     public static Sound button, merge1, generate1;
 
     private static boolean _soundOn = true, _musicOn = true;
     private static Music _currentPlayingMusic = null;
+
+    private static ArrayList<Sound> _lockedSounds = new ArrayList<>();
+    private static ArrayList<Sound> _playingSounds = new ArrayList<>();
+
+    private static final float TIMER_SOUND_FALL = 15.0f;
+    public static float timerSoundFall = TIMER_SOUND_FALL;
 
     public static void initMusic(){
         mainTheme = loadMusic("MainTheme.mp3");
@@ -22,6 +34,14 @@ public class GameSound {
         button = loadSound("button.mp3");
         merge1 = loadSound("merge1.mp3");
         //generate1 = loadSound("generate1.mp3");
+    }
+
+    public static void update() {
+        _lockedSounds.clear();
+
+        timerSoundFall -= Globals.deltaTime;
+        if (timerSoundFall <= 0)
+            timerSoundFall = 0;
     }
 
     public static boolean isMusicOn(){
@@ -53,30 +73,34 @@ public class GameSound {
 
     }
 
-/*    public static void playSound(final Sound sound, final float volMod) {
-        if (!IsSoundOn())
+    public static void playSound(final Sound sound, final float volMod) {
+        if (!isSoundOn())
             return;
 
-        if (_LockedSounds.contains(sound))
+        if (_lockedSounds.contains(sound)){
             return;
-        _LockedSounds.add(sound);
+        }
+
+        _lockedSounds.add(sound);
         try {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        if (_PlayingSounds != null && _PlayingSounds.contains(sound))
+                        if (_playingSounds != null && _playingSounds.contains(sound)){
                             try {
                                 sound.stop();
-                                _PlayingSounds.remove(sound);
+                                _playingSounds.remove(sound);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+                        }
 
                         sound.play(volMod);
 
-                        if (_PlayingSounds != null)
-                            _PlayingSounds.add(sound);
+                        if (_playingSounds != null){
+                            _playingSounds.add(sound);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -85,7 +109,7 @@ public class GameSound {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     private static Music loadMusic(String name){
         return Gdx.audio.newMusic(Gdx.files.internal("music/" + name));
@@ -118,9 +142,6 @@ public class GameSound {
         if(save){
             Player.get().savePreferences();
         }
-    }
-
-    public static void update() {
     }
 
     private static Sound loadSound(String name) {

@@ -59,7 +59,7 @@ public class Button extends DisplayObject {
     private void updateTouchEffect() {
         if(isPressed()){
             //TODO проверка на выключенный звук
-            //GameSound;
+            GameSound.playSound(GameSound.button, GameSound.SOUND_VOLUME_BUTTON);
             setScale(SCALE_AFTER_PRESS);
         }
     }
