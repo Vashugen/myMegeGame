@@ -14,6 +14,7 @@ import com.merge.game.objects.grid.GridCell;
 import com.merge.game.objects.grid.GridObject;
 import com.merge.game.objects.GameObjectType;
 import com.merge.game.objects.grid.MergeItem;
+import com.merge.game.objects.gui.elements.Button;
 import com.merge.game.objects.gui.elements.panels.LeftPanel;
 import com.merge.game.objects.gui.elements.panels.RightPanel;
 import com.merge.game.objects.gui.elements.panels.TaskArea;
@@ -52,6 +53,7 @@ public class SceneGame extends Scene {
     private int _levelCount = 0;
 
     private Trash _trash;
+    private Button _clearButton;
 
     public SceneGame() {
         GameSound.playBackgroundMusic(GameSound.mainTheme);
@@ -61,6 +63,7 @@ public class SceneGame extends Scene {
         initItems();
         initPanels();
         initTrash();
+        initClear();
         initTasks();
     }
 
@@ -70,6 +73,7 @@ public class SceneGame extends Scene {
         updateItems();
         updateTopPanel();
         updateTaskPanel();
+        updateClearButton();
     }
 
     private void initGameSettings() {
@@ -123,6 +127,11 @@ public class SceneGame extends Scene {
         _trash = new Trash(TextureItems.trash);
         _rightPanel.getTrashPanel().addChild(_trash);
         _trash.init();
+    }
+
+    private void initClear() {
+        _clearButton = new Button(TextureItems.clear);
+        _topPanel.addClearButton(_clearButton);
     }
 
     private void initTasks(){
@@ -248,6 +257,19 @@ public class SceneGame extends Scene {
                 //scoreCount ++;
 
                 //проверка на баллы и расширение поля
+            }
+        }
+    }
+
+    private void updateClearButton() {
+        if(_clearButton.isPressed()){
+            for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
+                for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
+                    if(_items[i][j] != null && _items[i][j].canBeDeleted()){
+                        removeChild(_items[i][j]);
+                        _items[i][j] = null;
+                    }
+                }
             }
         }
     }

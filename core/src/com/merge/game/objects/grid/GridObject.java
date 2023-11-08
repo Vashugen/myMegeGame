@@ -5,6 +5,7 @@ import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.GameObject;
+import com.merge.game.objects.GameObjectType;
 
 public class GridObject extends GameObject {
 
@@ -113,5 +114,9 @@ public class GridObject extends GameObject {
 
     public String getGenerateType() {
         return _generateType;
+    }
+
+    public boolean canBeDeleted() {
+        return !(this.getGameObjectType() == GameObjectType.GENERATE && this._generateType.equals(GenerateItemType.KETTLE));
     }
 }

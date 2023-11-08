@@ -14,7 +14,7 @@ public class Trash extends GameObject {
     }
 
     public void init() {
-        scaleToFit(0.5f, 0.5f);
+        scaleToFit(0.9f, 0.9f);
         setCenterCoeff(0.5f, 0.5f);
     }
 }

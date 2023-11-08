@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TextureItems {
 
-    public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, taskField, taskAbledButton, taskDisabledButton;
+    public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear, taskField, taskAbledButton, taskDisabledButton;
     public static TextureRegion mainScenePlay, mainSceneShop, mainSceneRewards;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
     public static TextureRegion[] amulet1, amulet2, amulet3, amulet4;
@@ -114,8 +114,9 @@ public class TextureItems {
         Texture texture = Textures.items;
         score = new TextureRegion(texture, 560, 0, 109, 109);
         gold = new TextureRegion(texture, 672, 0,109, 109);
-        level = new TextureRegion(texture, 784, 0, 138, 109);
+        level = new TextureRegion(texture, 784, 0, 116, 116);
         trash = new TextureRegion(texture, 896, 0, 109, 109);
+        clear = new TextureRegion(texture, 560, 132, 112, 112);
     }
 
 }
