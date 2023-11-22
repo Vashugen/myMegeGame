@@ -1,6 +1,7 @@
 package com.merge.game.objects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -17,8 +18,9 @@ public class DisplayObject {
     protected DisplayObject parent;
     protected ArrayList<DisplayObject> childs = new ArrayList<>();
 
-    protected float _rotation = 0.0f, rotationSpeed = 0.0f, _scale = 1.0f;
+    protected float _rotation = 0.0f, rotationSpeed = 0.0f, _scale = 1.0f, _alpha = 1.0f;
     protected float _hotspotX = 0.5f, _hotspotY = 0.5f;
+    protected float _R = 1.0f, _G = 1.0f, _B = 1.0f;
 
     public DisplayObject() {}
 
@@ -78,6 +80,22 @@ public class DisplayObject {
 
     public float getScale() {
         return _scale;
+    }
+
+    public float getAlpha() {
+        return _alpha;
+    }
+
+    public void setAlpha(float alpha) {
+        _alpha = alpha;
+        if(_alpha > 1){
+            _alpha = 1;
+        }
+        if (_alpha < 0){
+            _alpha = 0;
+        }
+
+        _hasColor = _R != 1 || _G != 1 || _B != 1 || _alpha != 1;
     }
 
     public void moveX(float x) {
@@ -170,15 +188,41 @@ public class DisplayObject {
         }
     }
 
-    public void draw(SpriteBatch batch) {
+    private boolean _hasColor = false;
+    private float r, g, b, a;
 
-        //TODO this
-        if(texture != null){
-            batch.draw(texture, getX(), Gdx.graphics.getHeight() - (getY() + height), _hotspotX * width, _hotspotY * height, width, height, _scale, _scale, -_rotation);
+    public void draw(SpriteBatch spriteBatch) {
+
+        if(_hasColor){
+            Color color = spriteBatch.getColor();
+            r = color.r;
+            g = color.g;
+            b = color.b;
+            a = color.a;
+            spriteBatch.setColor(r * _R, g * _G, b * _B, a * _alpha);
         }
 
+        drawObject(spriteBatch);
+
+        if(childs != null){
+            drawChilds(spriteBatch);
+        }
+
+        if(_hasColor){
+            spriteBatch.setColor(r, g, b, a);
+        }
+    }
+
+    protected void drawObject(SpriteBatch spriteBatch){
+        //TODO this
+        if(texture != null){
+            spriteBatch.draw(texture, getX(), Gdx.graphics.getHeight() - (getY() + height), _hotspotX * width, _hotspotY * height, width, height, _scale, _scale, -_rotation);
+        }
+    }
+
+    protected void drawChilds(SpriteBatch spriteBatch){
         for (int i = 0; i < childs.size(); i++) {
-            childs.get(i).draw(batch);
+            childs.get(i).draw(spriteBatch);
         }
     }
 

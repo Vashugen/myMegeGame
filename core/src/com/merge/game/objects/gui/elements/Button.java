@@ -41,8 +41,9 @@ public class Button extends DisplayObject {
     public void update() {
         super.update();
         updateEffects();
-        if (_isDisabled)
+        if (_isDisabled){
             return;
+        }
         updateTouchEffect();
     }
 
