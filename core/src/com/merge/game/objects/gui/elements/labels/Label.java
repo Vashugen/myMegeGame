@@ -10,18 +10,31 @@ import com.merge.game.objects.DisplayObject;
 
 public class Label extends DisplayObject {
 
-    protected String string;
-
     private BitmapFont _font;
+    private String _string;
+    private float _x, _y;
+
     private GlyphLayout _layout;
 
-    private float _x, _y;
+    protected Color _color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 
     public Label(float x, float y, float coeffSize, Color color) {
         _layout = new GlyphLayout();
         generateFont(coeffSize, color);
         _x = x;
         _y = y;
+    }
+
+    public Label(BitmapFont font, String string) {
+        _layout = new GlyphLayout();
+        setFont(font);
+        setString(string);
+    }
+
+    public Label(BitmapFont font, int string) {
+        _layout = new GlyphLayout();
+        setFont(font);
+        setString(string);
     }
 
     public float getX(){
@@ -54,6 +67,10 @@ public class Label extends DisplayObject {
     public static void dispose() {
     }
 
+    private void setFont(BitmapFont font) {
+        _font = font;
+    }
+
     private void setCenterCoeffX(float coeffX) {
         _x = coeffX * getParentWidth();
         _x += -_layout.width / 2;
@@ -74,16 +91,16 @@ public class Label extends DisplayObject {
     }
 
     public void setString(String string){
-        this.string = string;
-        _layout.setText(_font, string);
+        _string = string;
+        _layout.setText(_font, _string);
     }
 
     public void setString(int string) {
-        this.string = "" + string;
+        this._string = "" + string;
         _layout.setText(_font, "" + string);
     }
 
     public void draw(SpriteBatch spriteBatch) {
-        _font.draw(spriteBatch, string, getX(), Gdx.graphics.getHeight() - getY());
+        _font.draw(spriteBatch, _string, getX(), Gdx.graphics.getHeight() - getY());
     }
 }

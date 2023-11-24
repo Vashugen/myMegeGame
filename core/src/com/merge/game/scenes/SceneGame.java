@@ -1,6 +1,5 @@
 package com.merge.game.scenes;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
@@ -15,6 +14,8 @@ import com.merge.game.objects.grid.GridObject;
 import com.merge.game.objects.GameObjectType;
 import com.merge.game.objects.grid.MergeItem;
 import com.merge.game.objects.gui.elements.Button;
+import com.merge.game.objects.gui.elements.buttons.bonus.BonusButton;
+import com.merge.game.objects.gui.elements.buttons.bonus.BonusType;
 import com.merge.game.objects.gui.elements.panels.LeftPanel;
 import com.merge.game.objects.gui.elements.panels.RightPanel;
 import com.merge.game.objects.gui.elements.panels.TaskArea;
@@ -24,8 +25,6 @@ import com.merge.game.resources.textures.TextureItems;
 import com.merge.game.resources.textures.Textures;
 
 import java.util.ArrayList;
-
-import javax.tools.Tool;
 
 public class SceneGame extends Scene {
 
@@ -65,6 +64,7 @@ public class SceneGame extends Scene {
         initTrash();
         initClear();
         initTasks();
+        initBonus();
     }
 
     public void update(){
@@ -136,6 +136,13 @@ public class SceneGame extends Scene {
 
     private void initTasks(){
 
+    }
+
+    private void initBonus(){
+        for (int i = 1; i <= BonusType.BONUS_QUANTITY; i++) {
+            BonusButton bonusButton = new BonusButton(_rightPanel.getBonusPanel(), i);
+            bonusButton.setCenterCoeff(0.5f, 0.29f + (i - 1) * 0.21f);
+        }
     }
 
     private void initGenerateItem() {

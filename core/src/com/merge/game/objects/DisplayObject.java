@@ -240,6 +240,10 @@ public class DisplayObject {
         this.texture = texture;
     }
 
+    public TextureRegion getTexture() {
+        return texture;
+    }
+
     private void setCenterX(float x) {
         setX(x);
         moveX(-getWidth()/2);

@@ -30,8 +30,8 @@ public class PLPanel extends DisplayObject {
     private void initPicture(TextureRegion texture) {
         _picture = new DisplayObject(texture);
         addChild(_picture);
-        _picture.scaleToFit(0.5f, 0.5f);
-        _picture.setCenterCoeff(0.45f, 0.5f);
+        _picture.scaleToFit(0.7f, 0.7f);
+        _picture.setCenterCoeff(0.5f, 0.3f);
     }
 
     private void initLabel(int count){
@@ -40,7 +40,7 @@ public class PLPanel extends DisplayObject {
         _label.setString(count);
         float labelCoeff = 0.45f + 0.02f + (_picture.getWidth() / getWidth()) + ((_label.getWidth() / 2) / getWidth());
         _label.setCenterCoeff(labelCoeff, 0.5f);
-        //_label.setX(_picture.x + _picture.getWidth() + 0.05f + _label.getWidth() / 2);
+        _label.setX(_picture.x + _picture.getWidth() + 0.02f + _label.getWidth() / 2);
         //float labelScoreCoeffX = 0.45f + 0.1f + ((labelScore.getWidth() / 2) / labelScore.getParentWidth());
     }
 }

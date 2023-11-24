@@ -58,33 +58,21 @@ public class TaskPanel extends DisplayObject {
             }
 
             if(createTask){
-                setTask(task);
+                setTask(task, i);
                 addedTasks.add(task);
             }
         }
     }
 
-    private void setTask(Task task){
-
-        float scaleToFitCoeffX = this._countTask == 1 ? 0.25f : (0.25f / 1.5f);
-        float scaleToFitCoeffY = this._countTask == 1 ? 0.7f : (0.7f / 1.5f);
+    private void setTask(Task task, int indexPanel){
 
         DisplayObject taskObject = new MergeItem(task.type, task.level, GenerateItemType.KETTLE);
-        this.addChild(taskObject);
-        taskObject.scaleToFit(scaleToFitCoeffX, scaleToFitCoeffY);
 
-        float centerCoeffXItem = this._countTask == 1 ? 0.25f : CENTER_COEFF_X * _countCoeff;
-        taskObject.setCenterCoeff(centerCoeffXItem , 0.4f);
+        TaskItem taskItem = new TaskItem();
+        addChild(taskItem);
+        taskItem.setSize(getWidth() / _countTask ,getHeight());
+        taskItem.setX(indexPanel * taskItem.getWidth());
+        taskItem.init(taskObject.getTexture(), task.count);
 
-        _countCoeff += 2;
-
-        float fontSizeCoeff = this._countTask == 1 ? 0.03f : (0.03f / 1.5f);
-        Label taskCountLabel = new Label(0, 0, fontSizeCoeff, Color.WHITE);
-        this.addChild(taskCountLabel);
-        taskCountLabel.setString(task.count);
-        float centerCoeffXLabel = this._countTask == 1 ? 0.75f : CENTER_COEFF_X * _countCoeff;
-        taskCountLabel.setCenterCoeff(centerCoeffXLabel, 0.4f);
-
-        _countCoeff += 2;
     }
 }

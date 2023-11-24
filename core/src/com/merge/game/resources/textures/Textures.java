@@ -6,7 +6,7 @@ import com.merge.game.objects.grid.GenerateItemType;
 
 public class Textures {
     public static Texture TexBackground, TexBackgroundMain, TexBackgroundGame;
-    public static Texture fields, mainScene, items, amulet;
+    public static Texture fields, panels, mainScene, items, amulet;
 
 
     public static void loadTextures(){
@@ -14,6 +14,7 @@ public class Textures {
         TexBackgroundMain =  loadTextureMipmap("scenes/main/background.png", true);
         TexBackgroundGame = loadTextureMipmap("scenes/game/backgroundGame.jpg", true);
         fields = loadTextureMipmap("scenes/game/Fields.png", true);
+        panels = loadTextureMipmap("scenes/game/Panels.png", true);
         mainScene = loadTextureMipmap("scenes/main/items.png", true);
         items = loadTextureMipmap("scenes/game/MergeItems.png", true);
         amulet = loadTextureMipmap("scenes/game/AmuletItems.png", true);

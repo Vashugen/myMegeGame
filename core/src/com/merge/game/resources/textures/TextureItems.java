@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class TextureItems {
 
     public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear, taskField, taskAbledButton, taskDisabledButton, fade;
+    public static TextureRegion bonusPanel, bonusField, bonusFixGenerate, bonusMaxItem, bonusRandomItem;
     public static TextureRegion mainScenePlay, mainSceneShop, mainSceneRewards;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
     public static TextureRegion[] amulet1, amulet2, amulet3, amulet4;
@@ -15,6 +16,8 @@ public class TextureItems {
         initMain();
         initMergeItems();
         initGameItems();
+        initTasks();
+        initBonus();
     }
 
     private static void initFields() {
@@ -26,10 +29,7 @@ public class TextureItems {
             gridCell[i] = new TextureRegion(texture, 497 + (i * 168), 715, 168, 168);
         }
 
-        taskField = new TextureRegion(texture, 198, 0, 367, 149);
-        taskAbledButton = new TextureRegion(texture, 309, 448, 246, 121);
-        taskDisabledButton = new TextureRegion(texture, 316, 568, 231, 114);
-        fade = new TextureRegion(texture, 2, 990, 28, 28);
+        fade = new TextureRegion(texture, 3, 741, 28, 28);
     }
 
     private static void initMain(){
@@ -118,6 +118,22 @@ public class TextureItems {
         level = new TextureRegion(texture, 784, 0, 116, 116);
         trash = new TextureRegion(texture, 896, 0, 109, 109);
         clear = new TextureRegion(texture, 560, 132, 112, 112);
+    }
+
+    private static void initTasks() {
+        Texture texture = Textures.panels;
+        taskField = new TextureRegion(texture, 197, 616, 114, 107);
+        taskAbledButton = new TextureRegion(texture, 309, 448, 246, 121);
+        taskDisabledButton = new TextureRegion(texture, 316, 568, 231, 114);
+    }
+
+    private static void initBonus() {
+        Texture texture = Textures.panels;
+        bonusPanel = new TextureRegion(texture, 4, 217, 171, 391);
+        bonusField = new TextureRegion(texture, 178, 217, 188, 200);
+        bonusFixGenerate = new TextureRegion(texture, 0, 852, 170, 170);
+        bonusMaxItem = new TextureRegion(texture, 171, 852, 170, 170);
+        bonusRandomItem = new TextureRegion(texture, 342, 852, 170, 170);
     }
 
 }

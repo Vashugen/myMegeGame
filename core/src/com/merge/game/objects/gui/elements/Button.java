@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
+import com.merge.game.objects.gui.elements.labels.Label;
+import com.merge.game.resources.Fonts;
 import com.merge.game.resources.GameSound;
 
 public class Button extends DisplayObject {
@@ -12,6 +14,8 @@ public class Button extends DisplayObject {
     private static final float SCALE_AFTER_PRESS = 0.9f;
     
     protected boolean _isDisabled = false;
+
+    private Label _buttonLabel;
 
     public Button() {
         super();
@@ -45,6 +49,12 @@ public class Button extends DisplayObject {
             return;
         }
         updateTouchEffect();
+    }
+
+    protected void initLabel(){
+        _buttonLabel = new Label(Fonts.fontMedium, "");
+        addChild(_buttonLabel);
+        _buttonLabel.setCenterCoeff(0.5f, 0.4f);
     }
 
     private void updateEffects() {
