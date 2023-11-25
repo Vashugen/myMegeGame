@@ -27,6 +27,6 @@ public class TaskItem extends DisplayObject {
         _label = new Label(Fonts.fontXSmall, count);
         addChild(_label);
         _label.setCenterCoeff(0.45f, 0.5f);
-        _label.setY(_picture.y + _picture.getHeight() + 0.02f + _label.getHeight() / 2);
+        _label.setY(_picture.y + _picture.getHeight() + 0.05f + _label.getHeight() / 2);
     }
 }
