@@ -64,7 +64,7 @@ public class SceneGame extends Scene {
         initTrash();
         initClear();
         initTasks();
-        initBonus();
+        //initBonus();
     }
 
     public void update(){

@@ -129,7 +129,7 @@ public class TextureItems {
 
     private static void initBonus() {
         Texture texture = Textures.panels;
-        bonusPanel = new TextureRegion(texture, 4, 217, 171, 391);
+        bonusPanel = new TextureRegion(texture, 1, 215, 177, 392);
         bonusField = new TextureRegion(texture, 178, 217, 188, 200);
         bonusFixGenerate = new TextureRegion(texture, 0, 852, 170, 170);
         bonusMaxItem = new TextureRegion(texture, 171, 852, 170, 170);

@@ -71,12 +71,12 @@ public class Label extends DisplayObject {
         _font = font;
     }
 
-    private void setCenterCoeffX(float coeffX) {
+    public void setCenterCoeffX(float coeffX) {
         _x = coeffX * getParentWidth();
         _x += -_layout.width / 2;
     }
 
-    private void setCenterCoeffY(float coeffY) {
+    public void setCenterCoeffY(float coeffY) {
         _y = coeffY * getParentHeight();
         _y += -_layout.height / 2;
     }

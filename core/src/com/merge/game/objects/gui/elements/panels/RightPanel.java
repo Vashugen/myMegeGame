@@ -2,12 +2,14 @@ package com.merge.game.objects.gui.elements.panels;
 
 import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
+import com.merge.game.objects.game_elements.PanelBonus;
+import com.merge.game.objects.gui.elements.buttons.bonus.BonusType;
 import com.merge.game.resources.textures.TextureItems;
 
 public class RightPanel extends DisplayObject {
 
-    private DisplayObject _bonusPanel;
-    private TrashPanel _trashPanel;
+    private DisplayObject _panelBonus;
+    private TrashPanel _panelTrash;
 
     public void init() {
         setWidth(Globals.offsetX);
@@ -20,26 +22,20 @@ public class RightPanel extends DisplayObject {
     }
 
     public DisplayObject getTrashPanel() {
-        return _trashPanel;
+        return _panelTrash;
     }
 
     public DisplayObject getBonusPanel(){
-        return _bonusPanel;
+        return _panelBonus;
     }
 
     private void initBonusPanel() {
-        _bonusPanel = new DisplayObject(TextureItems.bonusPanel);
-        addChild(_bonusPanel);
-        _bonusPanel.setSizeOfParent();
-        _bonusPanel.scaleToFit(1.0f, 0.7f);
-        _bonusPanel.setCenterCoeff(0.5f, 0);
-        _bonusPanel.setY(0);
-
+        _panelBonus = new PanelBonus(this, TextureItems.bonusPanel, 1.0f, 0.7f);
     }
 
     private void initTrashPanel() {
-        _trashPanel = new TrashPanel();
-        addChild(_trashPanel);
-        _trashPanel.init();
+        _panelTrash = new TrashPanel();
+        addChild(_panelTrash);
+        _panelTrash.init();
     }
 }

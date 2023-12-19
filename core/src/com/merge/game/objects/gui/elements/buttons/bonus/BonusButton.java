@@ -12,8 +12,8 @@ public class BonusButton extends Button {
     public BonusButton(DisplayObject parent, int bonusType) {
         parent.addChild(this);
         setTexture(getTextureByType(bonusType));
-        scaleToFit(0.3f, 0.3f);
-        //initLabel();
+        scaleToFit(0.7f, 0.7f);
+        setCenterCoeff(0.5f, 0.5f);
     }
 
     private TextureRegion getTextureByType(int bonusType) {

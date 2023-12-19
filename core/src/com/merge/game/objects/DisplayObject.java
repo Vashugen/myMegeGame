@@ -136,6 +136,10 @@ public class DisplayObject {
         setHeight(getParentHeight());
     }
 
+    public void scaleToSquareSize(float size) {
+        scaleToFit(size / getParentWidth(), size / getParentHeight());
+    }
+
     public void scaleToWidth(float coeff){
         setWidth(coeff * getParentWidth());
         setHeight(texture.getRegionHeight() * (getWidth() / texture.getRegionWidth()));
@@ -255,12 +259,12 @@ public class DisplayObject {
         moveY(-getHeight()/2);
     }
 
-    private void setCenterCoeffX(float coeffX) {
+    public void setCenterCoeffX(float coeffX) {
         setX(coeffX * getParentWidth());
         moveX(-getWidth()/2);
     }
 
-    private void setCenterCoeffY(float coeffY) {
+    public void setCenterCoeffY(float coeffY) {
         setY(coeffY * getParentHeight());
         moveY(-getHeight()/2);
     }
