@@ -1,12 +1,10 @@
 package com.merge.game.objects.game_elements;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.merge.game.objects.DisplayObject;
-import com.merge.game.objects.GameObject;
 import com.merge.game.objects.GameObjectType;
-import com.merge.game.resources.textures.TextureItems;
+import com.merge.game.objects.grid.GridObject;
 
-public class Trash extends GameObject {
+public class Trash extends GridObject {
 
     public Trash(TextureRegion texture) {
         super(texture);

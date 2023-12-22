@@ -1,11 +1,6 @@
 package com.merge.game.objects.game_elements;
 
-import com.merge.game.objects.DisplayObject;
-import com.merge.game.objects.GameObject;
 import com.merge.game.objects.grid.GridObject;
-import com.merge.game.objects.grid.MergeItem;
-import com.merge.game.objects.gui.elements.Button;
-import com.merge.game.resources.textures.TextureItems;
 
 import java.util.ArrayList;
 

@@ -5,6 +5,7 @@ import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
 import com.merge.game.objects.Background;
+import com.merge.game.objects.GridItem;
 import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.game_elements.Trash;
 import com.merge.game.objects.grid.GenerateItem;
@@ -40,8 +41,8 @@ public class SceneGame extends Scene {
     private static float gridWidth, gridHeight;
 
     private GridCell[][] _grid;
-    private GridObject[][] _items;
-    private GridObject _activeObject = null;
+    private GridItem[][] _items;
+    private GridItem _activeObject = null;
 
     private TopPanel _topPanel;
     private RightPanel _rightPanel;
@@ -104,7 +105,7 @@ public class SceneGame extends Scene {
     }
 
     private void initItems(){
-        _items = new GridObject[GRID_COUNT_WIDTH][GRID_COUNT_HEIGHT];
+        _items = new GridItem[GRID_COUNT_WIDTH][GRID_COUNT_HEIGHT];
         initGenerateItem();
         //initMergeItems();
     }
@@ -170,16 +171,17 @@ public class SceneGame extends Scene {
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                     if(_items[i][j] != null && _items[i][j].isTouched()){
-                        if(_items[i][j].getType() == GameObjectType.GENERATE){
-                            int a = 1;
-                        }
                         _activeObject = _items[i][j];
                         _activeObject.startMove();
                     }
                 }
             }
         }else{
-            if(Tools.getDistance(_activeObject) >= Globals.itemSize * 0.8f){
+            if(_activeObject.getGameObjectType() == GameObjectType.GENERATE){
+                if(Tools.getDistance(_activeObject) >= Globals.itemSize * 0.5f){
+                    _activeObject.setCenterPosition(Input.GetTouchX(), Input.GetTouchY());
+                }
+            }else {
                 _activeObject.setCenterPosition(Input.GetTouchX(), Input.GetTouchY());
             }
         }
@@ -207,7 +209,9 @@ public class SceneGame extends Scene {
                 returnActiveObject();
             }
 
+            _activeObject.setActive(false);
             _activeObject = null;
+
         }
     }
 

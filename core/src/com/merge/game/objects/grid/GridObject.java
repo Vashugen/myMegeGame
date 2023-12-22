@@ -4,10 +4,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.objects.DisplayObject;
-import com.merge.game.objects.GameObject;
 import com.merge.game.objects.GameObjectType;
 
-public class GridObject extends GameObject {
+public class GridObject extends DisplayObject {
 
     protected int gridX, gridY;
 
@@ -16,9 +15,7 @@ public class GridObject extends GameObject {
     protected int _type = 0;
     protected String _generateType;
 
-    private boolean _isMoving = false;
-    private float _startMoveX = 0, _startMoveY = 0;
-    private float _moveX = 0, _moveY = 0;
+    protected int _gameObjectType;
 
     public GridObject(TextureRegion texture) {
         super(texture);
@@ -53,19 +50,6 @@ public class GridObject extends GameObject {
         setPosition(getXByGridX(x), getYByGridY(y));
     }
 
-    public void startMove() {
-        _isMoving = true;
-        _startMoveX = _moveX = Input.GetTouchX();
-        _startMoveY = _moveY = Input.GetTouchY();
-    }
-
-    public float getMoveX() {
-        return _moveX - _startMoveX;
-    }
-
-    public float getMoveY() {
-        return _moveY - _startMoveY;
-    }
 
     private void setGridPosition(int x, int y) {
         setGridPositionX(x);
@@ -118,5 +102,13 @@ public class GridObject extends GameObject {
 
     public boolean canBeDeleted() {
         return !(this.getGameObjectType() == GameObjectType.GENERATE && this._generateType.equals(GenerateItemType.KETTLE));
+    }
+
+    public int getGameObjectType() {
+        return _gameObjectType;
+    }
+
+    public boolean canBeMerge() {
+        return _gameObjectType == GameObjectType.MERGE;
     }
 }

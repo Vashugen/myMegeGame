@@ -2,9 +2,10 @@ package com.merge.game.objects.grid;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.objects.GameObjectType;
+import com.merge.game.objects.GridItem;
 import com.merge.game.resources.textures.TextureItems;
 
-public class MergeItem extends GridObject {
+public class MergeItem extends GridItem {
 
     public MergeItem(int type, int level, String generateType){
         super(getTexture(type, level, generateType));
