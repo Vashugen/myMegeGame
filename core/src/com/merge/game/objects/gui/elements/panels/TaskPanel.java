@@ -2,6 +2,7 @@ package com.merge.game.objects.gui.elements.panels;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.merge.game.logic.Globals;
 import com.merge.game.logic.Tools;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.game_elements.Task;
@@ -44,6 +45,7 @@ public class TaskPanel extends DisplayObject {
         int type, level, count;
         for (int i = 0; i < _countTask; i++){
             boolean createTask = true;
+            String generateItemType = Globals.generateExists.get(Tools.randomInt(0, Globals.generateExists.size()));
             type = Tools.randomInt(1, TextureItems.kettle1.length);
             level = Tools.randomInt(0, MAX_LEVEL_QUANTITY) + 1;
             //level = Math.random() > 0.5 ? 2 : 3;
@@ -58,15 +60,15 @@ public class TaskPanel extends DisplayObject {
             }
 
             if(createTask){
-                setTask(task, i);
+                setTask(task, i, generateItemType);
                 addedTasks.add(task);
             }
         }
     }
 
-    private void setTask(Task task, int indexPanel){
+    private void setTask(Task task, int indexPanel, String generateItemType){
 
-        DisplayObject taskObject = new MergeItem(task.type, task.level, GenerateItemType.KETTLE);
+        DisplayObject taskObject = new MergeItem(task.type, task.level, generateItemType);
 
         TaskItem taskItem = new TaskItem();
         addChild(taskItem);

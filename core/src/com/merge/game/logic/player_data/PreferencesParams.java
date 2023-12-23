@@ -5,7 +5,7 @@ public class PreferencesParams {
     public static final String EXISTS  = "exists";
     public static final String SCORE  = "score";
     public static final String LEVEL  = "level";
-    public static final String ENERGY_COUNT  = "energyc";
+    public static final String GOLD = "gold";
     public static final String ENERGY_TIME  = "energyt";
     public static final String ITEM_TYPE  = "item";
     public static final String ITEM_MERGE_TYPE  = "mitem";

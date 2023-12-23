@@ -9,9 +9,11 @@ public class GenerateItemType {
 
     public static final String KETTLE = "kettle";
     public static final String AMULET = "amulet";
+    public static final String POTION = "potion";
 
     private static ArrayList<TextureRegion[]> _texturesKettle = new ArrayList();
     private static ArrayList<TextureRegion[]> _texturesAmulet = new ArrayList();
+    private static ArrayList<TextureRegion[]> _texturesPotion = new ArrayList();
 
     public static void init(){
         _texturesKettle.add(0, null);
@@ -23,6 +25,15 @@ public class GenerateItemType {
 
         _texturesAmulet.add(0, null);
         _texturesAmulet.add(1, TextureItems.amulet1);
+        _texturesAmulet.add(2, TextureItems.amulet2);
+        _texturesAmulet.add(3, TextureItems.amulet3);
+        _texturesAmulet.add(4, TextureItems.amulet4);
+
+        _texturesPotion.add(0, null);
+        _texturesPotion.add(1, TextureItems.potion1);
+        _texturesPotion.add(2, TextureItems.potion2);
+        _texturesPotion.add(3, TextureItems.potion3);
+        _texturesPotion.add(4, TextureItems.potion4);
     }
 
     public static TextureRegion[] getTexture(String generateType, int level){
@@ -30,8 +41,9 @@ public class GenerateItemType {
             case KETTLE:
                 return _texturesKettle.get(level);
             case AMULET:
-                level = 1;
                 return _texturesAmulet.get(level);
+            case POTION:
+                return _texturesPotion.get(level);
         }
 
         return null;
@@ -43,9 +55,21 @@ public class GenerateItemType {
                 switch (itemType){
                     case 1:
                         return AMULET;
+                    case 2:
+                        return POTION;
                 }
         }
         return null;
+    }
+
+    public static int getEnergyByType(String generateType) {
+        switch (generateType){
+            case AMULET:
+            case POTION:
+                return 10;
+        }
+
+        return -1;
     }
 
 /*    public static TextureRegion[] getTypeName(String type, int level) {

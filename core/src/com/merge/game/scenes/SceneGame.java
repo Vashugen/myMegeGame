@@ -1,14 +1,12 @@
 package com.merge.game.scenes;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
+import com.merge.game.logic.player_data.Player;
 import com.merge.game.objects.Background;
-import com.merge.game.objects.GridItem;
 import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.game_elements.Trash;
-import com.merge.game.objects.grid.GenerateItem;
 import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.objects.grid.GridCell;
 import com.merge.game.objects.grid.GridObject;
@@ -41,16 +39,16 @@ public class SceneGame extends Scene {
     private static float gridWidth, gridHeight;
 
     private GridCell[][] _grid;
-    private GridItem[][] _items;
-    private GridItem _activeObject = null;
+    private MergeItem[][] _items;
+    private MergeItem _activeObject = null;
 
     private TopPanel _topPanel;
     private RightPanel _rightPanel;
     private LeftPanel _leftPanel;
 
-    private int _scoreCount = 0;
-    private int _goldCount = 0;
-    private int _levelCount = 0;
+    private int _scoreCount;
+    private int _goldCount;
+    private int _levelCount;
 
     private Trash _trash;
     private Button _clearButton;
@@ -75,9 +73,14 @@ public class SceneGame extends Scene {
         updateTopPanel();
         updateTaskPanel();
         updateClearButton();
+        updateGlobal();
     }
 
     private void initGameSettings() {
+
+        _scoreCount = Player.get().getScore();
+        _levelCount = Player.get().getLevel();
+        _goldCount = Player.get().getGold();
 
         gridWidth = Globals.screenWidth * GRID_COEF_WIDTH;
         gridHeight = Globals.screenHeight * GRID_COEF_HEIGHT;
@@ -86,6 +89,8 @@ public class SceneGame extends Scene {
 
         Globals.offsetX = (Globals.screenWidth - (Globals.itemSize * GRID_COUNT_WIDTH)) / 2;
         Globals.offsetY = (Globals.screenHeight - (Globals.itemSize * GRID_COUNT_HEIGHT)) / 2;
+
+        Globals.generateExists.add(GenerateItemType.KETTLE);
     }
 
     private void initBackground() {
@@ -105,7 +110,7 @@ public class SceneGame extends Scene {
     }
 
     private void initItems(){
-        _items = new GridItem[GRID_COUNT_WIDTH][GRID_COUNT_HEIGHT];
+        _items = new MergeItem[GRID_COUNT_WIDTH][GRID_COUNT_HEIGHT];
         initGenerateItem();
         //initMergeItems();
     }
@@ -149,7 +154,7 @@ public class SceneGame extends Scene {
     private void initGenerateItem() {
         int x = Tools.randomInt(GRID_COUNT_WIDTH);
         int y = Tools.randomInt(GRID_COUNT_HEIGHT);
-        _items[x][y] = new GenerateItem(TextureItems.kettle1[0], _grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, 1, 1, GenerateItemType.KETTLE);
+        _items[x][y] = new com.merge.game.objects.grid.MergeItem(_grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, 0, 1, GenerateItemType.KETTLE, GameObjectType.GENERATE);
         _items[x][y].setType(GameObjectType.GENERATE);
         addChild(_items[x][y]);
     }
@@ -285,6 +290,16 @@ public class SceneGame extends Scene {
         }
     }
 
+    private void updateGlobal(){
+        for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
+            for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
+                if(_items[i][j] != null && _items[i][j].isGenerate()){
+                    Globals.updateGenerateList(_items[i][j].getGenerateType());
+                }
+            }
+        }
+    }
+
     private void putInTrash() {
         removeChild(_activeObject);
         _items[_activeObject.getGridX()][_activeObject.getGridY()].destroy();
@@ -307,7 +322,7 @@ public class SceneGame extends Scene {
     private void updateGenerateItem(int i, int j) {
 
         if(_items[i][j] == _activeObject){
-            createItems(_activeObject.getGenerateType());
+            createItems(_activeObject);
             returnActiveObject();
         }else if(_items[i][j] == null){
             moveItem(i, j);
@@ -340,12 +355,12 @@ public class SceneGame extends Scene {
             return false;
         }
 
-        if(((MergeItem) _activeObject).match(_items[i][j])){
+        if(((com.merge.game.objects.grid.MergeItem) _activeObject).match(_items[i][j])){
             return true;
         }
 
         //не финальный уровень у итемсов
-        if(((MergeItem) _activeObject).isFinalLevel()){
+        if(((com.merge.game.objects.grid.MergeItem) _activeObject).isFinalLevel()){
             return false;
         }
 
@@ -358,7 +373,7 @@ public class SceneGame extends Scene {
 
         //generate items moved by this function too
         if(_activeObject.getGameObjectType() == GameObjectType.MERGE && _items[i][j] != null){
-            ((MergeItem)_activeObject).updateLevel();
+            ((com.merge.game.objects.grid.MergeItem)_activeObject).updateLevel();
         }
 
         _items[_activeObject.getGridX()][_activeObject.getGridY()] = null;
@@ -366,25 +381,20 @@ public class SceneGame extends Scene {
         _items[i][j] = _activeObject;
     }
 
-    private void createItems(String generateType) {
-        int energyCount = 10;
+    private void createItems(MergeItem generateObject) {
         //if(_activeObject.getMaxCount() > 0 && energyCount > 0){
-        if(energyCount > 0){
+        if(_scoreCount > 0 && generateObject.getEnergy() != 0){
             boolean itemIsCreate = false;
             do{
                 int x = Tools.randomInt(GRID_COUNT_WIDTH);
                 int y = Tools.randomInt(GRID_COUNT_HEIGHT);
-                //int type = Tools.randomInt(1, TextureItems.kettle1.length);
-                if (generateType.equals(GenerateItemType.AMULET)){
-                    int a = 10;
-                }
-                int type = Tools.randomInt(1, GenerateItemType.getTexture(generateType, 1).length);
                 if(_items[x][y] == null){
                     int level = Tools.randomInt(1, 3);
-                    TextureRegion[] texture = GenerateItemType.getTexture(generateType, level);
-                    _items[x][y] = new MergeItem(texture[type], _grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, type, level, generateType);
+                    int type = Tools.randomInt(1, GenerateItemType.getTexture(generateObject.getGenerateType(), 1).length);
+                    _items[x][y] = new com.merge.game.objects.grid.MergeItem(_grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, type, level, generateObject.getGenerateType(), GameObjectType.MERGE);
                     itemIsCreate = true;
-                    energyCount --;
+                    _scoreCount --;
+                    generateObject.decrementEnergy();
                     addChild(_items[x][y]);
                 }
 

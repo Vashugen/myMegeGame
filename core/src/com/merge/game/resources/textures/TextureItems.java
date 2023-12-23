@@ -10,6 +10,7 @@ public class TextureItems {
     public static TextureRegion mainScenePlay, mainSceneShop, mainSceneRewards;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
     public static TextureRegion[] amulet1, amulet2, amulet3, amulet4;
+    public static TextureRegion[] potion1, potion2, potion3, potion4;
 
     public static void initItems(){
         initFields();
@@ -42,6 +43,7 @@ public class TextureItems {
     private static void initMergeItems() {
         initKettle();
         initAmulet();
+        initPotion();
     }
 
     private static void initKettle() {
@@ -108,6 +110,36 @@ public class TextureItems {
         amulet4[0] = new TextureRegion(texture, 0, 396, 112, 112);
         for (int i = 1; i <= 1; i++) {
             amulet4[i] = new TextureRegion(texture, i * 112, 396, 112, 112);
+        }
+    }
+
+    private static void initPotion(){
+
+        Texture texture = Textures.potion;
+
+        //in const
+        potion1 = new TextureRegion[5];
+        potion1[0] = new TextureRegion(texture, 0, 0, 112, 112);
+        for (int i = 1; i <= 1; i++) {
+            potion1[i] = new TextureRegion(texture, i * 112, 0, 112, 112);
+        }
+
+        potion2 = new TextureRegion[5];
+        potion2[0] = new TextureRegion(texture, 0, 132, 112, 112);
+        for (int i = 1; i <= 1; i++) {
+            potion2[i] = new TextureRegion(texture,i * 112, 132, 112, 112);
+        }
+
+        potion3 = new TextureRegion[5];
+        potion3[0] = new TextureRegion(texture, 0, 264, 112, 112);
+        for (int i = 1; i <= 1; i++) {
+            potion3[i] = new TextureRegion(texture, i * 112, 264, 112, 112);
+        }
+
+        potion4 = new TextureRegion[5];
+        potion4[0] = new TextureRegion(texture, 0, 396, 112, 112);
+        for (int i = 1; i <= 1; i++) {
+            potion4[i] = new TextureRegion(texture, i * 112, 396, 112, 112);
         }
     }
 

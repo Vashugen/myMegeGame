@@ -2,9 +2,7 @@ package com.merge.game.logic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.merge.game.logic.player_data.PreferencesParams;
-import com.merge.game.objects.GridItem;
-import com.merge.game.objects.grid.GridObject;
+import com.merge.game.objects.grid.MergeItem;
 
 public class Tools {
 
@@ -40,7 +38,7 @@ public class Tools {
         return min + randomInt(max - min);
     }
 
-    public static float getDistance(GridItem object) {
+    public static float getDistance(MergeItem object) {
         float moveX = object.getMoveX();
         float moveY = object.getMoveY();
         return (float) Math.sqrt(moveX * moveX + moveY * moveY);

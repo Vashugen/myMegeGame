@@ -44,6 +44,7 @@ public class TopPanel extends DisplayObject {
         setSizeOfParent();
         setHeight(Globals.offsetY);
 
+        //TODO get from preferences
         _scorePanel = initPanel(TextureItems.score, _scoreCount, 0);
         _goldPanel = initPanel(TextureItems.gold, _goldCount, 1);
         _levelPanel = initPanel(TextureItems.level, _levelCount, 2);

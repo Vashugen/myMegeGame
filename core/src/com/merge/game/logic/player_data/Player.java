@@ -1,6 +1,5 @@
 package com.merge.game.logic.player_data;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.merge.game.logic.Tools;
 import com.merge.game.resources.GameSound;
@@ -23,7 +22,7 @@ public class Player {
 
     private int _score = 0;
     private int _level = 1;
-    private int _energyCount = 30;
+    private int _gold = 30;
     private long _energyTime = System.currentTimeMillis();
     private boolean _exists = false;
 
@@ -34,9 +33,9 @@ public class Player {
 
         _preferences = Tools.getPreferences();
         _exists = _preferences.getBoolean(PreferencesParams.EXISTS, false);
-        _score = _preferences.getInteger(PreferencesParams.SCORE, 0);
+        _score = _preferences.getInteger(PreferencesParams.SCORE, 30);
         _level = _preferences.getInteger(PreferencesParams.LEVEL, 0);
-        _energyCount = _preferences.getInteger(PreferencesParams.ENERGY_COUNT, 30);
+        _gold = _preferences.getInteger(PreferencesParams.GOLD, 30);
         _energyTime = _preferences.getLong(PreferencesParams.ENERGY_TIME, System.currentTimeMillis());
 
         //TODO как бы выглядела грядка
@@ -74,5 +73,17 @@ public class Player {
         preferences.putBoolean(PreferencesParams.MUSIC, GameSound.IsMusicOn());
         preferences.putBoolean(PreferencesParams.SOUND, GameSound.IsSoundOn());
         preferences.flush();*/
+    }
+
+    public int getScore() {
+        return _score;
+    }
+
+    public int getLevel() {
+        return _level;
+    }
+
+    public int getGold() {
+        return _gold;
     }
 }
