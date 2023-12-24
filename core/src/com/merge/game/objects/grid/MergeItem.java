@@ -16,6 +16,7 @@ public class MergeItem extends GridObject {
     private float _moveX = 0, _moveY = 0;
 
     protected boolean _isActive = false;
+    protected boolean _isBroken = false;
     private int _energy = 0;
 
     public MergeItem(int type, int level, String generateType){
@@ -34,6 +35,7 @@ public class MergeItem extends GridObject {
 
     public void update() {
         updateScale();
+        updateGenerator();
     }
 
     public boolean isActive() {
@@ -116,5 +118,13 @@ public class MergeItem extends GridObject {
         }
     }
 
+    private void updateGenerator(){
+        if(getGameObjectType() == GameObjectType.GENERATE && _energy == 0){
+
+            _isBroken = true;
+        }else if(!_isBroken) {
+
+        }
+    }
 
 }

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TextureItems {
 
-    public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear, taskField, taskAbledButton, taskDisabledButton, fade;
+    public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear, taskField, taskAbledButton, taskDisabledButton, fade, broken;
     public static TextureRegion bonusPanel, bonusField, bonusFixGenerate, bonusMaxItem, bonusRandomItem;
     public static TextureRegion mainScenePlay, mainSceneShop, mainSceneRewards;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
@@ -44,9 +44,11 @@ public class TextureItems {
         initKettle();
         initAmulet();
         initPotion();
+        initEffects();
     }
 
     private static void initKettle() {
+
         Texture texture = Textures.items;
         generateKettle = new TextureRegion(texture, 0, 0, 112, 112);
 
@@ -141,6 +143,11 @@ public class TextureItems {
         for (int i = 1; i <= 1; i++) {
             potion4[i] = new TextureRegion(texture, i * 112, 396, 112, 112);
         }
+    }
+
+    private static void initEffects(){
+        Texture texture = Textures.panels;
+        broken = new TextureRegion(texture, 0, 565, 120, 120);
     }
 
     private static void initGameItems() {
