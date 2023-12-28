@@ -23,6 +23,10 @@ public class PanelBonus extends DisplayObject {
         initBonusButtons();
     }
 
+    public ArrayList<BonusButton> bonuses() {
+        return _buttons;
+    }
+
     private void initBonusSquare() {
         float maxBonusSquareHeight = getHeight() / BonusType.BONUS_QUANTITY;
         float bonusSquareSize = getWidth() < maxBonusSquareHeight ? getWidth() : maxBonusSquareHeight;

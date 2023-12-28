@@ -63,13 +63,14 @@ public class GenerateItemType {
     }
 
     public static int getEnergyByType(String generateType) {
-        switch (generateType){
+        return 3;
+/*        switch (generateType){
             case AMULET:
             case POTION:
                 return 10;
         }
 
-        return -1;
+        return -1;*/
     }
 
 /*    public static TextureRegion[] getTypeName(String type, int level) {

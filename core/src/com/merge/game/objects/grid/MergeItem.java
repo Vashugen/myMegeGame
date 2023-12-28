@@ -3,7 +3,9 @@ package com.merge.game.objects.grid;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
+import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.GameObjectType;
+import com.merge.game.resources.textures.TextureItems;
 
 public class MergeItem extends GridObject {
 
@@ -14,6 +16,10 @@ public class MergeItem extends GridObject {
     private boolean _isMoving = false;
     private float _startMoveX = 0, _startMoveY = 0;
     private float _moveX = 0, _moveY = 0;
+
+    private boolean _isDragging = false;
+    private float _startDragX = 0, _startDragY = 0;
+    private float _dragX = 0, _dragY = 0;
 
     protected boolean _isActive = false;
     protected boolean _isBroken = false;
@@ -120,11 +126,27 @@ public class MergeItem extends GridObject {
 
     private void updateGenerator(){
         if(getGameObjectType() == GameObjectType.GENERATE && _energy == 0){
-
-            _isBroken = true;
+            brokeItem();
         }else if(!_isBroken) {
-
+            fixItem();
         }
     }
 
+    public void brokeItem() {
+        DisplayObject broken = new DisplayObject(TextureItems.broken);
+        addChild(broken);
+        broken.scaleToFit(0.5f, 0.5f);
+        broken.setCenterCoeff(0.9f, 0.1f);
+        _isBroken = true;
+    }
+
+    private void fixItem() {
+
+    }
+
+    public void startDrag() {
+        _isDragging = true;
+        _startDragX = _dragX = Input.GetTouchX();
+        _startDragY = _dragY = Input.GetTouchY();
+    }
 }

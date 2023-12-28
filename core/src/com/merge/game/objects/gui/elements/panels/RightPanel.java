@@ -8,7 +8,7 @@ import com.merge.game.resources.textures.TextureItems;
 
 public class RightPanel extends DisplayObject {
 
-    private DisplayObject _panelBonus;
+    private PanelBonus _panelBonus;
     private TrashPanel _panelTrash;
 
     public void init() {
@@ -25,7 +25,7 @@ public class RightPanel extends DisplayObject {
         return _panelTrash;
     }
 
-    public DisplayObject getBonusPanel(){
+    public PanelBonus getBonusPanel(){
         return _panelBonus;
     }
 

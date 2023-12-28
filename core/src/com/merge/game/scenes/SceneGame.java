@@ -5,6 +5,7 @@ import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
 import com.merge.game.logic.player_data.Player;
 import com.merge.game.objects.Background;
+import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.game_elements.Trash;
 import com.merge.game.objects.grid.GenerateItemType;
@@ -73,6 +74,7 @@ public class SceneGame extends Scene {
         updateTopPanel();
         updateTaskPanel();
         updateClearButton();
+        updateBonuses();
         updateGlobal();
     }
 
@@ -154,7 +156,7 @@ public class SceneGame extends Scene {
     private void initGenerateItem() {
         int x = Tools.randomInt(GRID_COUNT_WIDTH);
         int y = Tools.randomInt(GRID_COUNT_HEIGHT);
-        _items[x][y] = new com.merge.game.objects.grid.MergeItem(_grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, 0, 1, GenerateItemType.KETTLE, GameObjectType.GENERATE);
+        _items[x][y] = new MergeItem(_grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, 0, 1, GenerateItemType.KETTLE, GameObjectType.GENERATE);
         _items[x][y].setType(GameObjectType.GENERATE);
         addChild(_items[x][y]);
     }
@@ -193,6 +195,8 @@ public class SceneGame extends Scene {
     }
 
     private void updateItems() {
+        updateTouch();
+        //updateDrag();
         boolean isOverlap = false;
         if(_activeObject != null && !Input.isTouched()){
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
@@ -218,6 +222,59 @@ public class SceneGame extends Scene {
             _activeObject = null;
 
         }
+    }
+
+    private void updateTouch(){
+
+        if(!Input.isJustTouched()){
+            return;
+        }
+
+        for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
+            for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
+                if(_items[i][j] != null && _items[i][j].isTouched()){
+                    MergeItem obj = _items[i][j];
+                    //check bonuses here
+                    //checkBonuses();
+                    if(_activeObject == null){
+                        activeteObject(obj);
+                        obj.startDrag();
+                    }else {
+                        if(_activeObject == obj){
+                            deactivateObject();
+                            //game sound deactivate
+                        }else {
+                            if(getDistanceBetweenObjects(_activeObject, obj) == 1.0f){
+
+                            }else {
+
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        }
+    }
+
+    private float getDistanceBetweenObjects(MergeItem obj1, MergeItem obj2) {
+        return Tools.getDistance(obj1.getGridX(), obj1.getGridY(), obj2.getGridX(), obj2.getGridY());
+    }
+
+    private void activeteObject(MergeItem obj) {
+        //sound on activate
+        _activeObject = obj;
+        obj.setActive(true);
+    }
+
+    private void deactivateObject() {
+        if (_activeObject == null){
+            return;
+        }
+
+        _activeObject.setActive(false);
+        _activeObject = null;
     }
 
     private void updateTopPanel() {
@@ -288,6 +345,10 @@ public class SceneGame extends Scene {
                 }
             }
         }
+    }
+
+    private void updateBonuses(){
+
     }
 
     private void updateGlobal(){

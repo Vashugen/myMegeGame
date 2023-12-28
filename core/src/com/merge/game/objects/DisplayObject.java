@@ -10,6 +10,7 @@ import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class DisplayObject {
 

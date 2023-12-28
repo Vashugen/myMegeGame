@@ -43,4 +43,9 @@ public class Tools {
         float moveY = object.getMoveY();
         return (float) Math.sqrt(moveX * moveX + moveY * moveY);
     }
+
+    public static float getDistance(float x1, float y1, float x2, float y2) {
+
+    }
+
 }
