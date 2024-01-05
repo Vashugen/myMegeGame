@@ -2,13 +2,13 @@ package com.merge.game.objects.grid;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.logic.Globals;
-import com.merge.game.logic.Input;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.GameObjectType;
 
 public class GridObject extends DisplayObject {
 
-    protected int gridX, gridY;
+    protected int _gridX, _gridY;
+    protected float _destX, _destY;
 
     protected int _maxCount = 10;
     protected int _level = 0;
@@ -34,11 +34,11 @@ public class GridObject extends DisplayObject {
     }
 
     public int getGridX() {
-        return gridX;
+        return _gridX;
     }
 
     public int getGridY() {
-        return gridY;
+        return _gridY;
     }
 
     public int getLevel() {
@@ -51,26 +51,25 @@ public class GridObject extends DisplayObject {
     }
 
 
-    private void setGridPosition(int x, int y) {
+    public void setGridPosition(int x, int y) {
         setGridPositionX(x);
         setGridPositionY(y);
     }
 
     private void setGridPositionX(int x) {
-        gridX = x;
+        _gridX = x;
     }
 
     private void setGridPositionY(int y) {
-        gridY = y;
+        _gridY = y;
     }
 
 
-    private float getXByGridX(int x) {
+    protected float getXByGridX(int x) {
         return Globals.offsetX + x * Globals.itemSize;
     }
 
-
-    private float getYByGridY(int y) {
+    protected float getYByGridY(int y) {
         return Globals.offsetY + y * Globals.itemSize;
     }
 

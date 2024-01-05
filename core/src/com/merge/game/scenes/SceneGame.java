@@ -69,7 +69,6 @@ public class SceneGame extends Scene {
 
     public void update(){
         super.update();
-        initActiveObject();
         updateItems();
         updateTopPanel();
         updateTaskPanel();
@@ -173,19 +172,19 @@ public class SceneGame extends Scene {
         }
     }
 
-    private void initActiveObject() {
+    private void updateDrag() {
         if(_activeObject == null){
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                     if(_items[i][j] != null && _items[i][j].isTouched()){
-                        _activeObject = _items[i][j];
-                        _activeObject.startMove();
+                        activeteObject(_items[i][j]);
+                        _activeObject.startDrag();
                     }
                 }
             }
         }else{
             if(_activeObject.getGameObjectType() == GameObjectType.GENERATE){
-                if(Tools.getDistance(_activeObject) >= Globals.itemSize * 0.5f){
+                if(Tools.getDistance(_activeObject.getDragX(), _activeObject.getDragY(), Input.GetTouchX(), Input.GetTouchY()) >= Globals.itemSize * 0.5f){
                     _activeObject.setCenterPosition(Input.GetTouchX(), Input.GetTouchY());
                 }
             }else {
@@ -195,6 +194,7 @@ public class SceneGame extends Scene {
     }
 
     private void updateItems() {
+        updateDrag();
         updateTouch();
         //updateDrag();
         boolean isOverlap = false;
@@ -245,17 +245,38 @@ public class SceneGame extends Scene {
                             //game sound deactivate
                         }else {
                             if(getDistanceBetweenObjects(_activeObject, obj) == 1.0f){
-
+                                //значит, мы можем их смёржить
+                                initMergeObject(_activeObject, obj);
+                                deactivateObject();
                             }else {
-
+                                //значит, мы просто активировали (тапнули) на новый итем
+                                deactivateObject();
+                                activeteObject(obj);
+                                obj.startDrag();
                             }
                         }
                     }
+                }else if(_items[i][j] == null && _activeObject != null && _grid[i][j].isTouched()){
+                    //перемещаем в пустую клетку _activeObject
+                    moveItem(i, j);
+                    //deactivateObject();
                 }
-
-
             }
         }
+    }
+
+    private void initMergeObject(MergeItem objA, MergeItem objB) {
+
+        //GameSound.playSound(GameSound.soundMerge);
+        int x1 = objA.getGridX();
+        int y1 = objA.getGridY();
+        int x2 = objB.getGridX();
+        int y2 = objB.getGridY();
+
+        objA.setGridPosition(x2, y2);
+        objA.moveToGridPosition(x2, y2);
+        objB.setGridPosition(x1, y1);
+        objB.moveToGridPosition(x1, y1);
     }
 
     private float getDistanceBetweenObjects(MergeItem obj1, MergeItem obj2) {

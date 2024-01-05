@@ -52,28 +52,12 @@ public class MergeItem extends GridObject {
         _isActive = state;
     }
 
-    public boolean isMoving() {
-        return _isMoving;
+    public float getDragX() {
+        return _dragX;
     }
 
-    public void setMoving(boolean state) {
-        _isMoving = state;
-    }
-
-    public float getMoveX() {
-        return _moveX - _startMoveX;
-    }
-
-    public float getMoveY() {
-        return _moveY - _startMoveY;
-    }
-
-    public void startMove() {
-        _isMoving = true;
-        _startMoveX = _moveX = Input.GetTouchX();
-        _startMoveY = _moveY = Input.GetTouchY();
-        setActive(true);
-        //setScale(SCALE_AFTER_PRESS);
+    public float getDragY() {
+        return _dragY;
     }
 
     public boolean match(GridObject gridObject) {
@@ -148,5 +132,15 @@ public class MergeItem extends GridObject {
         _isDragging = true;
         _startDragX = _dragX = Input.GetTouchX();
         _startDragY = _dragY = Input.GetTouchY();
+    }
+
+    public void moveToGridPosition(int x, int y) {
+        setDistanation(x, y);
+        setPosition(x, y);
+    }
+
+    private void setDistanation(int x, int y) {
+        _destX = getXByGridX(x);
+        _destY = getYByGridY(y);
     }
 }
