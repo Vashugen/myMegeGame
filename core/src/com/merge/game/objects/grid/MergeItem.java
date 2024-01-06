@@ -41,6 +41,7 @@ public class MergeItem extends GridObject {
 
     public void update() {
         updateScale();
+        updateMovement();
         updateGenerator();
     }
 
@@ -108,6 +109,13 @@ public class MergeItem extends GridObject {
         }
     }
 
+    private void updateMovement() {
+        if(_isDragging){
+            _dragX = Input.getTouchX();
+            _dragY= Input.getTouchY();
+        }
+    }
+
     private void updateGenerator(){
         if(getGameObjectType() == GameObjectType.GENERATE && _energy == 0){
             brokeItem();
@@ -130,8 +138,8 @@ public class MergeItem extends GridObject {
 
     public void startDrag() {
         _isDragging = true;
-        _startDragX = _dragX = Input.GetTouchX();
-        _startDragY = _dragY = Input.GetTouchY();
+        _startDragX = _dragX = Input.getTouchX();
+        _startDragY = _dragY = Input.getTouchY();
     }
 
     public void moveToGridPosition(int x, int y) {

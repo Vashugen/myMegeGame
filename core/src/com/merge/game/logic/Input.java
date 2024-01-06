@@ -20,11 +20,11 @@ public class Input {
         return _isJustTouched;
     }
 
-    public static float GetTouchX() {
+    public static float getTouchX() {
         return Gdx.input.getX();
     }
 
-    public static float GetTouchY() {
+    public static float getTouchY() {
         return Gdx.input.getY();
     }
 }

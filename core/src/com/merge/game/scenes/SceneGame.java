@@ -5,7 +5,6 @@ import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
 import com.merge.game.logic.player_data.Player;
 import com.merge.game.objects.Background;
-import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.game_elements.Trash;
 import com.merge.game.objects.grid.GenerateItemType;
@@ -184,11 +183,11 @@ public class SceneGame extends Scene {
             }
         }else{
             if(_activeObject.getGameObjectType() == GameObjectType.GENERATE){
-                if(Tools.getDistance(_activeObject.getDragX(), _activeObject.getDragY(), Input.GetTouchX(), Input.GetTouchY()) >= Globals.itemSize * 0.5f){
-                    _activeObject.setCenterPosition(Input.GetTouchX(), Input.GetTouchY());
+                if(Tools.getDistance(_activeObject.getDragX(), _activeObject.getDragY(), Input.getTouchX(), Input.getTouchY()) >= Globals.itemSize * 0.5f){
+                    _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
                 }
             }else {
-                _activeObject.setCenterPosition(Input.GetTouchX(), Input.GetTouchY());
+                _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
             }
         }
     }
