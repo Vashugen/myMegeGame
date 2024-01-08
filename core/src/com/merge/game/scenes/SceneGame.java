@@ -68,12 +68,34 @@ public class SceneGame extends Scene {
 
     public void update(){
         super.update();
+        initActiveObject();
         updateItems();
         updateTopPanel();
         updateTaskPanel();
         updateClearButton();
         updateBonuses();
         updateGlobal();
+    }
+
+    private void initActiveObject() {
+        if(_activeObject == null){
+            for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
+                for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
+                    if(_items[i][j] != null && _items[i][j].isTouched()){
+                        activeteObject(_items[i][j]);
+                        _activeObject.startDrag();
+                    }
+                }
+            }
+        }else{
+            if(_activeObject.getGameObjectType() == GameObjectType.GENERATE){
+                if(Tools.getDistance(_activeObject.getDragX(), _activeObject.getDragY(), Input.getTouchX(), Input.getTouchY()) >= Globals.itemSize * 0.8f){
+                    _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
+                }
+            }else {
+                _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
+            }
+        }
     }
 
     private void initGameSettings() {
@@ -172,30 +194,6 @@ public class SceneGame extends Scene {
     }
 
     private void updateDrag() {
-        if(_activeObject == null){
-            for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
-                for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                    if(_items[i][j] != null && _items[i][j].isTouched()){
-                        activeteObject(_items[i][j]);
-                        _activeObject.startDrag();
-                    }
-                }
-            }
-        }else{
-            if(_activeObject.getGameObjectType() == GameObjectType.GENERATE){
-                if(Tools.getDistance(_activeObject.getDragX(), _activeObject.getDragY(), Input.getTouchX(), Input.getTouchY()) >= Globals.itemSize * 0.5f){
-                    _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
-                }
-            }else {
-                _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
-            }
-        }
-    }
-
-    private void updateItems() {
-        updateDrag();
-        updateTouch();
-        //updateDrag();
         boolean isOverlap = false;
         if(_activeObject != null && !Input.isTouched()){
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
@@ -223,6 +221,11 @@ public class SceneGame extends Scene {
         }
     }
 
+    private void updateItems() {
+        updateDrag();
+        updateTouch();
+    }
+
     private void updateTouch(){
 
         if(!Input.isJustTouched()){
@@ -231,34 +234,18 @@ public class SceneGame extends Scene {
 
         for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
             for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                if(_items[i][j] != null && _items[i][j].isTouched()){
-                    MergeItem obj = _items[i][j];
-                    //check bonuses here
-                    //checkBonuses();
-                    if(_activeObject == null){
-                        activeteObject(obj);
-                        obj.startDrag();
-                    }else {
-                        if(_activeObject == obj){
-                            deactivateObject();
-                            //game sound deactivate
+                if(_grid[i][j].isTouched()){
+                    if(_items[i][j] == null && _activeObject != null){
+                        moveItem(i, j);
+                    }else if(_items[i][j] != null){
+                        if(_activeObject == null){
+                            activeteObject(_items[i][j]);
+                            _items[i][j].startDrag();
                         }else {
-                            if(getDistanceBetweenObjects(_activeObject, obj) == 1.0f){
-                                //значит, мы можем их смёржить
-                                initMergeObject(_activeObject, obj);
-                                deactivateObject();
-                            }else {
-                                //значит, мы просто активировали (тапнули) на новый итем
-                                deactivateObject();
-                                activeteObject(obj);
-                                obj.startDrag();
-                            }
+                            updateItem(i, j);
                         }
                     }
-                }else if(_items[i][j] == null && _activeObject != null && _grid[i][j].isTouched()){
-                    //перемещаем в пустую клетку _activeObject
-                    moveItem(i, j);
-                    //deactivateObject();
+                    //check bonuses
                 }
             }
         }
