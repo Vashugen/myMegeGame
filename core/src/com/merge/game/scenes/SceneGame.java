@@ -5,12 +5,12 @@ import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
 import com.merge.game.logic.player_data.Player;
 import com.merge.game.objects.Background;
+import com.merge.game.objects.GameObjectType;
 import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.game_elements.Trash;
 import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.objects.grid.GridCell;
 import com.merge.game.objects.grid.GridObject;
-import com.merge.game.objects.GameObjectType;
 import com.merge.game.objects.grid.MergeItem;
 import com.merge.game.objects.gui.elements.Button;
 import com.merge.game.objects.gui.elements.buttons.bonus.BonusButton;
@@ -66,7 +66,7 @@ public class SceneGame extends Scene {
         //initBonus();
     }
 
-    public void update(){
+    public void update() {
         super.update();
         initActiveObject();
         updateItems();
@@ -78,21 +78,21 @@ public class SceneGame extends Scene {
     }
 
     private void initActiveObject() {
-        if(_activeObject == null){
+        if (_activeObject == null) {
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                    if(_items[i][j] != null && _items[i][j].isTouched()){
+                    if (_items[i][j] != null && _items[i][j].isTouched()) {
                         activeteObject(_items[i][j]);
                         _activeObject.startDrag();
                     }
                 }
             }
-        }else{
-            if(_activeObject.getGameObjectType() == GameObjectType.GENERATE){
-                if(Tools.getDistance(_activeObject.getDragX(), _activeObject.getDragY(), Input.getTouchX(), Input.getTouchY()) >= Globals.itemSize * 0.8f){
+        } else {
+            if (_activeObject.getGameObjectType() == GameObjectType.GENERATE) {
+                if (Tools.getDistance(_activeObject.getDragX(), _activeObject.getDragY(), Input.getTouchX(), Input.getTouchY()) >= Globals.itemSize * 0.8f) {
                     _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
                 }
-            }else {
+            } else {
                 _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
             }
         }
@@ -121,7 +121,7 @@ public class SceneGame extends Scene {
     }
 
     private void initGrid() {
-         _grid = new GridCell[GRID_COUNT_WIDTH][GRID_COUNT_HEIGHT];
+        _grid = new GridCell[GRID_COUNT_WIDTH][GRID_COUNT_HEIGHT];
         for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
             for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                 _grid[i][j] = new GridCell();
@@ -131,13 +131,13 @@ public class SceneGame extends Scene {
         }
     }
 
-    private void initItems(){
+    private void initItems() {
         _items = new MergeItem[GRID_COUNT_WIDTH][GRID_COUNT_HEIGHT];
         initGenerateItem();
         //initMergeItems();
     }
 
-    private void initPanels(){
+    private void initPanels() {
         _topPanel = new TopPanel(_scoreCount, _goldCount, _levelCount);
         addChild(_topPanel);
         _topPanel.init();
@@ -162,11 +162,11 @@ public class SceneGame extends Scene {
         _topPanel.addClearButton(_clearButton);
     }
 
-    private void initTasks(){
+    private void initTasks() {
 
     }
 
-    private void initBonus(){
+    private void initBonus() {
         for (int i = 1; i <= BonusType.BONUS_QUANTITY; i++) {
             BonusButton bonusButton = new BonusButton(_rightPanel.getBonusPanel(), i);
             bonusButton.setCenterCoeff(0.5f, 0.29f + (i - 1) * 0.21f);
@@ -184,7 +184,7 @@ public class SceneGame extends Scene {
     private void initMergeItems() {
         for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
             for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                if(_items[i][j] == null){
+                if (_items[i][j] == null) {
                     int textureIndex = Tools.randomInt(1, TextureItems.kettle1.length);
                     //_items[i][j] = new MergeItem(TextureItems.kettleLevelOne[textureIndex], _grid[i][j].getX(), _grid[i][j].getY(), _grid[i][j].getWidth(), _grid[i][j].getHeight(), i, j, 1);
                     addChild(_items[i][j]);
@@ -194,11 +194,12 @@ public class SceneGame extends Scene {
     }
 
     private void updateDrag() {
-        boolean isOverlap = false;
-        if(_activeObject != null && !Input.isTouched()){
+
+        if (_activeObject != null && !Input.isTouched()) {
+            boolean isOverlap = false;
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                    if(_grid[i][j].isMouseOver()){
+                    if (_grid[i][j].isMouseOver()) {
                         updateItem(i, j);
                         isOverlap = true;
                     }
@@ -206,42 +207,38 @@ public class SceneGame extends Scene {
             }
 
             //проверяем пересечение с trash
-            if(_trash.isMouseOver()){
+            if (_trash.isMouseOver()) {
                 putInTrash();
-                _goldCount ++;
+                _goldCount++;
             }
 
-            if(!isOverlap){
+            if (!isOverlap) {
                 returnActiveObject();
             }
-
-            _activeObject.setActive(false);
-            _activeObject = null;
-
         }
     }
 
     private void updateItems() {
         updateDrag();
-        updateTouch();
+        //updateTouch();
     }
 
-    private void updateTouch(){
+    private void updateTouch() {
 
-        if(!Input.isJustTouched()){
+        if (!Input.isJustTouched()) {
             return;
         }
 
         for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
             for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                if(_grid[i][j].isTouched()){
-                    if(_items[i][j] == null && _activeObject != null){
+                if (_grid[i][j].isTouched()) {
+                    if (_items[i][j] == null && _activeObject != null) {
                         moveItem(i, j);
-                    }else if(_items[i][j] != null){
-                        if(_activeObject == null){
+                    } else if (_items[i][j] != null) {
+                        if (_activeObject == null) {
                             activeteObject(_items[i][j]);
                             _items[i][j].startDrag();
-                        }else {
+                        } else {
                             updateItem(i, j);
                         }
                     }
@@ -276,11 +273,13 @@ public class SceneGame extends Scene {
     }
 
     private void deactivateObject() {
-        if (_activeObject == null){
+
+        if (_activeObject == null) {
             return;
         }
 
         _activeObject.setActive(false);
+        _activeObject.stopDragging();
         _activeObject = null;
     }
 
@@ -290,21 +289,21 @@ public class SceneGame extends Scene {
         _topPanel.getLevelPanel().setLabel(_levelCount);
     }
 
-    private void updateTaskPanel(){
+    private void updateTaskPanel() {
 
         for (int i = 0; i < _leftPanel.getTasks().size(); i++) {
 
             TaskArea area = _leftPanel.getTasks().get(i);
 
             area.update();
-            ArrayList <Task> addedTasks = area.getTaskPanel().getAddedTasks();
+            ArrayList<Task> addedTasks = area.getTaskPanel().getAddedTasks();
 
             //подсчёт количества подходящих для задания итемсов
             for (int j = 0; j < GRID_COUNT_WIDTH; j++) {
                 for (int k = 0; k < GRID_COUNT_HEIGHT; k++) {
-                    if(_items[j][k] != null && _items[j][k].canBeMerge()){
+                    if (_items[j][k] != null && _items[j][k].canBeMerge()) {
                         for (int l = 0; l < addedTasks.size(); l++) {
-                            if(addedTasks.get(l).exists(_items[j][k])){
+                            if (addedTasks.get(l).exists(_items[j][k])) {
                                 addedTasks.get(l).existsCount++;
                                 addedTasks.get(l).itemsToRemove.add((_items[j][k]));
                             }
@@ -313,13 +312,13 @@ public class SceneGame extends Scene {
                 }
             }
 
-            if(area.tasksComplete()){
+            if (area.tasksComplete()) {
                 area.activeButton();
-            }else {
+            } else {
                 area.inactiveButton();
             }
 
-            if(area.buttonIsPressed()){
+            if (area.buttonIsPressed()) {
                 //убираем с поля итемсы из задания
                 for (int j = 0; j < addedTasks.size(); j++) {
                     Task currentTask = addedTasks.get(j);
@@ -342,10 +341,10 @@ public class SceneGame extends Scene {
     }
 
     private void updateClearButton() {
-        if(_clearButton.isPressed()){
+        if (_clearButton.isPressed()) {
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                    if(_items[i][j] != null && _items[i][j].canBeDeleted()){
+                    if (_items[i][j] != null && _items[i][j].canBeDeleted()) {
                         removeChild(_items[i][j]);
                         _items[i][j] = null;
                     }
@@ -354,14 +353,14 @@ public class SceneGame extends Scene {
         }
     }
 
-    private void updateBonuses(){
+    private void updateBonuses() {
 
     }
 
-    private void updateGlobal(){
+    private void updateGlobal() {
         for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
             for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                if(_items[i][j] != null && _items[i][j].isGenerate()){
+                if (_items[i][j] != null && _items[i][j].isGenerate()) {
                     Globals.updateGenerateList(_items[i][j].getGenerateType());
                 }
             }
@@ -375,9 +374,9 @@ public class SceneGame extends Scene {
     }
 
     private void updateItem(int i, int j) {
-        if(_activeObject.getGameObjectType() == GameObjectType.GENERATE){
+        if (_activeObject.getGameObjectType() == GameObjectType.GENERATE) {
             updateGenerateItem(i, j);
-        }else{
+        } else {
             updateMergeItem(i, j);
         }
     }
@@ -385,14 +384,16 @@ public class SceneGame extends Scene {
     private void returnActiveObject() {
         _activeObject.setX(_grid[_activeObject.getGridX()][_activeObject.getGridY()].getX());
         _activeObject.setY(_grid[_activeObject.getGridX()][_activeObject.getGridY()].getY());
+        deactivateObject();
     }
 
     private void updateGenerateItem(int i, int j) {
 
-        if(_items[i][j] == _activeObject){
+        //на том же месте
+        if (_items[i][j] == _activeObject) {
             createItems(_activeObject);
             returnActiveObject();
-        }else if(_items[i][j] == null){
+        } else if (_items[i][j] == null) {
             moveItem(i, j);
         }
         //TODO this
@@ -405,31 +406,26 @@ public class SceneGame extends Scene {
     }
 
     private void updateMergeItem(int i, int j) {
-        if(canBeMoved(i, j)){
+        if (canBeMoved(i, j)) {
             moveItem(i, j);
-        }else {
+        } else {
             returnActiveObject();
         }
     }
 
     private boolean canBeMoved(int i, int j) {
 
-        if(_items[i][j] == null){
+        if (_items[i][j] == null) {
             return true;
         }
 
         //сравнение ссылок
-        if(_activeObject == _items[i][j]){
+        if (_activeObject == _items[i][j]) {
             return false;
         }
 
-        if(((com.merge.game.objects.grid.MergeItem) _activeObject).match(_items[i][j])){
+        if (_activeObject.match(_items[i][j])) {
             return true;
-        }
-
-        //не финальный уровень у итемсов
-        if(((com.merge.game.objects.grid.MergeItem) _activeObject).isFinalLevel()){
-            return false;
         }
 
         return false;
@@ -437,36 +433,43 @@ public class SceneGame extends Scene {
 
     private void moveItem(int i, int j) {
 
+        if (_activeObject.isFinalLevel()) {
+            return;
+        }
+
         removeChild(_items[i][j]);
 
         //generate items moved by this function too
-        if(_activeObject.getGameObjectType() == GameObjectType.MERGE && _items[i][j] != null){
-            ((com.merge.game.objects.grid.MergeItem)_activeObject).updateLevel();
+        if (_activeObject.getGameObjectType() == GameObjectType.MERGE && _items[i][j] != null) {
+            _activeObject.updateLevel();
         }
 
         _items[_activeObject.getGridX()][_activeObject.getGridY()] = null;
         _activeObject.placeAtGrid(i, j);
         _items[i][j] = _activeObject;
+
+        _activeObject.stopDragging();
+        deactivateObject();
     }
 
     private void createItems(MergeItem generateObject) {
         //if(_activeObject.getMaxCount() > 0 && energyCount > 0){
-        if(_scoreCount > 0 && generateObject.getEnergy() != 0){
+        if (_scoreCount > 0 && generateObject.getEnergy() != 0) {
             boolean itemIsCreate = false;
-            do{
+            do {
                 int x = Tools.randomInt(GRID_COUNT_WIDTH);
                 int y = Tools.randomInt(GRID_COUNT_HEIGHT);
-                if(_items[x][y] == null){
+                if (_items[x][y] == null) {
                     int level = Tools.randomInt(1, 3);
                     int type = Tools.randomInt(1, GenerateItemType.getTexture(generateObject.getGenerateType(), 1).length);
-                    _items[x][y] = new com.merge.game.objects.grid.MergeItem(_grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, type, level, generateObject.getGenerateType(), GameObjectType.MERGE);
+                    _items[x][y] = new MergeItem(_grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, type, level, generateObject.getGenerateType(), GameObjectType.MERGE);
                     itemIsCreate = true;
-                    _scoreCount --;
+                    _scoreCount--;
                     generateObject.decrementEnergy();
                     addChild(_items[x][y]);
                 }
 
-            }while (!itemIsCreate);
+            } while (!itemIsCreate);
         }
     }
 

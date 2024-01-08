@@ -155,4 +155,8 @@ public class MergeItem extends GridObject {
         _destX = getXByGridX(x);
         _destY = getYByGridY(y);
     }
+
+    public void stopDragging() {
+        _isDragging = false;
+    }
 }
