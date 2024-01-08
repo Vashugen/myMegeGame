@@ -88,12 +88,11 @@ public class SceneGame extends Scene {
                 }
             }
         } else {
-            if (_activeObject.getGameObjectType() == GameObjectType.GENERATE) {
-                if (Tools.getDistance(_activeObject.getDragX(), _activeObject.getDragY(), Input.getTouchX(), Input.getTouchY()) >= Globals.itemSize * 0.8f) {
-                    _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
-                }
-            } else {
+
+            if(_activeObject.getDistance() >= Globals.itemSize * 0.8f){
+            //if (Tools.getDistance(_activeObject.getDragX(), _activeObject.getDragY(), Input.getTouchX(), Input.getTouchY()) >= Globals.itemSize * 0.8f) {
                 _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
+                _activeObject.updateDragging();
             }
         }
     }
@@ -196,53 +195,54 @@ public class SceneGame extends Scene {
     private void updateDrag() {
 
         if (_activeObject != null && !Input.isTouched()) {
-            boolean isOverlap = false;
-            for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
-                for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                    if (_grid[i][j].isMouseOver()) {
-                        updateItem(i, j);
-                        isOverlap = true;
+            if(_activeObject.getDistance() >= Globals.itemSize * 0.8f){
+                boolean isOverlap = false;
+                for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
+                    for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
+                        if (_grid[i][j].isMouseOver()) {
+                            updateItem(i, j);
+                            isOverlap = true;
+                        }
                     }
                 }
-            }
 
-            //проверяем пересечение с trash
-            if (_trash.isMouseOver()) {
-                putInTrash();
-                _goldCount++;
-            }
+                //проверяем пересечение с trash
+                if (_trash.isMouseOver()) {
+                    putInTrash();
+                    _goldCount++;
+                }
 
-            if (!isOverlap) {
-                returnActiveObject();
+                if (!isOverlap) {
+                    returnActiveObject();
+                    deactivateObject();
+                }
             }
         }
     }
 
     private void updateItems() {
         updateDrag();
-        //updateTouch();
+        updateTouch();
     }
 
     private void updateTouch() {
 
-        if (!Input.isJustTouched()) {
-            return;
-        }
-
-        for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
-            for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                if (_grid[i][j].isTouched()) {
-                    if (_items[i][j] == null && _activeObject != null) {
-                        moveItem(i, j);
-                    } else if (_items[i][j] != null) {
-                        if (_activeObject == null) {
-                            activeteObject(_items[i][j]);
-                            _items[i][j].startDrag();
-                        } else {
-                            updateItem(i, j);
+        if (Input.isJustTouched()) {
+            for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
+                for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
+                    if (_grid[i][j].isTouched()) {
+                        if (_items[i][j] == null && _activeObject != null) {
+                            moveItem(i, j);
+                        } else if (_items[i][j] != null) {
+                            if (_activeObject == null) {
+                                activeteObject(_items[i][j]);
+                                _items[i][j].startDrag();
+                            } else {
+                                updateItem(i, j);
+                            }
                         }
+                        //check bonuses
                     }
-                    //check bonuses
                 }
             }
         }
@@ -384,7 +384,6 @@ public class SceneGame extends Scene {
     private void returnActiveObject() {
         _activeObject.setX(_grid[_activeObject.getGridX()][_activeObject.getGridY()].getX());
         _activeObject.setY(_grid[_activeObject.getGridX()][_activeObject.getGridY()].getY());
-        deactivateObject();
     }
 
     private void updateGenerateItem(int i, int j) {
@@ -393,16 +392,18 @@ public class SceneGame extends Scene {
         if (_items[i][j] == _activeObject) {
             createItems(_activeObject);
             returnActiveObject();
+            deactivateObject();
         } else if (_items[i][j] == null) {
             moveItem(i, j);
         }
         //TODO this
-//        else if(_items[i][j].canBeMerged() && _activeObject.canBeMerged) {
-//
-//        }
+/*        else if(_items[i][j].canBeMerged() && _activeObject.canBeMerged) {
+
+        }
         else {
             returnActiveObject();
-        }
+            deactivateObject();
+        }*/
     }
 
     private void updateMergeItem(int i, int j) {

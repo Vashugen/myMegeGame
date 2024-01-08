@@ -58,7 +58,7 @@ public class MergeItem extends GridObject {
     }
 
     public float getDragY() {
-        return _dragY - _startMoveY;
+        return _dragY - _startDragY;
     }
 
     public boolean match(GridObject gridObject) {
@@ -121,7 +121,7 @@ public class MergeItem extends GridObject {
         }
     }
 
-    private void updateDragging() {
+    public void updateDragging() {
         if(_isDragging){
             _dragX = Input.getTouchX();
             _dragY= Input.getTouchY();
@@ -158,5 +158,12 @@ public class MergeItem extends GridObject {
 
     public void stopDragging() {
         _isDragging = false;
+    }
+
+    public float getDistance() {
+        float dragX = getDragX();
+        float dragY = getDragY();
+        return (float) Math.sqrt(dragX * dragX + dragY * dragY);
+
     }
 }
