@@ -68,7 +68,7 @@ public class SceneGame extends Scene {
 
     public void update() {
         super.update();
-        initActiveObject();
+        updateActiveObject();
         updateItems();
         updateTopPanel();
         updateTaskPanel();
@@ -77,7 +77,14 @@ public class SceneGame extends Scene {
         updateGlobal();
     }
 
-    private void initActiveObject() {
+    private void updateActiveObject() {
+
+        if(_activeObject != null && _activeObject.getDistance() >= Globals.itemSize * 0.8f){
+            _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
+            _activeObject.updateDragging();
+        }
+
+        /*
         if (_activeObject == null) {
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
@@ -88,13 +95,13 @@ public class SceneGame extends Scene {
                 }
             }
         } else {
-
             if(_activeObject.getDistance() >= Globals.itemSize * 0.8f){
             //if (Tools.getDistance(_activeObject.getDragX(), _activeObject.getDragY(), Input.getTouchX(), Input.getTouchY()) >= Globals.itemSize * 0.8f) {
                 _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
                 _activeObject.updateDragging();
             }
         }
+        */
     }
 
     private void initGameSettings() {
@@ -195,27 +202,25 @@ public class SceneGame extends Scene {
     private void updateDrag() {
 
         if (_activeObject != null && !Input.isTouched()) {
-            if(_activeObject.getDistance() >= Globals.itemSize * 0.8f){
-                boolean isOverlap = false;
-                for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
-                    for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                        if (_grid[i][j].isMouseOver()) {
-                            updateItem(i, j);
-                            isOverlap = true;
-                        }
+            boolean isOverlap = false;
+            for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
+                for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
+                    if (_grid[i][j].isMouseOver()) {
+                        updateItem(i, j);
+                        isOverlap = true;
                     }
                 }
+            }
 
-                //проверяем пересечение с trash
-                if (_trash.isMouseOver()) {
-                    putInTrash();
-                    _goldCount++;
-                }
+            //проверяем пересечение с trash
+            if (_trash.isMouseOver()) {
+                putInTrash();
+                _goldCount++;
+            }
 
-                if (!isOverlap) {
-                    returnActiveObject();
-                    deactivateObject();
-                }
+            if (!isOverlap) {
+                returnActiveObject();
+                deactivateObject();
             }
         }
     }
@@ -230,18 +235,20 @@ public class SceneGame extends Scene {
         if (Input.isJustTouched()) {
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                    if (_grid[i][j].isTouched()) {
-                        if (_items[i][j] == null && _activeObject != null) {
-                            moveItem(i, j);
-                        } else if (_items[i][j] != null) {
-                            if (_activeObject == null) {
+                    if(_grid[i][j].isTouched()){
+                        //check bonuses
+                        if(_activeObject == null){
+                            if(_items[i][j] != null){
                                 activeteObject(_items[i][j]);
                                 _items[i][j].startDrag();
-                            } else {
+                            }
+                        }else {
+                            if(_items[i][j] == null){
+                                moveItem(i, j);
+                            }else {
                                 updateItem(i, j);
                             }
                         }
-                        //check bonuses
                     }
                 }
             }
@@ -434,23 +441,26 @@ public class SceneGame extends Scene {
 
     private void moveItem(int i, int j) {
 
-        if (_activeObject.isFinalLevel()) {
-            return;
+        if(_activeObject.getDistance() >= Globals.itemSize * 0.8f){
+            if (_activeObject.isFinalLevel()) {
+                return;
+            }
+
+            removeChild(_items[i][j]);
+
+            //generate items moved by this function too
+            if (_activeObject.getGameObjectType() == GameObjectType.MERGE && _items[i][j] != null) {
+                _activeObject.updateLevel();
+            }
+
+            _items[_activeObject.getGridX()][_activeObject.getGridY()] = null;
+            _activeObject.setGridPosition(i, j);
+            _activeObject.moveToGrid(i, j);
+            _items[i][j] = _activeObject;
+
+            _activeObject.stopDragging();
+            deactivateObject();
         }
-
-        removeChild(_items[i][j]);
-
-        //generate items moved by this function too
-        if (_activeObject.getGameObjectType() == GameObjectType.MERGE && _items[i][j] != null) {
-            _activeObject.updateLevel();
-        }
-
-        _items[_activeObject.getGridX()][_activeObject.getGridY()] = null;
-        _activeObject.placeAtGrid(i, j);
-        _items[i][j] = _activeObject;
-
-        _activeObject.stopDragging();
-        deactivateObject();
     }
 
     private void createItems(MergeItem generateObject) {

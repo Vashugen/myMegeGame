@@ -9,6 +9,7 @@ public class GridObject extends DisplayObject {
 
     protected int _gridX, _gridY;
     protected float _destX, _destY;
+    protected boolean _isAtDestX = true, _isAtDestY = true;
 
     protected int _maxCount = 10;
     protected int _level = 0;
@@ -73,6 +74,24 @@ public class GridObject extends DisplayObject {
         return Globals.offsetY + y * Globals.itemSize;
     }
 
+    public void moveToGrid(int x, int y) {
+        setDistanation(getXByGridX(x), getYByGridY(y));
+    }
+
+    private void setDistanation(float x, float y) {
+        setDestX(x);
+        setDestY(y);
+    }
+
+    private void setDestX(float x) {
+        _destX = x;
+        _isAtDestX = false;
+    }
+
+    private void setDestY(float y) {
+        _destY = y;
+        _isAtDestY = false;
+    }
 
     public void setType(int type) {
         this._type = type;
