@@ -193,8 +193,8 @@ public class SceneGame extends Scene {
 
     private void updateItems() {
 
+        boolean isOverlap = false;
         if (_activeObject != null && !Input.isTouched()) {
-            boolean isOverlap = false;
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                     if (_grid[i][j].isMouseOver()) {
@@ -212,27 +212,10 @@ public class SceneGame extends Scene {
 
             if (!isOverlap) {
                 returnActiveObject();
-                deactivateObject();
             }
+
+            deactivateObject();
         }
-    }
-
-    private void initMergeObject(MergeItem objA, MergeItem objB) {
-
-        //GameSound.playSound(GameSound.soundMerge);
-        int x1 = objA.getGridX();
-        int y1 = objA.getGridY();
-        int x2 = objB.getGridX();
-        int y2 = objB.getGridY();
-
-        objA.setGridPosition(x2, y2);
-        objA.moveToGridPosition(x2, y2);
-        objB.setGridPosition(x1, y1);
-        objB.moveToGridPosition(x1, y1);
-    }
-
-    private float getDistanceBetweenObjects(MergeItem obj1, MergeItem obj2) {
-        return Tools.getDistance(obj1.getGridX(), obj1.getGridY(), obj2.getGridX(), obj2.getGridY());
     }
 
     private void activeteObject(MergeItem obj) {
@@ -361,18 +344,16 @@ public class SceneGame extends Scene {
         if (_items[i][j] == _activeObject) {
             createItems(_activeObject);
             returnActiveObject();
-            deactivateObject();
         } else if (_items[i][j] == null) {
             moveItem(i, j);
         }
         //TODO this
-/*        else if(_items[i][j].canBeMerged() && _activeObject.canBeMerged) {
-
-        }
+//        else if(_items[i][j].canBeMerged() && _activeObject.canBeMerged) {
+//
+//        }
         else {
             returnActiveObject();
-            deactivateObject();
-        }*/
+        }
     }
 
     private void updateMergeItem(int i, int j) {
@@ -398,14 +379,15 @@ public class SceneGame extends Scene {
             return true;
         }
 
+        //не финальный уровень у итемсов
+        if(_activeObject.isFinalLevel()){
+            return false;
+        }
+
         return false;
     }
 
     private void moveItem(int i, int j) {
-
-        if (_activeObject.isFinalLevel()) {
-            return;
-        }
 
         removeChild(_items[i][j]);
 
@@ -415,8 +397,9 @@ public class SceneGame extends Scene {
         }
 
         _items[_activeObject.getGridX()][_activeObject.getGridY()] = null;
-        _activeObject.setGridPosition(i, j);
-        _activeObject.moveToGrid(i, j);
+        _activeObject.placeAtGrid(i, j);
+        //_activeObject.setGridPosition(i, j);
+        //_activeObject.moveToGrid(i, j);
         _items[i][j] = _activeObject;
     }
 
