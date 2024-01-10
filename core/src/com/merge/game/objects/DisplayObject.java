@@ -14,6 +14,10 @@ import java.util.Collection;
 
 public class DisplayObject {
 
+    protected static final float MAX_ACTIVE_SCALE = 1.15f;
+    protected static final float SCALE_EFFECT_SPEED = 0.007f;
+    protected float _scaleEffectSpeed = 0;
+
     public float x, y, height, width;
     protected TextureRegion texture;
     protected DisplayObject parent;

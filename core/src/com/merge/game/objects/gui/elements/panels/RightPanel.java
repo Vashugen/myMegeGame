@@ -12,6 +12,7 @@ public class RightPanel extends DisplayObject {
     private TrashPanel _panelTrash;
 
     public void init() {
+
         setWidth(Globals.offsetX);
         setHeight(Globals.screenHeight - Globals.offsetY * 2);
         setX(Globals.screenWidth - Globals.offsetX);
@@ -37,5 +38,9 @@ public class RightPanel extends DisplayObject {
         _panelTrash = new TrashPanel();
         addChild(_panelTrash);
         _panelTrash.init();
+    }
+
+    public void updateBonuses() {
+        _panelBonus.update();
     }
 }

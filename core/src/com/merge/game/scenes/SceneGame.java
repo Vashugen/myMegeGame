@@ -89,7 +89,6 @@ public class SceneGame extends Scene {
             }
         } else {
             if(_activeObject.getDistance() >= Globals.itemSize * 0.8f){
-            //if (Tools.getDistance(_activeObject.getDragX(), _activeObject.getDragY(), Input.getTouchX(), Input.getTouchY()) >= Globals.itemSize * 0.8f) {
                 _activeObject.setCenterPosition(Input.getTouchX(), Input.getTouchY());
                 _activeObject.updateDragging();
             }
@@ -306,7 +305,7 @@ public class SceneGame extends Scene {
     }
 
     private void updateBonuses() {
-
+        _rightPanel.updateBonuses();
     }
 
     private void updateGlobal() {
@@ -320,6 +319,9 @@ public class SceneGame extends Scene {
     }
 
     private void putInTrash() {
+        if(_activeObject.getGameObjectType() == GameObjectType.GENERATE && _activeObject.getGenerateType() == GenerateItemType.KETTLE){
+            return;
+        }
         removeChild(_activeObject);
         _items[_activeObject.getGridX()][_activeObject.getGridY()].destroy();
         _items[_activeObject.getGridX()][_activeObject.getGridY()] = null;

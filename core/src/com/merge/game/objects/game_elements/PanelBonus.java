@@ -46,4 +46,14 @@ public class PanelBonus extends DisplayObject {
             _buttons.add(buttonBonus);
         }
     }
+
+    @Override
+    public void update() {
+        super.update();
+        for (BonusButton bonusButton : _buttons) {
+            if(bonusButton.isTouched()){
+                bonusButton.setActive(!bonusButton.getActiveState());
+            }
+        }
+    }
 }

@@ -9,14 +9,6 @@ import com.merge.game.resources.textures.TextureItems;
 
 public class MergeItem extends GridObject {
 
-    private static final float MAX_ACTIVE_SCALE = 1.15f;
-    private static final float SCALE_EFFECT_SPEED = 0.007f;
-    private float _scaleEffectSpeed = 0;
-
-    private boolean _isMoving = false;
-    private float _startMoveX = 0, _startMoveY = 0;
-    private float _moveX = 0, _moveY = 0;
-
     private boolean _isDragging = false;
     private float _startDragX = 0, _startDragY = 0;
     private float _dragX = 0, _dragY = 0;
