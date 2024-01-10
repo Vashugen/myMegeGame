@@ -47,36 +47,6 @@ public class PanelBonus extends DisplayObject {
         }
     }
 
-    @Override
-    public void update() {
-        super.update();
-        for (BonusButton bonusButton : _buttons) {
-            if(bonusButton.isTouched()){
-                bonusButton.setActive(!bonusButton.getActiveState());
-            }
-        }
-    }
-
-    public boolean activeBonusExists() {
-        for (BonusButton bonusButton : _buttons) {
-            if(bonusButton.isActive()){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public BonusButton getActiveBonus() {
-        for (BonusButton bonusButton : _buttons) {
-            if(bonusButton.isActive()){
-                return bonusButton;
-            }
-        }
-
-        return null;
-    }
-
     public void addBonus(BonusButton bonusButton, int i) {
         _squares.get(i-1).addChild(bonusButton);
         bonusButton.init(i);

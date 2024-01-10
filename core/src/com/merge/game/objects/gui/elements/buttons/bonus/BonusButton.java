@@ -78,24 +78,7 @@ public class BonusButton extends Button {
         return _isActive == true;
     }
 
-    public void activate(MergeItem item) {
-        switch (_bonusType) {
-            case BonusType.FIX_GENERATE:
-                fixGenerate(item);
-                break;
-            case BonusType.MAX_ITEM:
-                generateMaxLevelItems();
-                break;
-            case BonusType.RANDOM_ITEM:
-                break;
-        }
-    }
-
-    private void fixGenerate(MergeItem item) {
-        if(item.getGameObjectType() != GameObjectType.GENERATE){
-            return;
-        }
-
-
+    public int getBonusType() {
+        return -_bonusType;
     }
 }

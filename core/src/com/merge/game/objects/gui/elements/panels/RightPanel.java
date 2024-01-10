@@ -41,18 +41,6 @@ public class RightPanel extends DisplayObject {
         _panelTrash.init();
     }
 
-    public void updateBonuses() {
-        _panelBonus.update();
-    }
-
-    public boolean bonusIsActive() {
-        return _panelBonus.activeBonusExists();
-    }
-
-    public BonusButton getActiveBonus() {
-        return _panelBonus.getActiveBonus();
-    }
-
     public void addBonus(BonusButton bonusButton, int i) {
         _panelBonus.addBonus(bonusButton, i);
     }

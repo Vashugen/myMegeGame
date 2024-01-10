@@ -87,7 +87,7 @@ public class SceneGame extends Scene {
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                     if (_items[i][j] != null && _items[i][j].isTouched()) {
-                        if(_rightPanel.bonusIsActive()){
+                        if(activeBonusExists()){
                             activateBonus(_items[i][j]);
                         }else{
                             activeteObject(_items[i][j]);
@@ -105,10 +105,74 @@ public class SceneGame extends Scene {
         }
     }
 
+    public boolean activeBonusExists() {
+        for (BonusButton bonusButton : _buttonsBonus) {
+            if(bonusButton.isActive()){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void activateBonus(MergeItem item) {
-        BonusButton bonusButton = _rightPanel.getActiveBonus();
+
+        for (BonusButton bonusButton : _buttonsBonus) {
+            if(bonusButton.isActive()){
+                switch (bonusButton.getBonusType()) {
+                    case BonusType.FIX_GENERATE:
+                        fixGenerator(item);
+                        break;
+                    case BonusType.MAX_ITEM:
+                        generateMaxLevelItems();
+                        break;
+                    case BonusType.RANDOM_ITEM:
+                        break;
+                }
+            }
+        }
+
         bonusButton.activate(item);
         bonusButton.setActive(false);
+    }
+
+
+
+    private void fixGenerator(MergeItem item) {
+        if(item.getGameObjectType() != GameObjectType.GENERATE){
+            return;
+        }
+    }
+
+    private void generateMaxLevelItems() {
+
+        for (int i1 = 1; i1 <= BonusType.MAX_ITEM_CREATE_QUANTITY; i1++) {
+            for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
+                for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
+                    if (_items[i][j] == null) {
+                        int level = getMaxLevel();
+                        int type = Tools.randomInt(1, GenerateItemType.getTexture(generateObject.getGenerateType(), 1).length);
+                        _items[i][j] = new MergeItem(_grid[i][j].getX(), _grid[i][j].getY(), _grid[i][j].getWidth(), _grid[i][j].getHeight(), i, j, type, level, generateObject.getGenerateType(), GameObjectType.MERGE);
+                        addChild(_items[i][j]);
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    private int getMaxLevel() {
+        int level = 0;
+        for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
+            for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
+                if (_items[i][j] != null) {
+                    level = _items[i][j].getLevel() > level ? _items[i][j].getLevel() : level;
+                }
+            }
+        }
+
+        return level;
     }
 
     private void initGameSettings() {
@@ -321,7 +385,11 @@ public class SceneGame extends Scene {
     }
 
     private void updateBonuses() {
-        _rightPanel.updateBonuses();
+        for (BonusButton bonusButton : _buttonsBonus) {
+            if(bonusButton.isTouched()){
+                bonusButton.setActive(!bonusButton.getActiveState());
+            }
+        }
     }
 
     private void updateGlobal() {
