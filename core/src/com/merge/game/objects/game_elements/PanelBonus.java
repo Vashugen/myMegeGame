@@ -56,4 +56,24 @@ public class PanelBonus extends DisplayObject {
             }
         }
     }
+
+    public boolean activeBonusExists() {
+        for (BonusButton bonusButton : _buttons) {
+            if(bonusButton.isActive()){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public BonusButton getActiveBonus() {
+        for (BonusButton bonusButton : _buttons) {
+            if(bonusButton.isActive()){
+                return bonusButton;
+            }
+        }
+
+        return null;
+    }
 }

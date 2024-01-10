@@ -3,6 +3,7 @@ package com.merge.game.objects.gui.elements.panels;
 import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.game_elements.PanelBonus;
+import com.merge.game.objects.gui.elements.buttons.bonus.BonusButton;
 import com.merge.game.objects.gui.elements.buttons.bonus.BonusType;
 import com.merge.game.resources.textures.TextureItems;
 
@@ -42,5 +43,13 @@ public class RightPanel extends DisplayObject {
 
     public void updateBonuses() {
         _panelBonus.update();
+    }
+
+    public boolean bonusIsActive() {
+        return _panelBonus.activeBonusExists();
+    }
+
+    public BonusButton getActiveBonus() {
+        return _panelBonus.getActiveBonus();
     }
 }

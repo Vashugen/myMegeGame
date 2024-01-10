@@ -129,7 +129,8 @@ public class MergeItem extends GridObject {
     }
 
     private void fixItem() {
-
+        _isBroken = false;
+        _energy = GenerateItemType.getEnergyByType(_generateType);
     }
 
     public void startDrag() {
