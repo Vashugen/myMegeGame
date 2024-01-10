@@ -20,7 +20,7 @@ public class PanelBonus extends DisplayObject {
         setCenterCoeffX(0.5f);
         setY(0);
         initBonusSquare();
-        initBonusButtons();
+        //initBonusButtons();
     }
 
     public ArrayList<BonusButton> bonuses() {
@@ -75,5 +75,10 @@ public class PanelBonus extends DisplayObject {
         }
 
         return null;
+    }
+
+    public void addBonus(BonusButton bonusButton, int i) {
+        _squares.get(i-1).addChild(bonusButton);
+        bonusButton.init(i);
     }
 }

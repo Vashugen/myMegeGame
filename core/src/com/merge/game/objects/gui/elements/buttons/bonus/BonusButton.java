@@ -13,9 +13,19 @@ public class BonusButton extends Button {
     private boolean _isActive;
     private int _bonusType;
 
+    public BonusButton(int bonusType) {
+        _bonusType = bonusType;
+    }
+
     public BonusButton(DisplayObject parent, int bonusType) {
         parent.addChild(this);
         _bonusType = bonusType;
+        setTexture(getTextureByType(bonusType));
+        scaleToFit(0.7f, 0.7f);
+        setCenterCoeff(0.5f, 0.5f);
+    }
+
+    public void init(int bonusType){
         setTexture(getTextureByType(bonusType));
         scaleToFit(0.7f, 0.7f);
         setCenterCoeff(0.5f, 0.5f);
@@ -74,6 +84,7 @@ public class BonusButton extends Button {
                 fixGenerate(item);
                 break;
             case BonusType.MAX_ITEM:
+                generateMaxLevelItems();
                 break;
             case BonusType.RANDOM_ITEM:
                 break;

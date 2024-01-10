@@ -55,6 +55,8 @@ public class SceneGame extends Scene {
     private Trash _trash;
     private Button _clearButton;
 
+    ArrayList<BonusButton> _buttonsBonus = new ArrayList<>();
+
     public SceneGame() {
         GameSound.playBackgroundMusic(GameSound.mainTheme);
         initGameSettings();
@@ -62,6 +64,7 @@ public class SceneGame extends Scene {
         initGrid();
         initItems();
         initPanels();
+        initBonus();
         initTrash();
         initClear();
         initTasks();
@@ -178,8 +181,8 @@ public class SceneGame extends Scene {
 
     private void initBonus() {
         for (int i = 1; i <= BonusType.BONUS_QUANTITY; i++) {
-            BonusButton bonusButton = new BonusButton(_rightPanel.getBonusPanel(), i);
-            bonusButton.setCenterCoeff(0.5f, 0.29f + (i - 1) * 0.21f);
+            BonusButton bonusButton = new BonusButton(i);
+            _rightPanel.addBonus(bonusButton, i);
         }
     }
 

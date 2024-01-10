@@ -52,4 +52,8 @@ public class RightPanel extends DisplayObject {
     public BonusButton getActiveBonus() {
         return _panelBonus.getActiveBonus();
     }
+
+    public void addBonus(BonusButton bonusButton, int i) {
+        _panelBonus.addBonus(bonusButton, i);
+    }
 }
