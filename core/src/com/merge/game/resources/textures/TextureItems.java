@@ -7,7 +7,7 @@ public class TextureItems {
 
     public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear,
             taskField, taskAbledButton, taskDisabledButton, fade, broken;
-    public static TextureRegion bonusPanel, bonusField, bonusFixGenerate, bonusMaxItem, bonusRandomItem;
+    public static TextureRegion bonusPanel, bonusField, bonusFixGenerate, bonusMaxItem, bonusRandomItem, bonusRandomGenerator;
     public static TextureRegion mainScenePlay, mainSceneShop, mainSceneRewards;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
     public static TextureRegion[] amulet1, amulet2, amulet3, amulet4;
@@ -174,6 +174,7 @@ public class TextureItems {
         bonusFixGenerate = new TextureRegion(texture, 0, 852, 170, 170);
         bonusMaxItem = new TextureRegion(texture, 171, 852, 170, 170);
         bonusRandomItem = new TextureRegion(texture, 342, 852, 170, 170);
+        bonusRandomGenerator =
     }
 
 }

@@ -127,6 +127,7 @@ public class SceneGame extends Scene {
                         generateMaxLevelItems();
                         break;
                     case BonusType.RANDOM_ITEM:
+                        createRandomGenerator();
                         break;
                 }
             }
@@ -135,8 +136,6 @@ public class SceneGame extends Scene {
         bonusButton.activate(item);
         bonusButton.setActive(false);
     }
-
-
 
     private void fixGenerator(MergeItem item) {
         if(item.getGameObjectType() != GameObjectType.GENERATE){
@@ -150,23 +149,39 @@ public class SceneGame extends Scene {
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                     if (_items[i][j] == null) {
-                        int level = getMaxLevel();
-                        int type = Tools.randomInt(1, GenerateItemType.getTexture(generateObject.getGenerateType(), 1).length);
-                        _items[i][j] = new MergeItem(_grid[i][j].getX(), _grid[i][j].getY(), _grid[i][j].getWidth(), _grid[i][j].getHeight(), i, j, type, level, generateObject.getGenerateType(), GameObjectType.MERGE);
+                        String generateType = getRandomGenerateType();
+                        int level = getMaxLevel(generateType);
+                        int type = Tools.randomInt(1, GenerateItemType.getTexture(generateType, level).length);
+                        _items[i][j] = new MergeItem(_grid[i][j].getX(), _grid[i][j].getY(), _grid[i][j].getWidth(), _grid[i][j].getHeight(), i, j, type, level, generateType, GameObjectType.MERGE);
                         addChild(_items[i][j]);
                     }
                 }
             }
         }
-
-
     }
 
-    private int getMaxLevel() {
+    private void createRandomGenerator() {
+        for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
+            for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
+                if (_items[i][j] == null) {
+                    _items[i][j] = new MergeItem(_grid[i][j].getX(), _grid[i][j].getY(), _grid[i][j].getWidth(), _grid[i][j].getHeight(), i, j, 0, 1, GenerateItemType.RANDOM, GameObjectType.GENERATE);
+                    _items[i][j].setType(GameObjectType.GENERATE);
+                    addChild(_items[i][j]);
+                }
+            }
+        }
+    }
+
+    private String getRandomGenerateType() {
+        int random = Tools.randomInt(0, Globals.generateExists.size());
+        return Globals.generateExists.get(random);
+    }
+
+    private int getMaxLevel(String generateType) {
         int level = 0;
         for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
             for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                if (_items[i][j] != null) {
+                if (_items[i][j] != null && _items[i][j].getGenerateType() == generateType) {
                     level = _items[i][j].getLevel() > level ? _items[i][j].getLevel() : level;
                 }
             }

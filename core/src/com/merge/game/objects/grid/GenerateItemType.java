@@ -10,6 +10,7 @@ public class GenerateItemType {
     public static final String KETTLE = "kettle";
     public static final String AMULET = "amulet";
     public static final String POTION = "potion";
+    public static final String RANDOM = "random";
 
     private static ArrayList<TextureRegion[]> _texturesKettle = new ArrayList();
     private static ArrayList<TextureRegion[]> _texturesAmulet = new ArrayList();

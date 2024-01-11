@@ -25,6 +25,12 @@ public class MergeItem extends GridObject {
         _gameObjectType = GameObjectType.MERGE;
     }
 
+    public MergeItem(TextureRegion texture, float x, float y, float width, float height, int gridX, int gridY, int type, int level, String generateType, int gameObjectType) {
+        super(texture, x, y, width, height, gridX, gridY, type, level, generateType);
+        _gameObjectType = gameObjectType;
+        _energy = GenerateItemType.getEnergyByType(generateType);
+    }
+
     public MergeItem(float x, float y, float width, float height, int gridX, int gridY, int type, int level, String generateType, int gameObjectType) {
         super(getTexture(type, level, generateType), x, y, width, height, gridX, gridY, type, level, generateType);
         _gameObjectType = gameObjectType;
