@@ -174,7 +174,6 @@ public class TextureItems {
         bonusFixGenerate = new TextureRegion(texture, 0, 852, 170, 170);
         bonusMaxItem = new TextureRegion(texture, 171, 852, 170, 170);
         bonusRandomItem = new TextureRegion(texture, 342, 852, 170, 170);
-        bonusRandomGenerator =
-    }
+        bonusRandomGenerator = new TextureRegion(texture, 342, 852, 170, 170);    }
 
 }

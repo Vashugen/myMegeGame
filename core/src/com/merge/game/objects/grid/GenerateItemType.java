@@ -65,9 +65,10 @@ public class GenerateItemType {
 
     public static int getEnergyByType(String generateType) {
         return 3;
-/*        switch (generateType){
+        /*switch (generateType){
             case AMULET:
             case POTION:
+            case RANDOM:
                 return 10;
         }
 
