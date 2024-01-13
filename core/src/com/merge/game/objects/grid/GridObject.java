@@ -127,7 +127,7 @@ public class GridObject extends DisplayObject {
     }
 
     public boolean isGenerate(){
-        return _generateType.equals(GameObjectType.GENERATE);
+        return _gameObjectType == GameObjectType.GENERATE;
     }
 
     public boolean canBeMerge() {
