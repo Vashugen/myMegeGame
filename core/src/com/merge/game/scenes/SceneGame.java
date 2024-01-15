@@ -23,8 +23,6 @@ import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.TextureItems;
 import com.merge.game.resources.textures.Textures;
 
-import org.graalvm.compiler.api.replacements.Snippet;
-
 import java.util.ArrayList;
 
 public class SceneGame extends Scene {
@@ -76,7 +74,7 @@ public class SceneGame extends Scene {
         updateActiveObject();
         updateItems();
         updateTopPanel();
-        updateTaskPanel();
+        updateTasks();
         updateClearButton();
         updateBonuses();
         updateGlobal();
@@ -336,7 +334,7 @@ public class SceneGame extends Scene {
         _topPanel.getLevelPanel().setLabel(_levelCount);
     }
 
-    private void updateTaskPanel() {
+    private void updateTasks() {
 
         for (int i = 0; i < _leftPanel.getTasks().size(); i++) {
 
