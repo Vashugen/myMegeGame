@@ -11,4 +11,5 @@ public class PreferencesParams {
     public static final String ITEM_MERGE_TYPE  = "mitem";
     public static final String MUSIC  = "music";
     public static final String SOUND  = "sound";
+    public static final String BONUS  = "bonus";
 }

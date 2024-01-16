@@ -2,7 +2,10 @@ package com.merge.game.logic.player_data;
 
 import com.badlogic.gdx.Preferences;
 import com.merge.game.logic.Tools;
+import com.merge.game.objects.gui.elements.buttons.bonus.BonusType;
 import com.merge.game.resources.GameSound;
+
+import org.graalvm.compiler.lir.alloc.lsra.LinearScan_OptionDescriptors;
 
 import java.util.ArrayList;
 
@@ -28,8 +31,11 @@ public class Player {
 
     private ArrayList<String> _itemsType = new ArrayList<>(); //i_j_тип 1=merge 2=generate 0=null
     private ArrayList<String> _itemsMergeType = new ArrayList<>(); //тип_уровень_generateType 0 null
+    private ArrayList<Integer> _bonus = new ArrayList<>();
 
     public void init() {
+
+        initBonus();
 
         _preferences = Tools.getPreferences();
         _exists = _preferences.getBoolean(PreferencesParams.EXISTS, false);
@@ -51,6 +57,12 @@ public class Player {
 
         GameSound.setMusicState(_preferences.getBoolean(PreferencesParams.MUSIC, true), false);
         GameSound.setSoundState(_preferences.getBoolean(PreferencesParams.SOUND, true), false);
+    }
+
+    private void initBonus(){
+        for (int i = 1; i <= BonusType.BONUS_QUANTITY; i++) {
+            _bonus.add(i, _preferences.getInteger(PreferencesParams.BONUS + i, 0));
+        }
     }
 
     public void savePreferences() {
@@ -85,5 +97,19 @@ public class Player {
 
     public int getGold() {
         return _gold;
+    }
+
+    public void changeItem(int itemType, int value) {
+        setBonus(itemType, _bonus.get(itemType) + value);
+    }
+
+    private void setBonus(int i, int value) {
+        _bonus.set(i, value);
+        saveLocalInt(PreferencesParams.BONUS + i, value);
+    }
+
+    private void saveLocalInt(String key, int value) {
+        _preferences.putInteger(key, value);
+        _preferences.flush();
     }
 }

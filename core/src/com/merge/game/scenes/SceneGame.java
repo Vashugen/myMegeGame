@@ -5,6 +5,7 @@ import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
 import com.merge.game.logic.player_data.Player;
 import com.merge.game.objects.Background;
+import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.GameObjectType;
 import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.game_elements.Trash;
@@ -24,11 +25,12 @@ import com.merge.game.resources.textures.TextureItems;
 import com.merge.game.resources.textures.Textures;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 public class SceneGame extends Scene {
 
     private static final int GRID_COUNT_WIDTH = 9;
-    private static final int GRID_COUNT_HEIGHT = 9; //7
+    private static final int GRID_COUNT_HEIGHT = 7; //7
 
     private static final int ITEM_START_COUNT = 21;
 
@@ -85,13 +87,8 @@ public class SceneGame extends Scene {
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                     if (_items[i][j] != null && _items[i][j].isTouched()) {
-                        if(activeBonusExists()){
-                            activateBonus(_items[i][j]);
-                        }else{
-                            activeteObject(_items[i][j]);
-                            _activeObject.startDrag();
-                        }
-
+                        activeteObject(_items[i][j]);
+                        _activeObject.startDrag();
                     }
                 }
             }
@@ -212,6 +209,7 @@ public class SceneGame extends Scene {
     }
 
     private void initGrid() {
+        initGridPanel();
         _grid = new GridCell[GRID_COUNT_WIDTH][GRID_COUNT_HEIGHT];
         for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
             for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
@@ -220,6 +218,14 @@ public class SceneGame extends Scene {
                 _grid[i][j].placeAtGrid(i, j);
             }
         }
+    }
+
+    private void initGridPanel() {
+        DisplayObject gridPanel = new DisplayObject(TextureItems.gridPanel);
+        addChild(gridPanel);
+        gridPanel.setSize((GRID_COUNT_WIDTH * Globals.itemSize) * 1.02f, (GRID_COUNT_HEIGHT * Globals.itemSize) * 1.02f);
+        gridPanel.setX(Globals.offsetX - gridPanel.getWidth() * 0.01f);
+        gridPanel.setY(Globals.offsetY - gridPanel.getHeight() * 0.01f);
     }
 
     private void initItems() {
@@ -400,8 +406,12 @@ public class SceneGame extends Scene {
 
     private void updateBonuses() {
         for (BonusButton bonusButton : _buttonsBonus) {
-            if(bonusButton.isTouched()){
+            if(bonusButton.isPressed()){
+                int bonusType = bonusButton.getBonusType();
+                Player.get().changeItem(bonusType, -1);
                 bonusButton.setActive(!bonusButton.getActiveState());
+                activateBonus(bonusType);
+                //activateBonus(_items[i][j]);
             }
         }
     }

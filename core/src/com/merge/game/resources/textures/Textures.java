@@ -7,18 +7,20 @@ import com.merge.game.objects.grid.GenerateItemType;
 public class Textures {
     public static Texture TexBackground, TexBackgroundMain, TexBackgroundGame;
     public static Texture fields, panels, mainScene, items, amulet, potion;
+    public static Texture gridPanel;
 
 
     public static void loadTextures(){
         TexBackground = loadTextureMipmap("scenes/start/background.jpg", true);
         TexBackgroundMain =  loadTextureMipmap("scenes/main/background.png", true);
-        TexBackgroundGame = loadTextureMipmap("scenes/game/backgroundGame.jpg", true);
+        TexBackgroundGame = loadTextureMipmap("scenes/game/background.jpg", true);
         fields = loadTextureMipmap("scenes/game/Fields.png", true);
         panels = loadTextureMipmap("scenes/game/Panels.png", true);
         mainScene = loadTextureMipmap("scenes/main/items.png", true);
         items = loadTextureMipmap("scenes/game/MergeItems.png", true);
         amulet = loadTextureMipmap("scenes/game/AmuletItems.png", true);
         potion = loadTextureMipmap("scenes/game/PotionItems.png", true);
+        gridPanel = loadTextureMipmap("scenes/game/gridPanel.jpg", true);
 
         TextureItems.initItems();
         GenerateItemType.init();
