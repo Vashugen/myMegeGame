@@ -55,7 +55,9 @@ public class SceneGame extends Scene {
     private Trash _trash;
     private Button _clearButton;
 
-    ArrayList<BonusButton> _buttonsBonus = new ArrayList<>();
+    private boolean _isBonusActivated = false;
+    private int _activeBonusType = 0;
+    private ArrayList<BonusButton> _buttonsBonus = new ArrayList<>();
 
     public SceneGame() {
         GameSound.playBackgroundMusic(GameSound.mainTheme);
@@ -110,27 +112,22 @@ public class SceneGame extends Scene {
         return false;
     }
 
-    private void activateBonus(MergeItem item) {
+    private void activateBonus(int bonusType) {
 
-        for (BonusButton bonusButton : _buttonsBonus) {
-            if(bonusButton.isActive()){
-                switch (bonusButton.getBonusType()) {
-                    case BonusType.FIX_GENERATE:
-                        fixGenerator(item);
-                        break;
-                    case BonusType.MAX_ITEM:
-                        generateMaxLevelItems();
-                        break;
-                    case BonusType.RANDOM_ITEM:
-                        createRandomGenerator();
-                        break;
-                }
+        if(_isBonusActivated){
+            //deactivateBonus();
+        }
 
-                bonusButton.setActive(false);
+        Player.get().changeItem(bonusType, -1);
+        _activeBonusType = bonusType;
+
+        for (BonusButton buttonsBonus : _buttonsBonus) {
+            if(buttonsBonus.getBonusType() == bonusType){
+                buttonsBonus.setActive(true);
             }
         }
-        
-        
+
+        _isBonusActivated = true;
     }
 
     private void fixGenerator(MergeItem item) {
@@ -297,8 +294,13 @@ public class SceneGame extends Scene {
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                     if (_grid[i][j].isMouseOver()) {
-                        updateItem(i, j);
-                        isOverlap = true;
+                        if(_isBonusActivated){
+
+                        }else {
+                            updateItem(i, j);
+                            isOverlap = true;
+                        }
+
                     }
                 }
             }
@@ -408,10 +410,11 @@ public class SceneGame extends Scene {
         for (BonusButton bonusButton : _buttonsBonus) {
             if(bonusButton.isPressed()){
                 int bonusType = bonusButton.getBonusType();
-                Player.get().changeItem(bonusType, -1);
-                bonusButton.setActive(!bonusButton.getActiveState());
-                activateBonus(bonusType);
-                //activateBonus(_items[i][j]);
+                if(_isBonusActivated){
+
+                }else {
+                    activateBonus(bonusType);
+                }
             }
         }
     }
