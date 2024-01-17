@@ -130,10 +130,21 @@ public class SceneGame extends Scene {
         _isBonusActivated = true;
     }
 
+    private void deactivateActiveBonus() {
+        for (BonusButton buttonsBonus : _buttonsBonus) {
+            if(buttonsBonus.getBonusType() == _activeBonusType){
+                buttonsBonus.setActive(false);
+            }
+        }
+        _isBonusActivated = false;
+    }
+
     private void fixGenerator(MergeItem item) {
         if(item.getGameObjectType() != GameObjectType.GENERATE){
             return;
         }
+
+        item.fixGenerator();
     }
 
     private void generateMaxLevelItems() {
@@ -295,7 +306,12 @@ public class SceneGame extends Scene {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                     if (_grid[i][j].isMouseOver()) {
                         if(_isBonusActivated){
-
+                            switch (_activeBonusType){
+                                case BonusType.FIX_GENERATE:
+                                    fixGenerator(_items[i][j]);
+                                    deactivateActiveBonus();
+                                    break;
+                            }
                         }else {
                             updateItem(i, j);
                             isOverlap = true;

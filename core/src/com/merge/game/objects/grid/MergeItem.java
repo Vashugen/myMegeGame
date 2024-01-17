@@ -165,4 +165,8 @@ public class MergeItem extends GridObject {
         return (float) Math.sqrt(dragX * dragX + dragY * dragY);
 
     }
+
+    public void fixGenerator() {
+        _energy = GenerateItemType.getEnergyByType(getGenerateType());
+    }
 }
