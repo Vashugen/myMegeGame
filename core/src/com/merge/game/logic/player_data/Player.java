@@ -35,9 +35,8 @@ public class Player {
 
     public void init() {
 
-        initBonus();
-
         _preferences = Tools.getPreferences();
+        initBonus();
         _exists = _preferences.getBoolean(PreferencesParams.EXISTS, false);
         _score = _preferences.getInteger(PreferencesParams.SCORE, 30);
         _level = _preferences.getInteger(PreferencesParams.LEVEL, 0);
@@ -60,7 +59,8 @@ public class Player {
     }
 
     private void initBonus(){
-        for (int i = 1; i <= BonusType.BONUS_QUANTITY; i++) {
+
+        for (int i = 0; i <= BonusType.BONUS_QUANTITY; i++) {
             _bonus.add(i, _preferences.getInteger(PreferencesParams.BONUS + i, 0));
         }
     }

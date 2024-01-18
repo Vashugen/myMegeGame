@@ -71,7 +71,7 @@ public class GridObject extends DisplayObject {
     }
 
     protected float getYByGridY(int y) {
-        return Globals.offsetY + y * Globals.itemSize;
+        return Globals.offsetTop + y * Globals.itemSize;
     }
 
     public void moveToGrid(int x, int y) {

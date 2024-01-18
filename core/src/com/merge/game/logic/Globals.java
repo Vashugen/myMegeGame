@@ -6,7 +6,7 @@ public class Globals {
 
     public static int screenWidth, screenHeight;
     public static float deltaTime = 1.0f;
-    public static float offsetX, offsetY, itemSize;
+    public static float offsetX, offsetY, itemSize, offsetTop, offsetBottom;
 
     public static final ArrayList<String> generateExists = new ArrayList<>();
 

@@ -25,7 +25,6 @@ import com.merge.game.resources.textures.TextureItems;
 import com.merge.game.resources.textures.Textures;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 
 public class SceneGame extends Scene {
 
@@ -44,9 +43,9 @@ public class SceneGame extends Scene {
     private MergeItem[][] _items;
     private MergeItem _activeObject = null;
 
-    private TopPanel _topPanel;
-    private RightPanel _rightPanel;
-    private LeftPanel _leftPanel;
+    private DisplayObject _panelBottom;
+    private RightPanel _panelRight;
+    private LeftPanel _panelLeft;
 
     private int _scoreCount;
     private int _goldCount;
@@ -205,6 +204,7 @@ public class SceneGame extends Scene {
 
         Globals.itemSize = (int) Math.min((gridWidth / GRID_COUNT_WIDTH), (gridHeight / GRID_COUNT_HEIGHT));
 
+        Globals.offsetTop = Globals.screenHeight * 0.05f;
         Globals.offsetX = (Globals.screenWidth - (Globals.itemSize * GRID_COUNT_WIDTH)) / 2;
         Globals.offsetY = (Globals.screenHeight - (Globals.itemSize * GRID_COUNT_HEIGHT)) / 2;
 
@@ -233,7 +233,7 @@ public class SceneGame extends Scene {
         addChild(gridPanel);
         gridPanel.setSize((GRID_COUNT_WIDTH * Globals.itemSize) * 1.02f, (GRID_COUNT_HEIGHT * Globals.itemSize) * 1.02f);
         gridPanel.setX(Globals.offsetX - gridPanel.getWidth() * 0.01f);
-        gridPanel.setY(Globals.offsetY - gridPanel.getHeight() * 0.01f);
+        gridPanel.setY(Globals.offsetTop - gridPanel.getHeight() * 0.01f);
     }
 
     private void initItems() {
@@ -243,28 +243,24 @@ public class SceneGame extends Scene {
     }
 
     private void initPanels() {
-        _topPanel = new TopPanel(_scoreCount, _goldCount, _levelCount);
-        addChild(_topPanel);
-        _topPanel.init();
+        _panelRight = new RightPanel();
+        addChild(_panelRight);
+        _panelRight.init();
 
-        _rightPanel = new RightPanel();
-        addChild(_rightPanel);
-        _rightPanel.init();
-
-        _leftPanel = new LeftPanel();
-        addChild(_leftPanel);
-        _leftPanel.init();
+        _panelLeft = new LeftPanel();
+        addChild(_panelLeft);
+        _panelLeft.init();
     }
 
     private void initTrash() {
         _trash = new Trash(TextureItems.trash);
-        _rightPanel.getTrashPanel().addChild(_trash);
+        _panelRight.getTrashPanel().addChild(_trash);
         _trash.init();
     }
 
     private void initClear() {
         _clearButton = new Button(TextureItems.clear);
-        _topPanel.addClearButton(_clearButton);
+        //_panelBottom.addClearButton(_clearButton);
     }
 
     private void initTasks() {
@@ -274,7 +270,7 @@ public class SceneGame extends Scene {
     private void initBonus() {
         for (int i = 1; i <= BonusType.BONUS_QUANTITY; i++) {
             BonusButton bonusButton = new BonusButton(i);
-            _rightPanel.addBonus(bonusButton, i);
+            _panelRight.addBonus(bonusButton, i);
         }
     }
 
@@ -353,16 +349,16 @@ public class SceneGame extends Scene {
     }
 
     private void updateTopPanel() {
-        _topPanel.getScorePanel().setLabel(_scoreCount);
-        _topPanel.getGoldPanel().setLabel(_goldCount);
-        _topPanel.getLevelPanel().setLabel(_levelCount);
+        /*_panelBottom.getScorePanel().setLabel(_scoreCount);
+        _panelBottom.getGoldPanel().setLabel(_goldCount);
+        _panelBottom.getLevelPanel().setLabel(_levelCount);*/
     }
 
     private void updateTasks() {
 
-        for (int i = 0; i < _leftPanel.getTasks().size(); i++) {
+        for (int i = 0; i < _panelLeft.getTasks().size(); i++) {
 
-            TaskArea area = _leftPanel.getTasks().get(i);
+            TaskArea area = _panelLeft.getTasks().get(i);
 
             area.update();
             ArrayList<Task> addedTasks = area.getTaskPanel().getAddedTasks();
