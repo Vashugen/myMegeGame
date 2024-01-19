@@ -204,6 +204,8 @@ public class SceneGame extends Scene {
 
         Globals.itemSize = (int) Math.min((gridWidth / GRID_COUNT_WIDTH), (gridHeight / GRID_COUNT_HEIGHT));
 
+        //float maxW =
+
         Globals.offsetTop = Globals.screenHeight * 0.05f;
         Globals.offsetX = (Globals.screenWidth - (Globals.itemSize * GRID_COUNT_WIDTH)) / 2;
         Globals.offsetY = (Globals.screenHeight - (Globals.itemSize * GRID_COUNT_HEIGHT)) / 2;

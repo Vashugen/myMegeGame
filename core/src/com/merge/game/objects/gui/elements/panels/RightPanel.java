@@ -15,9 +15,9 @@ public class RightPanel extends DisplayObject {
     public void init() {
 
         setWidth(Globals.offsetX);
-        setHeight(Globals.screenHeight - Globals.offsetY * 2);
+        setHeight(Globals.screenHeight - Globals.offsetY - Globals.offsetTop);
         setX(Globals.screenWidth - Globals.offsetX);
-        setY(Globals.offsetY);
+        setY(Globals.offsetTop);
 
         initBonusPanel();
         initTrashPanel();
@@ -32,7 +32,7 @@ public class RightPanel extends DisplayObject {
     }
 
     private void initBonusPanel() {
-        _panelBonus = new PanelBonus(this, TextureItems.bonusPanel, 1.0f, 0.7f);
+        _panelBonus = new PanelBonus(this, TextureItems.bonusPanel, 0.7f, 0.8f);
     }
 
     private void initTrashPanel() {

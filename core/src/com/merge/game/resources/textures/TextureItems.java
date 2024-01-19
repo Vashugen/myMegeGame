@@ -173,10 +173,9 @@ public class TextureItems {
     private static void initBonus() {
         Texture texture = Textures.panels;
         bonusPanel = new TextureRegion(texture, 9, 219, 171, 390);
-        bonusField = new TextureRegion(texture, 178, 217, 188, 200);
+        bonusField = new TextureRegion(texture, 186, 219, 170, 170);
         bonusFixGenerate = new TextureRegion(texture, 0, 852, 170, 170);
         bonusMaxItem = new TextureRegion(texture, 171, 852, 170, 170);
         bonusRandomItem = new TextureRegion(texture, 342, 852, 170, 170);
         bonusRandomGenerator = new TextureRegion(texture, 342, 852, 170, 170);    }
-
 }
