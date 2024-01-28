@@ -85,6 +85,6 @@ public class BonusButton extends Button {
     }
 
     public int getBonusType() {
-        return -_bonusType;
+        return _bonusType;
     }
 }

@@ -1,6 +1,7 @@
 package com.merge.game.resources;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
 public class Shaders {
@@ -11,6 +12,7 @@ public class Shaders {
     public static void loadShaders() {
         ShaderProgram.pedantic = false;
 
+        shaderDefault = SpriteBatch.createDefaultShader();
         shaderObjectLightning = loadShader("GemLightning");
     }
 

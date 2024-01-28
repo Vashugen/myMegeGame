@@ -10,6 +10,7 @@ import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
 import com.merge.game.objects.shader_effects.ShaderEffect;
+import com.merge.game.resources.Shaders;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -230,8 +231,40 @@ public class DisplayObject {
     protected void drawObject(SpriteBatch spriteBatch){
         //TODO this
         if(texture != null){
+
+            if(_shader != null){
+                spriteBatch.end();
+                spriteBatch.setShader(_shader);
+                updateShader();
+                spriteBatch.begin();
+            }
+
             spriteBatch.draw(texture, getX(), Gdx.graphics.getHeight() - (getY() + height), _hotspotX * width, _hotspotY * height, width, height, _scale, _scale, -_rotation);
+
+            if(_shader != null){
+                spriteBatch.end();
+                spriteBatch.setShader(Shaders.shaderDefault);
+                spriteBatch.begin();
+            }
         }
+    }
+
+    private void updateShader() {
+        _shader.begin();
+        put("u_u1", getTexture().getU());
+        put("u_u2", getTexture().getU2());
+        put("u_v1", getTexture().getV());
+        put("u_v2", getTexture().getV2());
+
+        if(_shaderEffect != null){
+            _shaderEffect.updateShader();
+        }
+
+        _shader.end();
+    }
+
+    private void put(String location, float value) {
+        _shader.setUniformf(_shader.getUniformLocation(location), value);
     }
 
     protected void drawChilds(SpriteBatch spriteBatch){
@@ -284,7 +317,7 @@ public class DisplayObject {
         if(_shaderEffect == null){
            setShader(null);
         } else {
-            setShader(_shaderEffect.getShader());
+           setShader(_shaderEffect.getShader());
         }
     }
 

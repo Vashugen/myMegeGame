@@ -19,7 +19,6 @@ import com.merge.game.objects.gui.elements.buttons.bonus.BonusType;
 import com.merge.game.objects.gui.elements.panels.LeftPanel;
 import com.merge.game.objects.gui.elements.panels.RightPanel;
 import com.merge.game.objects.gui.elements.panels.TaskArea;
-import com.merge.game.objects.gui.elements.panels.TopPanel;
 import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.TextureItems;
 import com.merge.game.resources.textures.Textures;
@@ -101,20 +100,10 @@ public class SceneGame extends Scene {
         }
     }
 
-    public boolean activeBonusExists() {
-        for (BonusButton bonusButton : _buttonsBonus) {
-            if(bonusButton.isActive()){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     private void activateBonus(int bonusType) {
 
         if(_isBonusActivated){
-            //deactivateBonus();
+            deactivateBonus();
         }
 
         Player.get().changeItem(bonusType, -1);
@@ -129,7 +118,7 @@ public class SceneGame extends Scene {
         _isBonusActivated = true;
     }
 
-    private void deactivateActiveBonus() {
+    private void deactivateBonus() {
         for (BonusButton buttonsBonus : _buttonsBonus) {
             if(buttonsBonus.getBonusType() == _activeBonusType){
                 buttonsBonus.setActive(false);
@@ -272,6 +261,7 @@ public class SceneGame extends Scene {
     private void initBonus() {
         for (int i = 1; i <= BonusType.BONUS_QUANTITY; i++) {
             BonusButton bonusButton = new BonusButton(i);
+            _buttonsBonus.add(bonusButton);
             _panelRight.addBonus(bonusButton, i);
         }
     }
@@ -307,7 +297,7 @@ public class SceneGame extends Scene {
                             switch (_activeBonusType){
                                 case BonusType.FIX_GENERATE:
                                     fixGenerator(_items[i][j]);
-                                    deactivateActiveBonus();
+                                    deactivateBonus();
                                     break;
                             }
                         }else {
@@ -421,11 +411,17 @@ public class SceneGame extends Scene {
     }
 
     private void updateBonuses() {
+
         for (BonusButton bonusButton : _buttonsBonus) {
             if(bonusButton.isPressed()){
                 int bonusType = bonusButton.getBonusType();
                 if(_isBonusActivated){
-
+                    Player.get().changeItem(_activeBonusType, 1);
+                    if(_activeBonusType == bonusType){
+                        deactivateBonus();
+                    }else {
+                        activateBonus(bonusType);
+                    }
                 }else {
                     activateBonus(bonusType);
                 }

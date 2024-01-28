@@ -5,12 +5,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.merge.game.objects.grid.GenerateItemType;
 
 public class Textures {
+    public static Texture texDisplacement;
     public static Texture TexBackground, TexBackgroundMain, TexBackgroundGame;
     public static Texture fields, panels, mainScene, items, amulet, potion;
     public static Texture gridPanel;
 
 
     public static void loadTextures(){
+
+        texDisplacement = loadTexture("scenes/game/Displacement.jpg", true);
         TexBackground = loadTextureMipmap("scenes/start/background.jpg", true);
         TexBackgroundMain =  loadTextureMipmap("scenes/main/background.png", true);
         TexBackgroundGame = loadTextureMipmap("scenes/game/background.jpg", true);
@@ -24,6 +27,12 @@ public class Textures {
 
         TextureItems.initItems();
         GenerateItemType.init();
+    }
+
+    private static Texture loadTexture(String path, boolean smooth) {
+        Texture texture = new Texture(Gdx.files.internal(path));
+        texture.setFilter(Texture.TextureFilter.Linear, smooth ? Texture.TextureFilter.Linear : Texture.TextureFilter.Nearest);
+        return texture;
     }
 
     private static Texture loadTextureMipmap(String name, boolean useMipMap) {
