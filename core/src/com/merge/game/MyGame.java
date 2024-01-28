@@ -12,6 +12,7 @@ import com.merge.game.logic.player_data.Player;
 import com.merge.game.logic.player_data.PreferencesParams;
 import com.merge.game.resources.Fonts;
 import com.merge.game.resources.GameSound;
+import com.merge.game.resources.Shaders;
 import com.merge.game.resources.textures.Textures;
 import com.merge.game.scenes.SceneManager;
 import com.merge.game.scenes.SceneType;
@@ -56,6 +57,7 @@ public class MyGame extends ApplicationAdapter {
 		Fonts.loadFonts();
 		GameSound.initMusic();
 		GameSound.initSound();
+		Shaders.loadShaders();
 		Tools.setPreferences(Gdx.app.getPreferences(PreferencesParams.GAME_NAME));
 		Player.get().init();
 

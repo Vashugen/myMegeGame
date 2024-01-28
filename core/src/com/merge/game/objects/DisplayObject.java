@@ -5,9 +5,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
+import com.merge.game.objects.shader_effects.ShaderEffect;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,6 +28,9 @@ public class DisplayObject {
     protected float _rotation = 0.0f, rotationSpeed = 0.0f, _scale = 1.0f, _alpha = 1.0f;
     protected float _hotspotX = 0.5f, _hotspotY = 0.5f;
     protected float _R = 1.0f, _G = 1.0f, _B = 1.0f;
+
+    protected ShaderProgram _shader = null;
+    protected ShaderEffect _shaderEffect = null;
 
     public DisplayObject() {}
 
@@ -272,5 +277,18 @@ public class DisplayObject {
     public void setCenterCoeffY(float coeffY) {
         setY(coeffY * getParentHeight());
         moveY(-getHeight()/2);
+    }
+
+    public void setShaderEffect(ShaderEffect shaderEffect) {
+        _shaderEffect = shaderEffect;
+        if(_shaderEffect == null){
+           setShader(null);
+        } else {
+            setShader(_shaderEffect.getShader());
+        }
+    }
+
+    private void setShader(ShaderProgram shader) {
+        _shader = shader;
     }
 }

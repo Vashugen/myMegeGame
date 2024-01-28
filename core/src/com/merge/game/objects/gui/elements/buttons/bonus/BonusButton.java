@@ -6,6 +6,7 @@ import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.GameObjectType;
 import com.merge.game.objects.grid.MergeItem;
 import com.merge.game.objects.gui.elements.Button;
+import com.merge.game.objects.shader_effects.ShaderEffectObjectLightning;
 import com.merge.game.resources.textures.TextureItems;
 
 public class BonusButton extends Button {
@@ -46,6 +47,11 @@ public class BonusButton extends Button {
 
     public void setActive(boolean state) {
         _isActive = state;
+        if (_isActive){
+            setShaderEffect(new ShaderEffectObjectLightning(0.025f));
+        }else {
+            setShaderEffect(null);
+        }
     }
 
     @Override
