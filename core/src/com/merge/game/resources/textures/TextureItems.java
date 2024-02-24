@@ -8,7 +8,7 @@ public class TextureItems {
     public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear,
             taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel;
     public static TextureRegion bonusPanel, bonusField, bonusFixGenerate, bonusMaxItem, bonusRandomItem, bonusRandomGenerator;
-    public static TextureRegion mainScenePlay, mainSceneShop, mainSceneRewards;
+    public static TextureRegion mainScenePanel, mainScenePlay, mainSceneShop, mainSceneRewards;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
     public static TextureRegion[] amulet1, amulet2, amulet3, amulet4;
     public static TextureRegion[] potion1, potion2, potion3, potion4;
@@ -39,6 +39,7 @@ public class TextureItems {
 
     private static void initMain(){
         Texture texture = Textures.mainScene;
+        mainScenePanel = new TextureRegion(texture, 0, 209, 832, 320);
         mainScenePlay = new TextureRegion(texture, 0, 0, 210, 210);
         mainSceneShop = new TextureRegion(texture, 210 * 1, 0, 210, 210);
         mainSceneRewards = new TextureRegion(texture, 210 * 2, 0, 210, 210);

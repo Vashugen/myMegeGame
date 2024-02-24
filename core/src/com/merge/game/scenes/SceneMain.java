@@ -11,12 +11,13 @@ import com.merge.game.resources.textures.Textures;
 public class SceneMain extends Scene{
 
     private Background _background;
-    private DisplayObject _panelShop, _panelPlay, _panelRewards;
+    private DisplayObject _mainPanel, _panelShop, _panelPlay, _panelRewards;
     private Button _shop, _play, _rewards;
 
     public SceneMain() {
         GameSound.playBackgroundMusic(GameSound.mainTheme);
         initBackground();
+        initMainPanel();
         initPanels();
         initButtons();
     }
@@ -26,21 +27,29 @@ public class SceneMain extends Scene{
         addChild(_background);
     }
 
+    private void initMainPanel() {
+        _mainPanel = new DisplayObject(TextureItems.mainScenePanel);
+        addChild(_mainPanel);
+        _mainPanel.scaleToFit(0.7f, 0.6f);
+        _mainPanel.setCenterCoeff(0.5f, 0.4f);
+    }
+
     private void initPanels() {
+
         _panelShop = new DisplayObject();
-        addChild(_panelShop);
+        _mainPanel.addChild(_panelShop);
         _panelShop.setSizeOfParent();
         _panelShop.setWidth(_panelShop.getParentWidth() / 3);
         _panelShop.setX(0);
 
         _panelPlay = new DisplayObject();
-        addChild(_panelPlay);
+        _mainPanel.addChild(_panelPlay);
         _panelPlay.setSizeOfParent();
         _panelPlay.setWidth(_panelShop.getParentWidth() / 3);
         _panelPlay.setX(_panelShop.getWidth());
 
         _panelRewards = new DisplayObject();
-        addChild(_panelRewards);
+        _mainPanel.addChild(_panelRewards);
         _panelRewards.setSizeOfParent();
         _panelRewards.setWidth(_panelShop.getParentWidth() / 3);
         _panelRewards.setX(_panelShop.getWidth() + _panelPlay.getWidth());

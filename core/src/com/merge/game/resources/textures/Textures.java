@@ -15,7 +15,7 @@ public class Textures {
 
         texDisplacement = loadTexture("scenes/game/Displacement.jpg", true);
         TexBackground = loadTextureMipmap("scenes/start/background.jpg", true);
-        TexBackgroundMain =  loadTextureMipmap("scenes/main/background.png", true);
+        TexBackgroundMain =  loadTextureMipmap("scenes/main/background2.jpg", true);
         TexBackgroundGame = loadTextureMipmap("scenes/game/background.jpg", true);
         fields = loadTextureMipmap("scenes/game/Fields.png", true);
         panels = loadTextureMipmap("scenes/game/Panels.png", true);

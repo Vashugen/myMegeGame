@@ -112,11 +112,12 @@ public class MergeItem extends GridObject {
     }
 
     private void updateGenerator(){
-        if(getGameObjectType() == GameObjectType.GENERATE && _energy == 0){
+        if(getGameObjectType() == GameObjectType.GENERATE && _energy <= 0){
             brokeItem();
-        }else if(!_isBroken) {
-            fixItem();
         }
+        /*else if(!_isBroken) {
+            fixItem();
+        }*/
     }
 
     public void updateDragging() {
