@@ -288,7 +288,7 @@ public class SceneGame extends Scene {
     private void updateItems() {
 
         boolean isOverlap = false;
-        if (_activeObject != null && !Input.isTouched()) {
+        if (!Input.isTouched() && _activeObject != null) {
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                     if (_grid[i][j].isMouseOver()) {
@@ -299,11 +299,10 @@ public class SceneGame extends Scene {
                                     deactivateBonus();
                                     break;
                             }
-                        }else {
+                        }else if(_activeObject != null) {
                             updateItem(i, j);
                             isOverlap = true;
                         }
-
                     }
                 }
             }
