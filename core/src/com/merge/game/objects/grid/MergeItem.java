@@ -14,8 +14,11 @@ public class MergeItem extends GridObject {
     private float _dragX = 0, _dragY = 0;
 
     protected boolean _isActive = false;
-    protected boolean _isBroken = false;
+    protected boolean _isFix = false;
+    protected boolean _isBroke = false;
     private int _energy = 0;
+
+    private DisplayObject _broken;
 
     public MergeItem(int type, int level, String generateType){
         super(getTexture(type, level, generateType));
@@ -112,12 +115,12 @@ public class MergeItem extends GridObject {
     }
 
     private void updateGenerator(){
-        if(getGameObjectType() == GameObjectType.GENERATE && _energy <= 0){
+        if(getGameObjectType() == GameObjectType.GENERATE && _energy <= 0 && !_isBroke){
             brokeItem();
         }
-        /*else if(!_isBroken) {
+        if(_isFix) {
             fixItem();
-        }*/
+        }
     }
 
     public void updateDragging() {
@@ -128,16 +131,17 @@ public class MergeItem extends GridObject {
     }
 
     public void brokeItem() {
-        DisplayObject broken = new DisplayObject(TextureItems.broken);
-        addChild(broken);
-        broken.scaleToFit(0.5f, 0.5f);
-        broken.setCenterCoeff(0.9f, 0.1f);
-        _isBroken = true;
+        _broken = new DisplayObject(TextureItems.broken);
+        addChild(_broken);
+        _broken.scaleToFit(0.5f, 0.5f);
+        _broken.setCenterCoeff(0.9f, 0.1f);
+        _isBroke = true;
     }
 
     private void fixItem() {
-        _isBroken = false;
-        _energy = GenerateItemType.getEnergyByType(_generateType);
+        _isFix = false;
+        _isBroke = false;
+        removeChild(_broken);
     }
 
     public void startDrag() {
@@ -169,5 +173,6 @@ public class MergeItem extends GridObject {
 
     public void fixGenerator() {
         _energy = GenerateItemType.getEnergyByType(getGenerateType());
+        _isFix = true;
     }
 }
