@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.gui.elements.labels.Label;
+import com.merge.game.resources.Fonts;
 
 public class PLPanel extends DisplayObject {
 
@@ -30,12 +31,12 @@ public class PLPanel extends DisplayObject {
     private void initPicture(TextureRegion texture) {
         _picture = new DisplayObject(texture);
         addChild(_picture);
-        _picture.scaleToFit(0.7f, 0.7f);
-        _picture.setCenterCoeff(0.5f, 0.3f);
+        _picture.scaleToFit(0.5f, 0.5f);
+        _picture.setCenterCoeff(0.4f, 0.5f);
     }
 
     private void initLabel(int count){
-        _label = new Label(0, 0,0.05f, Color.BLACK);
+        _label = new Label(Fonts.fontXSmall, "");
         addChild(_label);
         _label.setString(count);
         float labelCoeff = 0.45f + 0.02f + (_picture.getWidth() / getWidth()) + ((_label.getWidth() / 2) / getWidth());
