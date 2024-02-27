@@ -79,6 +79,7 @@ public class SceneGame extends Scene {
         updateTasks();
         updateClearButton();
         updateBonusButtons();
+        updateBonusMagicGenerator();
         updateGlobal();
     }
 
@@ -421,6 +422,30 @@ public class SceneGame extends Scene {
                     }
                 }else if (Player.get().getBonusCount(bonusType) > 0){
                     activateBonus(bonusType);
+                }
+            }
+        }
+    }
+
+    private void updateBonusMagicGenerator() {
+
+        //1.если надо, создаём
+        //2. обновляем его таймер
+        //3. исчезает, если <=0
+
+        for (BonusButton bonusButton : _buttonsBonus) {
+            if(bonusButton.isPressed() && bonusButton.getBonusType() == BonusType.MAGIC_GENERATOR){
+                boolean bonusMagicGeneratorIsCreate= false;
+                for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
+                    for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
+                        if (_items[i][j] == null) {
+                            bonusMagicGeneratorIsCreate = true;
+                        }
+                    }
+                }
+
+                if (!bonusMagicGeneratorIsCreate){
+                    //если нет свободного места, пишем, что нет места, деактивируем бонус и возвращаем ему значение
                 }
             }
         }

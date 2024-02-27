@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.player_data.Player;
 import com.merge.game.objects.DisplayObject;
-import com.merge.game.objects.GameObjectType;
-import com.merge.game.objects.grid.MergeItem;
 import com.merge.game.objects.gui.elements.Button;
 import com.merge.game.objects.gui.elements.labels.Label;
 import com.merge.game.objects.shader_effects.ShaderEffectObjectLightning;
@@ -35,7 +33,7 @@ public class BonusButton extends Button {
                 return TextureItems.bonusFixGenerate;
             case BonusType.MAX_ITEM:
                 return TextureItems.bonusMaxItem;
-            case BonusType.RANDOM_ITEM:
+            case BonusType.MAGIC_GENERATOR:
                 return TextureItems.bonusRandomItem;
         }
 
