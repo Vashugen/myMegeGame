@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class PanelBonus extends DisplayObject {
 
     ArrayList<DisplayObject> _squares = new ArrayList<>();
-    ArrayList<BonusButton> _buttons = new ArrayList<>();
 
     public PanelBonus(DisplayObject parent, TextureRegion textureRegion, float coeffW, float coeffH) {
         setTexture(textureRegion);
@@ -26,27 +25,16 @@ public class PanelBonus extends DisplayObject {
         //initBonusButtons();
     }
 
-    public ArrayList<BonusButton> bonuses() {
-        return _buttons;
-    }
-
     private void initBonusSquare() {
         float maxBonusSquareHeight = getHeight() / BonusType.BONUS_QUANTITY;
         float bonusSquareSize = getWidth() < maxBonusSquareHeight ? getWidth() : maxBonusSquareHeight;
         for (int i = 0; i < BonusType.BONUS_QUANTITY; i++) {
-            DisplayObject bonusSquare = new DisplayObject(TextureItems.bonusField);
+            DisplayObject bonusSquare = new DisplayObject(TextureItems.bonusSquare);
             _squares.add(bonusSquare);
             addChild(bonusSquare);
             bonusSquare.scaleToSquareSize(bonusSquareSize);
             bonusSquare.setCenterCoeffX(0.5f);
             bonusSquare.setY(bonusSquareSize * i);
-        }
-    }
-
-    private void initBonusButtons() {
-        for (int i = 1; i <= BonusType.BONUS_QUANTITY; i++) {
-            BonusButton buttonBonus = new BonusButton(_squares.get(i-1), i);
-            _buttons.add(buttonBonus);
         }
     }
 

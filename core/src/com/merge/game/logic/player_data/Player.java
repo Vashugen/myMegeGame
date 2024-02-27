@@ -34,8 +34,9 @@ public class Player {
     private ArrayList<Integer> _bonus = new ArrayList<>();
 
     public void init() {
-
         _preferences = Tools.getPreferences();
+        /*_preferences.clear();
+        _preferences.flush();*/
         initBonus();
         _exists = _preferences.getBoolean(PreferencesParams.EXISTS, false);
         _score = _preferences.getInteger(PreferencesParams.SCORE, 30);
@@ -61,7 +62,7 @@ public class Player {
     private void initBonus(){
 
         for (int i = 0; i <= BonusType.BONUS_QUANTITY; i++) {
-            _bonus.add(i, _preferences.getInteger(PreferencesParams.BONUS + i, 0));
+            _bonus.add(i, _preferences.getInteger(PreferencesParams.BONUS + i, 1));
         }
     }
 
@@ -111,5 +112,9 @@ public class Player {
     private void saveLocalInt(String key, int value) {
         _preferences.putInteger(key, value);
         _preferences.flush();
+    }
+
+    public int getBonusCount(int bonusType) {
+        return _bonus.get(bonusType);
     }
 }

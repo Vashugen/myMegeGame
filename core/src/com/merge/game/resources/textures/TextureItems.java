@@ -7,8 +7,9 @@ public class TextureItems {
 
     public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear,
             taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel;
-    public static TextureRegion bonusPanel, bonusField, bonusFixGenerate, bonusMaxItem, bonusRandomItem, bonusRandomGenerator;
+    public static TextureRegion bonusPanel, bonusSquare, bonusCount, bonusFixGenerate, bonusMaxItem, bonusRandomItem, bonusRandomGenerator;
     public static TextureRegion mainScenePanel, mainScenePlay, mainSceneShop, mainSceneRewards;
+    public static TextureRegion[] numbers;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
     public static TextureRegion[] amulet1, amulet2, amulet3, amulet4;
     public static TextureRegion[] potion1, potion2, potion3, potion4;
@@ -20,6 +21,7 @@ public class TextureItems {
         initGameItems();
         initTasks();
         initBonus();
+        initNumbers();
     }
 
     private static void initFields() {
@@ -174,9 +176,19 @@ public class TextureItems {
     private static void initBonus() {
         Texture texture = Textures.panels;
         bonusPanel = new TextureRegion(texture, 9, 219, 171, 390);
-        bonusField = new TextureRegion(texture, 186, 219, 170, 170);
+        bonusSquare = new TextureRegion(texture, 803,6, 120, 120);
+        bonusCount = new TextureRegion(texture, 685, 0, 120, 120);
         bonusFixGenerate = new TextureRegion(texture, 0, 852, 170, 170);
         bonusMaxItem = new TextureRegion(texture, 171, 852, 170, 170);
         bonusRandomItem = new TextureRegion(texture, 342, 852, 170, 170);
-        bonusRandomGenerator = new TextureRegion(texture, 342, 852, 170, 170);    }
+        bonusRandomGenerator = new TextureRegion(texture, 342, 852, 170, 170);
+    }
+
+    private static void initNumbers() {
+        Texture texture = Textures.panels;
+        numbers = new TextureRegion[10];
+        for (int i = 0; i < 10; i++) {
+            numbers[i] = new TextureRegion(texture, 184 + (i * 120), 219, 120, 120);
+        }
+    }
 }

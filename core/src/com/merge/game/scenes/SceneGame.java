@@ -68,7 +68,6 @@ public class SceneGame extends Scene {
         initTrash();
         initClear();
         initTasks();
-        System.out.println("here");
         //initBonus();
     }
 
@@ -420,7 +419,7 @@ public class SceneGame extends Scene {
                     }else {
                         activateBonus(bonusType);
                     }
-                }else {
+                }else if (Player.get().getBonusCount(bonusType) > 0){
                     activateBonus(bonusType);
                 }
             }
