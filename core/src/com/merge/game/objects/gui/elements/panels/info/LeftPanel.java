@@ -49,10 +49,11 @@ public class LeftPanel extends DisplayObject {
         }
     }
 
-    public void updateScore(int goldCount) {
-
+    public void updateScore(int quantity) {
+        _panelInfo.updateScore(quantity);
     }
 
-    public void updateGold(int scoreCount) {
+    public void updateGold(int quantity) {
+        _panelInfo.updateGold(quantity);
     }
 }

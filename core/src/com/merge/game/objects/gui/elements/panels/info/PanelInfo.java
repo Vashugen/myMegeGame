@@ -28,4 +28,12 @@ public class PanelInfo extends DisplayObject {
         panel.init(texture, 0);
         return panel;
     }
+
+    public void updateScore(int quantity) {
+        _panelScore.updateLabel(quantity);
+    }
+
+    public void updateGold(int quantity) {
+        _panelGold.updateLabel(quantity);
+    }
 }

@@ -23,4 +23,15 @@ public class Globals {
             generateExists.add(generateType);
         }
     }
+
+    public static boolean generatorExists(String type) {
+
+        for (int i = 0; i < generateExists.size(); i++) {
+            if(generateExists.get(i).equals(type)){
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

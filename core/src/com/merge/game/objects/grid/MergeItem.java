@@ -175,4 +175,8 @@ public class MergeItem extends GridObject {
         _energy = GenerateItemType.getEnergyByType(getGenerateType());
         _isFix = true;
     }
+
+    public boolean empty() {
+        return _energy <= 0 ? true : false;
+    }
 }

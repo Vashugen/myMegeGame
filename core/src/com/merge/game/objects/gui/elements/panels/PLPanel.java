@@ -44,4 +44,8 @@ public class PLPanel extends DisplayObject {
         _label.setX(_picture.x + _picture.getWidth() + 0.02f + _label.getWidth() / 2);
         //float labelScoreCoeffX = 0.45f + 0.1f + ((labelScore.getWidth() / 2) / labelScore.getParentWidth());
     }
+
+    public void updateLabel(int quantity) {
+        _label.setString(quantity);
+    }
 }
