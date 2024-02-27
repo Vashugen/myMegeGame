@@ -7,20 +7,21 @@ public class TextureItems {
 
     public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear,
             taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel;
-    public static TextureRegion bonusPanel, bonusSquare, bonusCount, bonusFixGenerate, bonusMaxItem, bonusRandomItem, bonusRandomGenerator;
+    public static TextureRegion bonusPanel, bonusSquare, bonusCount, bonusFixGenerate, bonusMaxItem, bonusMagicGenerator, bonusRandomGenerator;
     public static TextureRegion mainScenePanel, mainScenePlay, mainSceneShop, mainSceneRewards;
     public static TextureRegion[] numbers;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
     public static TextureRegion[] amulet1, amulet2, amulet3, amulet4;
     public static TextureRegion[] potion1, potion2, potion3, potion4;
+    public static TextureRegion[] magic1;
 
     public static void initItems(){
         initFields();
         initMain();
+        initBonus();
         initMergeItems();
         initGameItems();
         initTasks();
-        initBonus();
         initNumbers();
     }
 
@@ -155,6 +156,8 @@ public class TextureItems {
 
 
     private static void initMagic() {
+        magic1 = new TextureRegion[1];
+        magic1[0] = bonusMagicGenerator;
     }
 
     private static void initEffects(){
@@ -185,7 +188,7 @@ public class TextureItems {
         bonusCount = new TextureRegion(texture, 685, 0, 120, 120);
         bonusFixGenerate = new TextureRegion(texture, 0, 852, 170, 170);
         bonusMaxItem = new TextureRegion(texture, 171, 852, 170, 170);
-        bonusRandomItem = new TextureRegion(texture, 342, 852, 170, 170);
+        bonusMagicGenerator = new TextureRegion(texture, 342, 852, 170, 170);
         bonusRandomGenerator = new TextureRegion(texture, 342, 852, 170, 170);
     }
 

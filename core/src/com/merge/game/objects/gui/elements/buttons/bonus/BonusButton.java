@@ -34,7 +34,7 @@ public class BonusButton extends Button {
             case BonusType.MAX_ITEM:
                 return TextureItems.bonusMaxItem;
             case BonusType.MAGIC_GENERATOR:
-                return TextureItems.bonusRandomItem;
+                return TextureItems.bonusMagicGenerator;
         }
 
         return null;

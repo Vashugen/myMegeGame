@@ -37,6 +37,9 @@ public class GenerateItemType {
         _texturesPotion.add(3, TextureItems.potion3);
         _texturesPotion.add(4, TextureItems.potion4);
 
+        _texturesMagic.add(0, null);
+        _texturesMagic.add(1, TextureItems.magic1);
+
     }
 
     public static TextureRegion[] getTexture(String generateType, int level){
@@ -48,7 +51,7 @@ public class GenerateItemType {
             case POTION:
                 return _texturesPotion.get(level);
             case MAGIC:
-
+                return _texturesMagic.get(level);
         }
 
         return null;
@@ -69,11 +72,13 @@ public class GenerateItemType {
 
     public static int getEnergyByType(String generateType) {
         return 3;
-        /*switch (generateType){
+/*        switch (generateType){
+            case KETTLE:
             case AMULET:
             case POTION:
-            case RANDOM:
                 return 10;
+            case MAGIC:
+                return 4;
         }
 
         return -1;*/

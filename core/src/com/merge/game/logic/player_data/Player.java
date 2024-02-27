@@ -35,8 +35,8 @@ public class Player {
 
     public void init() {
         _preferences = Tools.getPreferences();
-        /*_preferences.clear();
-        _preferences.flush();*/
+        _preferences.clear();
+        _preferences.flush();
         initBonus();
         _exists = _preferences.getBoolean(PreferencesParams.EXISTS, false);
         _score = _preferences.getInteger(PreferencesParams.SCORE, 30);
