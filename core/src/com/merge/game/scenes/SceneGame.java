@@ -155,7 +155,7 @@ public class SceneGame extends Scene {
         for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
             for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                 if (_items[i][j] == null) {
-                    _items[i][j] = new MergeItem(TextureItems.bonusRandomGenerator, _grid[i][j].getX(), _grid[i][j].getY(), _grid[i][j].getWidth(), _grid[i][j].getHeight(), i, j, 0, 1, GenerateItemType.RANDOM, GameObjectType.GENERATE);
+                    _items[i][j] = new MergeItem(TextureItems.bonusRandomGenerator, _grid[i][j].getX(), _grid[i][j].getY(), _grid[i][j].getWidth(), _grid[i][j].getHeight(), i, j, 0, 1, GenerateItemType.MAGIC, GameObjectType.GENERATE);
                     _items[i][j].setType(GameObjectType.GENERATE);
                     addChild(_items[i][j]);
                 }
@@ -433,20 +433,21 @@ public class SceneGame extends Scene {
         //2. обновляем его таймер
         //3. исчезает, если <=0
 
-        for (BonusButton bonusButton : _buttonsBonus) {
-            if(bonusButton.isPressed() && bonusButton.getBonusType() == BonusType.MAGIC_GENERATOR){
-                boolean bonusMagicGeneratorIsCreate= false;
-                for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
-                    for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                        if (_items[i][j] == null) {
-                            bonusMagicGeneratorIsCreate = true;
-                        }
+        if(_isBonusActivated && _activeBonusType == BonusType.MAGIC_GENERATOR){
+            boolean bonusMagicGeneratorIsCreate= false;
+            for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
+                for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
+                    if (_items[i][j] == null) {
+                        bonusMagicGeneratorIsCreate = true;
+                        _items[i][j] = new MergeItem(_grid[i][j].getX(), _grid[i][j].getY(), _grid[i][j].getWidth(), _grid[i][j].getHeight(), i, j, 0, 1, GenerateItemType.MAGIC, GameObjectType.GENERATE);
+                        _items[i][j].setType(GameObjectType.GENERATE);
+                        addChild(_items[i][j]);
                     }
                 }
+            }
 
-                if (!bonusMagicGeneratorIsCreate){
-                    //если нет свободного места, пишем, что нет места, деактивируем бонус и возвращаем ему значение
-                }
+            if(!bonusMagicGeneratorIsCreate){
+                //если нет свободного места, пишем, что нет места, деактивируем бонус и возвращаем ему значение
             }
         }
     }
@@ -556,7 +557,7 @@ public class SceneGame extends Scene {
                 int x = Tools.randomInt(GRID_COUNT_WIDTH);
                 int y = Tools.randomInt(GRID_COUNT_HEIGHT);
                 if (_items[x][y] == null) {
-                    if(_activeObject.getGenerateType() == GenerateItemType.RANDOM){
+                    if(_activeObject.getGenerateType() == GenerateItemType.MAGIC){
                         _items[x][y] = createBonusItem(x, y);
                     }else {
                         int level = Tools.randomInt(1, 3);

@@ -10,11 +10,12 @@ public class GenerateItemType {
     public static final String KETTLE = "kettle";
     public static final String AMULET = "amulet";
     public static final String POTION = "potion";
-    public static final String RANDOM = "random";
+    public static final String MAGIC = "magic";
 
     private static ArrayList<TextureRegion[]> _texturesKettle = new ArrayList();
     private static ArrayList<TextureRegion[]> _texturesAmulet = new ArrayList();
     private static ArrayList<TextureRegion[]> _texturesPotion = new ArrayList();
+    private static ArrayList<TextureRegion[]> _texturesMagic = new ArrayList();
 
     public static void init(){
         _texturesKettle.add(0, null);
@@ -35,6 +36,7 @@ public class GenerateItemType {
         _texturesPotion.add(2, TextureItems.potion2);
         _texturesPotion.add(3, TextureItems.potion3);
         _texturesPotion.add(4, TextureItems.potion4);
+
     }
 
     public static TextureRegion[] getTexture(String generateType, int level){
@@ -45,6 +47,8 @@ public class GenerateItemType {
                 return _texturesAmulet.get(level);
             case POTION:
                 return _texturesPotion.get(level);
+            case MAGIC:
+
         }
 
         return null;

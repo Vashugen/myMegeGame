@@ -51,6 +51,7 @@ public class TextureItems {
         initKettle();
         initAmulet();
         initPotion();
+        initMagic();
         initEffects();
     }
 
@@ -150,6 +151,10 @@ public class TextureItems {
         for (int i = 1; i <= 1; i++) {
             potion4[i] = new TextureRegion(texture, i * 112, 396, 112, 112);
         }
+    }
+
+
+    private static void initMagic() {
     }
 
     private static void initEffects(){
