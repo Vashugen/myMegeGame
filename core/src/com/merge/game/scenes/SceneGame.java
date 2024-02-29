@@ -538,6 +538,10 @@ public class SceneGame extends Scene {
 
     private boolean canBeMoved(int i, int j) {
 
+        if(_items[i][j].getGenerateType().equals(GenerateItemType.POTION)){
+            int a = 1;
+        }
+
         if (_items[i][j] == null) {
             return true;
         }
