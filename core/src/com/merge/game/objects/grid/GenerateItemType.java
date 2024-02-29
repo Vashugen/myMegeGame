@@ -10,11 +10,13 @@ public class GenerateItemType {
     public static final String KETTLE = "kettle";
     public static final String AMULET = "amulet";
     public static final String POTION = "potion";
+    public static final String BOOK = "book";
     public static final String MAGIC = "magic";
 
     private static ArrayList<TextureRegion[]> _texturesKettle = new ArrayList();
     private static ArrayList<TextureRegion[]> _texturesAmulet = new ArrayList();
     private static ArrayList<TextureRegion[]> _texturesPotion = new ArrayList();
+    private static ArrayList<TextureRegion[]> _texturesBook = new ArrayList();
     private static ArrayList<TextureRegion[]> _texturesMagic = new ArrayList();
 
     public static void init(){
@@ -37,6 +39,12 @@ public class GenerateItemType {
         _texturesPotion.add(3, TextureItems.potion3);
         _texturesPotion.add(4, TextureItems.potion4);
 
+        _texturesBook.add(0, null);
+        _texturesBook.add(1, TextureItems.book1);
+        _texturesBook.add(2, TextureItems.book2);
+        _texturesBook.add(3, TextureItems.book3);
+        _texturesBook.add(4, TextureItems.book4);
+
         _texturesMagic.add(0, null);
         _texturesMagic.add(1, TextureItems.magic1);
 
@@ -50,6 +58,8 @@ public class GenerateItemType {
                 return _texturesAmulet.get(level);
             case POTION:
                 return _texturesPotion.get(level);
+            case BOOK:
+                return _texturesBook.get(level);
             case MAGIC:
                 return _texturesMagic.get(level);
         }
@@ -65,6 +75,8 @@ public class GenerateItemType {
                         return AMULET;
                     case 2:
                         return POTION;
+                    case 4:
+                        return BOOK;
                 }
         }
         return null;

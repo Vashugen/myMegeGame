@@ -7,7 +7,7 @@ import com.merge.game.objects.grid.GenerateItemType;
 public class Textures {
     public static Texture texDisplacement;
     public static Texture TexBackground, TexBackgroundMain, TexBackgroundGame;
-    public static Texture fields, panels, mainScene, items, amulet, potion;
+    public static Texture fields, panels, mainScene, items, amulet, potion, book;
     public static Texture gridPanel;
 
 
@@ -23,6 +23,7 @@ public class Textures {
         items = loadTextureMipmap("scenes/game/MergeItems.png", true);
         amulet = loadTextureMipmap("scenes/game/AmuletItems.png", true);
         potion = loadTextureMipmap("scenes/game/PotionItems.png", true);
+        book = loadTextureMipmap("scenes/game/BookItems.png", true);
         gridPanel = loadTextureMipmap("scenes/game/gridPanel.jpg", true);
 
         TextureItems.initItems();

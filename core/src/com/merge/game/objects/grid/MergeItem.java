@@ -5,6 +5,7 @@ import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.GameObjectType;
+import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.resources.textures.TextureItems;
 
 public class MergeItem extends GridObject {
@@ -73,10 +74,14 @@ public class MergeItem extends GridObject {
     public void updateLevel() {
         _level ++;
         setTexture(getTexture(this.getType(), this.getLevel(), this.getGenerateType()));
-        if(isFinalLevel()){
+        if(isFinalLevel() && canBeGenerator()){
             _gameObjectType = GameObjectType.GENERATE;
             _generateType = GenerateItemType.getGenerateType(getGenerateType(), getType());
         }
+    }
+
+    private boolean canBeGenerator() {
+        return _generateType.equals(GenerateItemType.KETTLE) ? true : false;
     }
 
     public int getEnergy() {
