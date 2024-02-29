@@ -68,7 +68,6 @@ public class SceneGame extends Scene {
         initTrash();
         initClear();
         initTasks();
-        //initBonus();
     }
 
     public void update() {
@@ -85,11 +84,12 @@ public class SceneGame extends Scene {
     }
 
     private void updateActiveObject() {
+
         if (_activeObject == null) {
             for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
                 for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
                     if (_items[i][j] != null && _items[i][j].isTouched()) {
-                        activeteObject(_items[i][j]);
+                        activateObject(_items[i][j]);
                         _activeObject.startDrag();
                     }
                 }
@@ -305,7 +305,7 @@ public class SceneGame extends Scene {
                                     deactivateBonus();
                                     break;
                             }
-                        }else if(_activeObject != null) {
+                        }else {
                             updateItem(i, j);
                             isOverlap = true;
                         }
@@ -327,7 +327,7 @@ public class SceneGame extends Scene {
         }
     }
 
-    private void activeteObject(MergeItem obj) {
+    private void activateObject(MergeItem obj) {
         //sound on activate
         _activeObject = obj;
         obj.setActive(true);
@@ -476,8 +476,6 @@ public class SceneGame extends Scene {
                 }
             }
         }
-
-
     }
 
     private void updateGlobal() {
@@ -549,13 +547,13 @@ public class SceneGame extends Scene {
             return false;
         }
 
-        if (_activeObject.match(_items[i][j])) {
-            return true;
-        }
-
         //не финальный уровень у итемсов
         if(_activeObject.isFinalLevel()){
             return false;
+        }
+
+        if (_activeObject.match(_items[i][j])) {
+            return true;
         }
 
         return false;
@@ -579,7 +577,7 @@ public class SceneGame extends Scene {
 
     private void createItems() {
         //if(_activeObject.getMaxCount() > 0 && energyCount > 0){
-        if (_scoreCount > 0 && _activeObject.getEnergy() > 0) {
+        if (_scoreCount > 0 && !_activeObject.empty()) {
             boolean itemIsCreate = false;
             do {
                 int x = Tools.randomInt(GRID_COUNT_WIDTH);

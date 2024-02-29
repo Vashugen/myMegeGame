@@ -39,7 +39,7 @@ public class Player {
         _preferences.flush();
         initBonus();
         _exists = _preferences.getBoolean(PreferencesParams.EXISTS, false);
-        _score = _preferences.getInteger(PreferencesParams.SCORE, 30);
+        _score = _preferences.getInteger(PreferencesParams.SCORE, 100);
         _level = _preferences.getInteger(PreferencesParams.LEVEL, 0);
         _gold = _preferences.getInteger(PreferencesParams.GOLD, 30);
         _energyTime = _preferences.getLong(PreferencesParams.ENERGY_TIME, System.currentTimeMillis());
