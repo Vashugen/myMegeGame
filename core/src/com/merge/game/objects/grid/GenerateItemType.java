@@ -10,12 +10,14 @@ public class GenerateItemType {
     public static final String KETTLE = "kettle";
     public static final String AMULET = "amulet";
     public static final String POTION = "potion";
+    public static final String BOX = "box";
     public static final String BOOK = "book";
     public static final String MAGIC = "magic";
 
     private static ArrayList<TextureRegion[]> _texturesKettle = new ArrayList();
     private static ArrayList<TextureRegion[]> _texturesAmulet = new ArrayList();
     private static ArrayList<TextureRegion[]> _texturesPotion = new ArrayList();
+    private static ArrayList<TextureRegion[]> _texturesBox = new ArrayList();
     private static ArrayList<TextureRegion[]> _texturesBook = new ArrayList();
     private static ArrayList<TextureRegion[]> _texturesMagic = new ArrayList();
 
@@ -39,6 +41,12 @@ public class GenerateItemType {
         _texturesPotion.add(3, TextureItems.potion3);
         _texturesPotion.add(4, TextureItems.potion4);
 
+        _texturesBox.add(0, null);
+        _texturesBox.add(1, TextureItems.box1);
+        _texturesBox.add(2, TextureItems.box2);
+        _texturesBox.add(3, TextureItems.box3);
+        _texturesBox.add(4, TextureItems.box4);
+
         _texturesBook.add(0, null);
         _texturesBook.add(1, TextureItems.book1);
         _texturesBook.add(2, TextureItems.book2);
@@ -58,6 +66,8 @@ public class GenerateItemType {
                 return _texturesAmulet.get(level);
             case POTION:
                 return _texturesPotion.get(level);
+            case BOX:
+                return _texturesBox.get(level);
             case BOOK:
                 return _texturesBook.get(level);
             case MAGIC:
@@ -75,6 +85,8 @@ public class GenerateItemType {
                         return AMULET;
                     case 2:
                         return POTION;
+                    case 3:
+                        return BOX;
                     case 4:
                         return BOOK;
                 }
@@ -87,6 +99,7 @@ public class GenerateItemType {
             case KETTLE:
                 return 30;
             case AMULET:
+            case BOX:
             case POTION:
                 return 4;
             case MAGIC:

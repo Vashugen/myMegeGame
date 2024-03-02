@@ -13,6 +13,7 @@ public class TextureItems {
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
     public static TextureRegion[] amulet1, amulet2, amulet3, amulet4;
     public static TextureRegion[] potion1, potion2, potion3, potion4;
+    public static TextureRegion[] box1, box2, box3, box4;
     public static TextureRegion[] book1, book2, book3, book4;
     public static TextureRegion[] magic1;
 
@@ -53,6 +54,7 @@ public class TextureItems {
         initKettle();
         initAmulet();
         initPotion();
+        initBox();
         initBook();
         initMagic();
         initEffects();
@@ -153,6 +155,36 @@ public class TextureItems {
         potion4[0] = new TextureRegion(texture, 0, 396, 112, 112);
         for (int i = 1; i <= 1; i++) {
             potion4[i] = new TextureRegion(texture, i * 112, 396, 112, 112);
+        }
+    }
+
+    private static void initBox(){
+
+        Texture texture = Textures.box;
+
+        //in const
+        box1 = new TextureRegion[2];
+        box1[0] = new TextureRegion(texture, 0, 0, 112, 112);
+        for (int i = 1; i <= 1; i++) {
+            box1[i] = new TextureRegion(texture, i * 112, 0, 112, 112);
+        }
+
+        box2 = new TextureRegion[2];
+        box2[0] = new TextureRegion(texture, 0, 132, 112, 112);
+        for (int i = 1; i <= 1; i++) {
+            box2[i] = new TextureRegion(texture,i * 112, 132, 112, 112);
+        }
+
+        box3 = new TextureRegion[2];
+        box3[0] = new TextureRegion(texture, 0, 264, 112, 112);
+        for (int i = 1; i <= 1; i++) {
+            box3[i] = new TextureRegion(texture, i * 112, 264, 112, 112);
+        }
+
+        box4 = new TextureRegion[2];
+        box4[0] = new TextureRegion(texture, 0, 396, 112, 112);
+        for (int i = 1; i <= 1; i++) {
+            box4[i] = new TextureRegion(texture, i * 112, 396, 112, 112);
         }
     }
 
