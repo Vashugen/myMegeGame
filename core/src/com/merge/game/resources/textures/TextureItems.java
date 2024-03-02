@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class TextureItems {
 
     public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear,
-            taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel;
+            taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel, window, buttonClose;
     public static TextureRegion bonusPanel, bonusSquare, bonusCount, bonusFixGenerate, bonusMaxItem, bonusMagicGenerator, bonusRandomGenerator;
     public static TextureRegion mainScenePanel, mainScenePlay, mainSceneShop, mainSceneRewards;
     public static TextureRegion[] numbers;
@@ -37,7 +37,8 @@ public class TextureItems {
         }
 
         fade = new TextureRegion(texture, 3, 741, 28, 28);
-
+        window = new TextureRegion(texture, 11, 260, 285, 479);
+        buttonClose = new TextureRegion(texture, 309, 211, 200, 200);
         texture = Textures.gridPanel;
         gridPanel = new TextureRegion(texture);
     }

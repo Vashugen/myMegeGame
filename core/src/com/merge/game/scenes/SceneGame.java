@@ -13,12 +13,14 @@ import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.objects.grid.GridCell;
 import com.merge.game.objects.grid.GridObject;
 import com.merge.game.objects.grid.MergeItem;
+import com.merge.game.objects.gui.WindowGui;
 import com.merge.game.objects.gui.elements.Button;
 import com.merge.game.objects.gui.elements.buttons.bonus.BonusButton;
 import com.merge.game.objects.gui.elements.buttons.bonus.BonusType;
 import com.merge.game.objects.gui.elements.panels.info.LeftPanel;
 import com.merge.game.objects.gui.elements.panels.RightPanel;
 import com.merge.game.objects.gui.elements.panels.TaskArea;
+import com.merge.game.objects.gui.windows.WindowShop;
 import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.TextureItems;
 import com.merge.game.resources.textures.Textures;
@@ -106,6 +108,10 @@ public class SceneGame extends Scene {
 
         if(_isBonusActivated){
             deactivateBonus();
+        }
+
+        if(Player.get().getBonusCount(bonusType) <= 0){
+            WindowGui.get().addWindow(new WindowShop(true));
         }
 
         Player.get().changeItem(bonusType, -1);
