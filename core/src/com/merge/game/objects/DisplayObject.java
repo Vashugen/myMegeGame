@@ -324,4 +324,17 @@ public class DisplayObject {
     private void setShader(ShaderProgram shader) {
         _shader = shader;
     }
+
+
+    public void setColor(int r, int g, int b, float alpha) {
+        _R = r;
+        _G = g;
+        _B = b;
+        _alpha = alpha;
+        _hasColor = _R != 1 || _G != 1 || _B != 1 || _alpha != 1;
+    }
+
+    protected float getOwnAlpha() {
+        return _alpha;
+    }
 }

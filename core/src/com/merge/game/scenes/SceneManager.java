@@ -3,6 +3,7 @@ package com.merge.game.scenes;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
+import com.merge.game.objects.gui.WindowGui;
 import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.TextureItems;
 
@@ -55,6 +56,7 @@ public class SceneManager {
 
     public void update() {
         updateSceneChanging();
+        WindowGui.get().update();
         GameSound.update();
         if(_currentScene != null){
             _currentScene.update();
