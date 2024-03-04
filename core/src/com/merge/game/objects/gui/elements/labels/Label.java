@@ -11,12 +11,18 @@ import com.merge.game.objects.DisplayObject;
 public class Label extends DisplayObject {
 
     private BitmapFont _font;
-    private String _string;
+    private String _text;
     private float _x, _y;
 
     private GlyphLayout _layout;
 
     protected Color _color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+    public Label(BitmapFont font){
+        _layout = new GlyphLayout();
+        setFont(font);
+        setText("");
+    }
 
     public Label(float x, float y, float coeffSize, Color color) {
         _layout = new GlyphLayout();
@@ -28,13 +34,13 @@ public class Label extends DisplayObject {
     public Label(BitmapFont font, String string) {
         _layout = new GlyphLayout();
         setFont(font);
-        setString(string);
+        setText(string);
     }
 
     public Label(BitmapFont font, int string) {
         _layout = new GlyphLayout();
         setFont(font);
-        setString(string);
+        setText(string);
     }
 
     public float getX(){
@@ -67,6 +73,10 @@ public class Label extends DisplayObject {
     public static void dispose() {
     }
 
+    public BitmapFont getFont() {
+        return _font;
+    }
+
     private void setFont(BitmapFont font) {
         _font = font;
     }
@@ -90,17 +100,21 @@ public class Label extends DisplayObject {
         generator.dispose();
     }
 
-    public void setString(String string){
-        _string = string;
-        _layout.setText(_font, _string);
+    public String getText() {
+        return _text;
     }
 
-    public void setString(int string) {
-        this._string = "" + string;
+    public void setText(String string){
+        _text = string;
+        _layout.setText(_font, _text);
+    }
+
+    public void setText(int string) {
+        this._text = "" + string;
         _layout.setText(_font, "" + string);
     }
 
     public void draw(SpriteBatch spriteBatch) {
-        _font.draw(spriteBatch, _string, getX(), Gdx.graphics.getHeight() - getY());
+        _font.draw(spriteBatch, _text, getX(), Gdx.graphics.getHeight() - getY());
     }
 }

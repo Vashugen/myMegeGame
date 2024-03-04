@@ -1,5 +1,6 @@
 package com.merge.game.objects.gui;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.gui.windows.Window;
@@ -15,7 +16,14 @@ public class WindowGui {
     private static WindowGui _instance = null;
 
     public static WindowGui get(){
-        return _instance == null ? new WindowGui() : _instance;
+
+        if(_instance == null){
+            _instance = new WindowGui();
+        }
+
+        return _instance;
+
+        //return _instance == null ? new WindowGui() : _instance;
     }
 
     private DisplayObject _fade;
@@ -58,9 +66,25 @@ public class WindowGui {
         }
     }
 
-    public  void addWindow(Window window){
+    public void addWindow(Window window){
         _windowList.add(0, window);
     }
 
 
+    public void draw(SpriteBatch batch) {
+
+        if(_windowList.isEmpty()){
+            if(_fadeAlpha > 0){
+                _fade.draw(batch);
+            }
+        }else {
+            for (int i = 0; i < _windowList.size(); i++) {
+                if(i == 0){
+                    _fade.draw(batch);
+                }
+                _windowList.get(i).draw(batch);
+            }
+        }
+
+    }
 }

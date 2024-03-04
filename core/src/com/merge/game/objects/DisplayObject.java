@@ -3,12 +3,14 @@ package com.merge.game.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
+import com.merge.game.objects.gui.elements.labels.Label;
 import com.merge.game.objects.shader_effects.ShaderEffect;
 import com.merge.game.resources.Shaders;
 
@@ -336,5 +338,11 @@ public class DisplayObject {
 
     protected float getOwnAlpha() {
         return _alpha;
+    }
+
+    protected void createLabel(BitmapFont font, String text, float cx, float cy) {
+        Label label = new Label(font, text);
+        addChild(label);
+        label.setCenterCoeff(cx, cy);
     }
 }

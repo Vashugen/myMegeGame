@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.gui.WindowGui;
+import com.merge.game.objects.gui.windows.WindowText;
 import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.TextureItems;
 
@@ -69,6 +70,8 @@ public class SceneManager {
             if(_currentScene != null){
                 _currentScene.draw(batch);
             }
+
+            WindowGui.get().draw(batch);
         }
 
         if(_fade != null){

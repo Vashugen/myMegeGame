@@ -1,7 +1,11 @@
 package com.merge.game.objects.gui.windows;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
+import com.merge.game.objects.gui.elements.Button;
+import com.merge.game.objects.gui.elements.labels.Label;
+import com.merge.game.resources.Fonts;
 import com.merge.game.resources.textures.TextureItems;
 
 public class Window extends DisplayObject {
@@ -12,11 +16,14 @@ public class Window extends DisplayObject {
     private static final float ALPHA_SPEED = 0.04f;
     private int _state = STATE_APPEARING;
 
+    protected Button _buttonClose;
+
     public Window(){
         setTexture(TextureItems.window);
-        scaleToWidth(0.9f);
+        scaleToFit(0.8f, 0.8f);
         setCenterCoeff(0.5f, 0.45f);
         addButtonCloseDefault();
+        setAlpha(0);
     }
 
     public Window(float scaleToWidth, float cx, float cy, boolean buttonClose){
@@ -40,6 +47,7 @@ public class Window extends DisplayObject {
     }
 
     private void updateAppearing() {
+
         if(getOwnAlpha() < 1){
             setAlpha(getOwnAlpha() + ALPHA_SPEED * Globals.deltaTime);
             if (getOwnAlpha() == 1){
@@ -51,17 +59,33 @@ public class Window extends DisplayObject {
     }
 
     private void updateWindow() {
+        if(_buttonClose != null && _buttonClose.isPressed()){
+            disappear();
+        }
+    }
+
+    private void disappear() {
+        _state = STATE_DISAPPEARING;
     }
 
     private void updateDisappearing() {
     }
 
+
+
     private void addButtonCloseDefault() {
-        addButtonClose();
+        addButtonClose(0.15f, 0.86f, 0.32f);
     }
 
-    private void addButtonClose(){
+    private void addButtonClose(float scaleToWidth, float cx, float cy) {
+        _buttonClose = new Button(TextureItems.buttonClose);
+        addChild(_buttonClose);
+        _buttonClose.scaleToWidth(scaleToWidth);
+        _buttonClose.setCenterCoeff(cx, cy);
+    }
 
+    protected void setTitle(String title){
+        createLabel(Fonts.fontLarge, title, 0.5f, 0.31f);
     }
 
 }

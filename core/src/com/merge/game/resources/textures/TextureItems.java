@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class TextureItems {
 
     public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear,
-            taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel, window, buttonClose;
+            taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel, window, window2, buttonClose;
     public static TextureRegion bonusPanel, bonusSquare, bonusCount, bonusFixGenerate, bonusMaxItem, bonusMagicGenerator, bonusRandomGenerator;
     public static TextureRegion mainScenePanel, mainScenePlay, mainSceneShop, mainSceneRewards;
     public static TextureRegion[] numbers;
@@ -21,6 +21,7 @@ public class TextureItems {
         initFields();
         initMain();
         initBonus();
+        initGrid();
         initMergeItems();
         initGameItems();
         initTasks();
@@ -31,13 +32,9 @@ public class TextureItems {
         Texture texture = Textures.fields;
         buttonStart = new TextureRegion(texture, 312, 452, 239, 112);
 
-        gridCell = new TextureRegion[3];
-        for (int i = 0; i < 3; i++) {
-            gridCell[i] = new TextureRegion(texture, 497 + (i * 168), 715, 168, 168);
-        }
-
         fade = new TextureRegion(texture, 3, 741, 28, 28);
-        window = new TextureRegion(texture, 11, 260, 285, 479);
+        window = new TextureRegion(texture, 526, 738, 497, 286);
+        window2 = new TextureRegion(texture, 14, 259, 281, 481);
         buttonClose = new TextureRegion(texture, 309, 211, 200, 200);
         texture = Textures.gridPanel;
         gridPanel = new TextureRegion(texture);
@@ -230,6 +227,7 @@ public class TextureItems {
     }
 
     private static void initGameItems() {
+
         Texture texture = Textures.items;
         score = new TextureRegion(texture, 560, 0, 109, 109);
         gold = new TextureRegion(texture, 672, 0,109, 109);
@@ -254,6 +252,15 @@ public class TextureItems {
         bonusMaxItem = new TextureRegion(texture, 171, 852, 170, 170);
         bonusMagicGenerator = new TextureRegion(texture, 342, 852, 170, 170);
         bonusRandomGenerator = new TextureRegion(texture, 342, 852, 170, 170);
+    }
+
+    private static void initGrid() {
+        Texture texture = Textures.panels;
+
+        gridCell = new TextureRegion[3];
+        for (int i = 0; i < 3; i++) {
+            gridCell[i] = new TextureRegion(texture, 497 + (i * 168), 715, 168, 168);
+        }
     }
 
     private static void initNumbers() {

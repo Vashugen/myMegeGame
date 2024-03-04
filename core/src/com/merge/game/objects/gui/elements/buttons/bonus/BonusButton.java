@@ -88,7 +88,7 @@ public class BonusButton extends Button {
     }
 
     private void updateLabel() {
-        _labelCount.setString(Player.get().getBonusCount(_bonusType));
+        _labelCount.setText(Player.get().getBonusCount(_bonusType));
         _labelCount.setCenterCoeff(0.5f, 0.4f);
     }
 

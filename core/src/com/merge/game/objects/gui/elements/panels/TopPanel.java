@@ -52,7 +52,7 @@ public class TopPanel extends DisplayObject {
     }
 
     public void setScore(int score) {
-        _scorePanel.getLabel().setString(score);
+        _scorePanel.getLabel().setText(score);
     }
 
     private PLPanel initPanel(TextureRegion texture, int count, int indexPanel) {

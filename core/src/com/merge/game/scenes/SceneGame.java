@@ -21,6 +21,8 @@ import com.merge.game.objects.gui.elements.panels.info.LeftPanel;
 import com.merge.game.objects.gui.elements.panels.RightPanel;
 import com.merge.game.objects.gui.elements.panels.TaskArea;
 import com.merge.game.objects.gui.windows.WindowShop;
+import com.merge.game.objects.gui.windows.WindowText;
+import com.merge.game.resources.Fonts;
 import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.TextureItems;
 import com.merge.game.resources.textures.Textures;
@@ -111,7 +113,9 @@ public class SceneGame extends Scene {
         }
 
         if(Player.get().getBonusCount(bonusType) <= 0){
-            WindowGui.get().addWindow(new WindowShop(true));
+            //WindowGui.get().addWindow(new WindowShop(true));
+            WindowGui.get().addWindow(new WindowText("Error!", Fonts.fontMedium, "There are no bonus"));
+            return;
         }
 
         Player.get().changeItem(bonusType, -1);
@@ -437,7 +441,7 @@ public class SceneGame extends Scene {
                     }else {
                         activateBonus(bonusType);
                     }
-                }else if (Player.get().getBonusCount(bonusType) > 0){
+                }else {
                     activateBonus(bonusType);
                 }
             }

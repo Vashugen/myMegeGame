@@ -1,6 +1,5 @@
 package com.merge.game.objects.gui.elements.panels;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.gui.elements.labels.Label;
@@ -21,11 +20,11 @@ public class PLPanel extends DisplayObject {
     }
 
     public void setLabel(String string) {
-        _label.setString(string);
+        _label.setText(string);
     }
 
     public void setLabel(int string) {
-        _label.setString(string);
+        _label.setText(string);
     }
 
     private void initPicture(TextureRegion texture) {
@@ -38,7 +37,7 @@ public class PLPanel extends DisplayObject {
     private void initLabel(int count){
         _label = new Label(Fonts.fontXSmall, "");
         addChild(_label);
-        _label.setString(count);
+        _label.setText(count);
         float labelCoeff = 0.45f + 0.02f + (_picture.getWidth() / getWidth()) + ((_label.getWidth() / 2) / getWidth());
         _label.setCenterCoeff(labelCoeff, 0.5f);
         _label.setX(_picture.x + _picture.getWidth() + 0.02f + _label.getWidth() / 2);
@@ -46,6 +45,6 @@ public class PLPanel extends DisplayObject {
     }
 
     public void updateLabel(int quantity) {
-        _label.setString(quantity);
+        _label.setText(quantity);
     }
 }
