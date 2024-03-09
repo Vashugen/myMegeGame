@@ -61,8 +61,13 @@ public class WindowGui {
     }
 
     private void updateWindows() {
+
         if(!_windowList.isEmpty()){
             _windowList.get(0).update();
+
+            if(!_windowList.isEmpty() && _windowList.get(0).isToDelete()){
+                _windowList.remove(0);
+            }
         }
     }
 
@@ -86,5 +91,9 @@ public class WindowGui {
             }
         }
 
+    }
+
+    public boolean isEmpty() {
+        return _windowList.isEmpty();
     }
 }

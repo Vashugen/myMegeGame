@@ -12,7 +12,6 @@ public class Label extends DisplayObject {
 
     private BitmapFont _font;
     private String _text;
-    private float _x, _y;
 
     private GlyphLayout _layout;
 
@@ -27,8 +26,8 @@ public class Label extends DisplayObject {
     public Label(float x, float y, float coeffSize, Color color) {
         _layout = new GlyphLayout();
         generateFont(coeffSize, color);
-        _x = x;
-        _y = y;
+        this.x = x;
+        this.y = y;
     }
 
     public Label(BitmapFont font, String string) {
@@ -44,19 +43,19 @@ public class Label extends DisplayObject {
     }
 
     public float getX(){
-        return parent != null ? (parent.getX() + _x) : _x;
+        return parent != null ? (parent.getX() + x) : x;
     }
 
     public float getY(){
-        return parent != null ? (parent.getY() + _y) : _y;
+        return parent != null ? (parent.getY() + y) : y;
     }
 
     public void setX(float x) {
-        _x = x;
+        this.x = x;
     }
 
     public void setY(float y) {
-        _y = y;
+        this.y = y;
     }
 
     @Override
@@ -77,18 +76,18 @@ public class Label extends DisplayObject {
         return _font;
     }
 
-    private void setFont(BitmapFont font) {
+    public void setFont(BitmapFont font) {
         _font = font;
     }
 
     public void setCenterCoeffX(float coeffX) {
-        _x = coeffX * getParentWidth();
-        _x += -_layout.width / 2;
+        x = coeffX * getParentWidth();
+        x += -_layout.width / 2;
     }
 
     public void setCenterCoeffY(float coeffY) {
-        _y = coeffY * getParentHeight();
-        _y += -_layout.height / 2;
+        y = coeffY * getParentHeight();
+        y += -_layout.height / 2;
     }
 
     private void generateFont(float coeffSize, Color color) {

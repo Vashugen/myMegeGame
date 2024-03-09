@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class TextureItems {
 
     public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear,
-            taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel, window, window2, buttonClose;
+            taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel, window, windowShop, buttonClose, buttonBuy, panelBonusCount;
     public static TextureRegion bonusPanel, bonusSquare, bonusCount, bonusFixGenerate, bonusMaxItem, bonusMagicGenerator, bonusRandomGenerator;
     public static TextureRegion mainScenePanel, mainScenePlay, mainSceneShop, mainSceneRewards;
     public static TextureRegion[] numbers;
@@ -34,8 +34,11 @@ public class TextureItems {
 
         fade = new TextureRegion(texture, 3, 741, 28, 28);
         window = new TextureRegion(texture, 526, 738, 497, 286);
-        window2 = new TextureRegion(texture, 14, 259, 281, 481);
+        windowShop = new TextureRegion(texture, 17, 259, 272, 366);
         buttonClose = new TextureRegion(texture, 309, 211, 200, 200);
+        buttonBuy = new TextureRegion(texture, 21, 628, 200, 106);
+        panelBonusCount = new TextureRegion(texture, 315, 690, 200, 99);
+
         texture = Textures.gridPanel;
         gridPanel = new TextureRegion(texture);
     }
@@ -103,25 +106,25 @@ public class TextureItems {
         //in const
         amulet1 = new TextureRegion[3];
         amulet1[0] = new TextureRegion(texture, 0, 0, 112, 112);
-        for (int i = 1; i <= 1; i++) {
+        for (int i = 1; i <= 2; i++) {
             amulet1[i] = new TextureRegion(texture, i * 112, 0, 112, 112);
         }
 
         amulet2 = new TextureRegion[3];
         amulet2[0] = new TextureRegion(texture, 0, 132, 112, 112);
-        for (int i = 1; i <= 1; i++) {
+        for (int i = 1; i <= 2; i++) {
             amulet2[i] = new TextureRegion(texture,i * 112, 132, 112, 112);
         }
 
         amulet3 = new TextureRegion[3];
         amulet3[0] = new TextureRegion(texture, 0, 264, 112, 112);
-        for (int i = 1; i <= 1; i++) {
+        for (int i = 1; i <= 2; i++) {
             amulet3[i] = new TextureRegion(texture, i * 112, 264, 112, 112);
         }
 
         amulet4 = new TextureRegion[3];
         amulet4[0] = new TextureRegion(texture, 0, 396, 112, 112);
-        for (int i = 1; i <= 1; i++) {
+        for (int i = 1; i <= 2; i++) {
             amulet4[i] = new TextureRegion(texture, i * 112, 396, 112, 112);
         }
     }

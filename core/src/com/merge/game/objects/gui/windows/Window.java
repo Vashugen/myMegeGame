@@ -14,12 +14,13 @@ public class Window extends DisplayObject {
     private static final int STATE_UPDATE = 1;
     private static final int STATE_DISAPPEARING = 2;
     private static final float ALPHA_SPEED = 0.04f;
+    private static final float ALPHA_SPEED_DISAPPEAR = 0.04f;
     private int _state = STATE_APPEARING;
 
     protected Button _buttonClose;
 
     public Window(){
-        setTexture(TextureItems.window);
+        setTexture(TextureItems.windowShop);
         scaleToFit(0.8f, 0.8f);
         setCenterCoeff(0.5f, 0.45f);
         addButtonCloseDefault();
@@ -27,7 +28,14 @@ public class Window extends DisplayObject {
     }
 
     public Window(float scaleToWidth, float cx, float cy, boolean buttonClose){
+        setTexture(TextureItems.windowShop);
+        scaleToWidth(scaleToWidth);
+        setCenterCoeff(cx, cy);
+        if(buttonClose){
+            addButtonCloseDefault();
+        }
 
+        setAlpha(0);
     }
 
     @Override
@@ -69,9 +77,13 @@ public class Window extends DisplayObject {
     }
 
     private void updateDisappearing() {
+        if(getOwnAlpha() > 0){
+            setAlpha(getOwnAlpha() - ALPHA_SPEED_DISAPPEAR * Globals.deltaTime);
+            if(getOwnAlpha() <= 0){
+                setToDelete();
+            }
+        }
     }
-
-
 
     private void addButtonCloseDefault() {
         addButtonClose(0.15f, 0.86f, 0.32f);

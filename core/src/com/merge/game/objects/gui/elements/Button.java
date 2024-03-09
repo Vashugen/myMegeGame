@@ -1,21 +1,20 @@
 package com.merge.game.objects.gui.elements;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.gui.elements.labels.Label;
-import com.merge.game.resources.Fonts;
 import com.merge.game.resources.GameSound;
 
 public class Button extends DisplayObject {
 
     private static final float SCALE_SPEED = 0.025f;
     private static final float SCALE_AFTER_PRESS = 0.9f;
-    
-    protected boolean _isDisabled = false;
 
-    private Label _buttonLabel;
+    private Label _label = null;
+    protected boolean _isDisabled = false;
 
     public Button() {
         super();
@@ -37,10 +36,6 @@ public class Button extends DisplayObject {
         return false;
     }
 
-    public void setDisabled(boolean state) {
-        _isDisabled = state;
-    }
-
     @Override
     public void update() {
         super.update();
@@ -49,12 +44,6 @@ public class Button extends DisplayObject {
             return;
         }
         updateTouchEffect();
-    }
-
-    protected void initLabel(){
-        _buttonLabel = new Label(Fonts.fontMedium, "");
-        addChild(_buttonLabel);
-        _buttonLabel.setCenterCoeff(0.5f, 0.4f);
     }
 
     private void updateEffects() {
@@ -72,6 +61,22 @@ public class Button extends DisplayObject {
             //TODO проверка на выключенный звук
             GameSound.playSound(GameSound.button, GameSound.SOUND_VOLUME_BUTTON);
             setScale(SCALE_AFTER_PRESS);
+        }
+    }
+
+    public void setLabel(BitmapFont font, String text) {
+        setLabel(font, text, 0.5f, 0.45f);
+    }
+
+    public void setLabel(BitmapFont font, String text, float cx, float cy) {
+        if(_label == null){
+            _label = new Label(font, text);
+            addChild(_label);
+            _label.setCenterCoeff(cx, cy);
+        }else {
+            _label.setFont(font);
+            _label.setText(text);
+            _label.setCenterCoeff(cx, cy);
         }
     }
 }

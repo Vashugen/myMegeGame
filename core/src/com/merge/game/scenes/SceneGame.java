@@ -76,6 +76,10 @@ public class SceneGame extends Scene {
 
     public void update() {
         super.update();
+        if (!WindowGui.get().isEmpty()){
+            return;
+        }
+        updateEffects();
         updateActiveObject();
         updateItems();
         updateTopPanel();
@@ -85,6 +89,10 @@ public class SceneGame extends Scene {
         updateBonusButtons();
         updateBonusMagicGenerator();
         updateGlobal();
+    }
+
+    private void updateEffects() {
+
     }
 
     private void updateActiveObject() {
@@ -113,8 +121,8 @@ public class SceneGame extends Scene {
         }
 
         if(Player.get().getBonusCount(bonusType) <= 0){
-            //WindowGui.get().addWindow(new WindowShop(true));
-            WindowGui.get().addWindow(new WindowText("Error!", Fonts.fontMedium, "There are no bonus"));
+            WindowGui.get().addWindow(new WindowShop(true));
+            //WindowGui.get().addWindow(new WindowText("Error!", Fonts.fontMedium, "There are no bonus"));
             return;
         }
 
@@ -595,6 +603,10 @@ public class SceneGame extends Scene {
                 if (_items[x][y] == null) {
                     if(_activeObject.getGenerateType() == GenerateItemType.MAGIC){
                         _items[x][y] = createMagicGeneratorItem(x, y);
+                    }else if(_activeObject.getGenerateType() == GenerateItemType.POTION){
+                        int level = Tools.randomInt(1, 3);
+                        int type = Tools.randomInt(1, GenerateItemType.getTexture(_activeObject.getGenerateType(), 1).length);
+                        _items[x][y] = new MergeItem(_grid[x][y].getX(), _grid[x][y].getY(), _grid[x][y].getWidth(), _grid[x][y].getHeight(), x, y, type, level, _activeObject.getGenerateType(), GameObjectType.MERGE);
                     }else {
                         int level = Tools.randomInt(1, 3);
                         int type = Tools.randomInt(1, GenerateItemType.getTexture(_activeObject.getGenerateType(), 1).length);

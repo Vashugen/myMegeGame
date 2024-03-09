@@ -10,12 +10,15 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
+import com.merge.game.objects.gui.elements.Button;
 import com.merge.game.objects.gui.elements.labels.Label;
 import com.merge.game.objects.shader_effects.ShaderEffect;
 import com.merge.game.resources.Shaders;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.swing.AbstractButton;
 
 public class DisplayObject {
 
@@ -34,6 +37,8 @@ public class DisplayObject {
 
     protected ShaderProgram _shader = null;
     protected ShaderEffect _shaderEffect = null;
+
+    protected boolean _isToDelete = false;
 
     public DisplayObject() {}
 
@@ -96,7 +101,7 @@ public class DisplayObject {
     }
 
     public float getAlpha() {
-        return _alpha;
+        return _alpha * (haveParent() ? parent.getAlpha() : 1.0f);
     }
 
     public void setAlpha(float alpha) {
@@ -109,6 +114,18 @@ public class DisplayObject {
         }
 
         _hasColor = _R != 1 || _G != 1 || _B != 1 || _alpha != 1;
+    }
+
+    public boolean isToDelete() {
+        return _isToDelete;
+    }
+
+    public void setToDelete() {
+        _isToDelete = true;
+    }
+
+    private boolean haveParent(){
+        return parent != null;
     }
 
     public void moveX(float x) {
@@ -340,9 +357,26 @@ public class DisplayObject {
         return _alpha;
     }
 
-    protected void createLabel(BitmapFont font, String text, float cx, float cy) {
+    protected DisplayObject createObject(TextureRegion texture, float scaleWidth, float cx, float cy){
+        DisplayObject object = new DisplayObject(texture);
+        addChild(object);
+        object.scaleToWidth(scaleWidth);
+        object.setCenterCoeff(cx, cy);
+        return object;
+    }
+
+    protected Button createButton(TextureRegion texture, float widthCoeff, float cx, float cy) {
+        Button button = new Button(texture);
+        addChild(button);
+        button.scaleToWidth(widthCoeff);
+        button.setCenterCoeff(cx, cy);
+        return button;
+    }
+
+    public Label createLabel(BitmapFont font, String text, float cx, float cy) {
         Label label = new Label(font, text);
         addChild(label);
         label.setCenterCoeff(cx, cy);
+        return label;
     }
 }
