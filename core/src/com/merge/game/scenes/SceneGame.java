@@ -196,7 +196,7 @@ public class SceneGame extends Scene {
         int level = 1;
         for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
             for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                if (_items[i][j] != null && _items[i][j].getGenerateType() == generateType) {
+                if (_items[i][j] != null && _items[i][j].getGenerateType().equals(generateType) && !_items[i][j].isGenerate()) {
                     level = _items[i][j].getLevel() > level ? _items[i][j].getLevel() : level;
                 }
             }
