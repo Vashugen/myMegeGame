@@ -2,13 +2,12 @@ package com.merge.game.objects.gui.elements.panels.info;
 
 import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
+import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.gui.elements.panels.TaskArea;
 
 import java.util.ArrayList;
 
 public class LeftPanel extends DisplayObject {
-
-    private static final int TASKS_COUNT = 2;
 
     private PanelInfo _panelInfo;
 
@@ -41,7 +40,7 @@ public class LeftPanel extends DisplayObject {
         tasksArea.setHeight(getHeight() * 0.9f);
         tasksArea.setY(_panelInfo.getHeight());
 
-        for (int i = 0; i < TASKS_COUNT; i++) {
+        for (int i = 0; i < Task.TASKS_COUNT; i++) {
             TaskArea taskArea = new TaskArea();
             tasksArea.addChild(taskArea);
             tasks.add(taskArea);

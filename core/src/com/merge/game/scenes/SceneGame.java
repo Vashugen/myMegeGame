@@ -278,7 +278,35 @@ public class SceneGame extends Scene {
     }
 
     private void initTasks() {
+        for (int i = 0; i < Task.TASKS_COUNT; i++) {
+            createTasks();
+        }
+    }
 
+    private void createTasks() {
+        int type, level, count;
+        int tasksCount = Tools.randomInt(1, 3);
+        for (int i = 0; i < tasksCount; i++){
+            boolean createTask = true;
+            String generateItemType = Globals.generateExists.get(Tools.randomInt(0, Globals.generateExists.size()));
+            type = Tools.randomInt(1, TextureItems.kettle1.length);
+            level = Tools.randomInt(0, MAX_LEVEL_QUANTITY) + 1;
+            //level = Math.random() > 0.5 ? 2 : 3;
+            count = Math.random() > 0.5 ? 1 : 2;
+            Task task  = new Task(type, level, GenerateItemType.KETTLE, count);
+            //проверка на дубли в заданиях, TODO check
+            for(int j = 0; j < addedTasks.size(); j++){
+                if(addedTasks.get(j).exists(task)){
+                    createTask = false;
+                    break;
+                }
+            }
+
+            if(createTask){
+                setTask(task, i);
+                addedTasks.add(task);
+            }
+        }
     }
 
     private void initBonus() {
