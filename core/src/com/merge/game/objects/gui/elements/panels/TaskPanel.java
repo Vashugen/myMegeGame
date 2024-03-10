@@ -60,21 +60,19 @@ public class TaskPanel extends DisplayObject {
             }
 
             if(createTask){
-                setTask(task, i, generateItemType);
+                setTask(task, i);
                 addedTasks.add(task);
             }
         }
     }
 
-    private void setTask(Task task, int indexPanel, String generateItemType){
-
-        DisplayObject taskObject = new MergeItem(task.type, task.level, generateItemType);
+    private void setTask(Task task, int indexPanel){
 
         TaskItem taskItem = new TaskItem();
         addChild(taskItem);
         taskItem.setSize(getWidth() / _countTask ,getHeight());
         taskItem.setX(indexPanel * taskItem.getWidth());
-        taskItem.init(taskObject.getTexture(), task.count);
+        taskItem.init(task.getTexture(), task.count);
 
     }
 }
