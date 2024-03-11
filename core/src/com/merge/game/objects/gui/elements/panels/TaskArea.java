@@ -11,28 +11,29 @@ public class TaskArea extends DisplayObject {
 
     public void init() {
         setSizeOfParent();
-        setHeight(getHeight() * 0.9f);
-        setY(this.parent.getHeight());
+        setHeight(parent.getHeight() * 0.9f);
+        setY(parent.getHeight());
 
         initTasks();
-
     }
 
     private void initTasks() {
         for (int i = 0; i < Task.TASKS_COUNT; i++) {
-            Task task = new Task();
-            addChild(task);
+            Task task = new Task(this, i);
             _tasksList.add(task);
-            task.init(i);
         }
     }
 
-    public void setTask(Task task, int indexPanel) {
-        _taskItemsList.get(indexPanel).addTask(task);
+    public void setTask(TaskItem task, int index, int tasksCount) {
+
+    }
+
+/*    public void setTask(Task task, int indexPanel) {
+        _tasksList.get(indexPanel).addTask(task);
         TaskItem2 taskItem = new TaskItem2();
         addChild(taskItem);
         taskItem.setSize(getWidth() / _countTask ,getHeight());
         taskItem.setX(indexPanel * taskItem.getWidth());
         taskItem.init(task.getTexture(), task.count);
-    }
+    }*/
 }

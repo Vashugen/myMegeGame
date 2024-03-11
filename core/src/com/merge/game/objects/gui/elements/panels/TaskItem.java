@@ -1,22 +1,29 @@
 package com.merge.game.objects.gui.elements.panels;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.game_elements.task.Task;
+import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.objects.gui.elements.Button;
 import com.merge.game.resources.textures.TextureItems;
 
 public class TaskItem extends DisplayObject {
 
-    private DisplayObject taskPanel;
-    private Button taskButton;
-    private int _index;
+    private int _count, _type, _level, _tasksCount;
+    private String _generatorType;
     
-    public void init(int count) {
-        _index = count;
-        setSizeOfParent();
-        setHeight(getParentHeight() / Task.TASKS_COUNT);
-        setY(count * getHeight());
-        generateTaskPanel();
+    public TaskItem (int type, int level, String generatorType, int count, int tasksCount) {
+        _type = type;
+        _level = level;
+        _generatorType = generatorType;
+        _count = count;
+        _tasksCount = tasksCount;
+        setTexture(getTexture(_type, _level, generatorType));
+    }
+
+    private static TextureRegion getTexture(int type, int level, String generatorType) {
+        TextureRegion[] textureRegions = GenerateItemType.getTexture(generatorType, level);
+        return textureRegions[type];
     }
 
     public DisplayObject getTaskPanel() {
@@ -43,8 +50,8 @@ public class TaskItem extends DisplayObject {
     private void initTaskPanel() {
         taskPanel = new DisplayObject(TextureItems.taskField);
         addChild(taskPanel);
-/*        _countTask = Tools.randomInt(1, 3);
-        _countCoeff = _countTask == 1 ? 2 : 1;*/
+        _countTask = Tools.randomInt(1, 3);
+        _countCoeff = _countTask == 1 ? 2 : 1;
         scaleToFit(0.9f, 0.9f);
         setCenterCoeff(0.5f,0.4f);
     }
@@ -81,8 +88,5 @@ public class TaskItem extends DisplayObject {
         return true;
     }
 
-    public void addTask(Task task) {
-        taskPanel.addChild(task);
 
-    }
 }

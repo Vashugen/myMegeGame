@@ -35,7 +35,6 @@ public class LeftPanel extends DisplayObject {
     }
 
     private void initTasksArea() {
-
         taskArea = new TaskArea();
         addChild(taskArea);
         taskArea.init();
@@ -49,7 +48,7 @@ public class LeftPanel extends DisplayObject {
         _panelInfo.updateGold(quantity);
     }
 
-    public void setTask(Task task, int indexPanel) {
+    public void setTask(TaskItem task, int indexPanel, int tasksCount) {
         taskArea.setTask(task, indexPanel);
     }
 }
