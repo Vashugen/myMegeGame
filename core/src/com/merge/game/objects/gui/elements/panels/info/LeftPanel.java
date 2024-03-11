@@ -4,16 +4,17 @@ import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.gui.elements.panels.TaskArea;
+import com.merge.game.objects.gui.elements.panels.TaskItem;
 
 import java.util.ArrayList;
 
 public class LeftPanel extends DisplayObject {
 
-    private PanelInfo _panelInfo;
+    public PanelInfo _panelInfo;
 
-    private ArrayList<TaskArea> tasks = new ArrayList<>();
+    private ArrayList<TaskItem> tasks = new ArrayList<>();
 
-    public ArrayList<TaskArea> getTasks() {
+    public ArrayList<TaskItem> getTasks() {
         return tasks;
     }
 
@@ -34,18 +35,9 @@ public class LeftPanel extends DisplayObject {
 
     private void initTasksArea() {
 
-        DisplayObject tasksArea = new DisplayObject();
+        TaskArea tasksArea = new TaskArea();
         addChild(tasksArea);
-        tasksArea.setSizeOfParent();
-        tasksArea.setHeight(getHeight() * 0.9f);
-        tasksArea.setY(_panelInfo.getHeight());
-
-        for (int i = 0; i < Task.TASKS_COUNT; i++) {
-            TaskArea taskArea = new TaskArea();
-            tasksArea.addChild(taskArea);
-            tasks.add(taskArea);
-            taskArea.init(i);
-        }
+        tasksArea.init();
     }
 
     public void updateScore(int quantity) {
@@ -54,5 +46,9 @@ public class LeftPanel extends DisplayObject {
 
     public void updateGold(int quantity) {
         _panelInfo.updateGold(quantity);
+    }
+
+    public void setTask(Task task, int indexPanel) {
+
     }
 }

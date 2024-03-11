@@ -1,15 +1,11 @@
 package com.merge.game.objects.gui.elements.panels;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.Tools;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.grid.GenerateItemType;
-import com.merge.game.objects.grid.GridObject;
-import com.merge.game.objects.grid.MergeItem;
-import com.merge.game.objects.gui.elements.labels.Label;
 import com.merge.game.resources.textures.TextureItems;
 
 import java.util.ArrayList;
@@ -18,8 +14,6 @@ public class TaskPanel extends DisplayObject {
 
     private static final int MAX_LEVEL_QUANTITY = 2;
     private static final float CENTER_COEFF_X = 0.125f;
-
-    private ArrayList<Task> addedTasks = new ArrayList<>();
 
     private int _countTask;
     private int _countCoeff;
@@ -68,7 +62,7 @@ public class TaskPanel extends DisplayObject {
 
     private void setTask(Task task, int indexPanel){
 
-        TaskItem taskItem = new TaskItem();
+        TaskItem2 taskItem = new TaskItem2();
         addChild(taskItem);
         taskItem.setSize(getWidth() / _countTask ,getHeight());
         taskItem.setX(indexPanel * taskItem.getWidth());

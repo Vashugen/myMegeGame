@@ -10,8 +10,10 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.Input;
 import com.merge.game.logic.Tools;
+import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.gui.elements.Button;
 import com.merge.game.objects.gui.elements.labels.Label;
+import com.merge.game.objects.gui.elements.panels.TaskItem;
 import com.merge.game.objects.shader_effects.ShaderEffect;
 import com.merge.game.resources.Shaders;
 
@@ -379,4 +381,5 @@ public class DisplayObject {
         label.setCenterCoeff(cx, cy);
         return label;
     }
+
 }

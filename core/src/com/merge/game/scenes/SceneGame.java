@@ -19,10 +19,8 @@ import com.merge.game.objects.gui.elements.buttons.bonus.BonusButton;
 import com.merge.game.objects.gui.elements.buttons.bonus.BonusType;
 import com.merge.game.objects.gui.elements.panels.info.LeftPanel;
 import com.merge.game.objects.gui.elements.panels.RightPanel;
-import com.merge.game.objects.gui.elements.panels.TaskArea;
+import com.merge.game.objects.gui.elements.panels.TaskItem;
 import com.merge.game.objects.gui.windows.WindowShop;
-import com.merge.game.objects.gui.windows.WindowText;
-import com.merge.game.resources.Fonts;
 import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.TextureItems;
 import com.merge.game.resources.textures.Textures;
@@ -60,6 +58,8 @@ public class SceneGame extends Scene {
     private boolean _isBonusActivated = false;
     private int _activeBonusType = 0;
     private ArrayList<BonusButton> _buttonsBonus = new ArrayList<>();
+
+    private ArrayList<Task> addedTasks = new ArrayList<>();
 
     public SceneGame() {
         GameSound.playBackgroundMusic(GameSound.mainTheme);
@@ -303,7 +303,7 @@ public class SceneGame extends Scene {
             }
 
             if(createTask){
-                setTask(task, i);
+                _panelLeft.setTask(task, i);
                 addedTasks.add(task);
             }
         }
@@ -405,7 +405,7 @@ public class SceneGame extends Scene {
 
         for (int i = 0; i < _panelLeft.getTasks().size(); i++) {
 
-            TaskArea area = _panelLeft.getTasks().get(i);
+            TaskItem area = _panelLeft.getTasks().get(i);
 
             area.update();
             ArrayList<Task> addedTasks = area.getTaskPanel().getAddedTasks();

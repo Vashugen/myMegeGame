@@ -79,4 +79,8 @@ public class Button extends DisplayObject {
             _label.setCenterCoeff(cx, cy);
         }
     }
+
+    public void setDisabled(boolean state){
+        _isDisabled = state;
+    }
 }
