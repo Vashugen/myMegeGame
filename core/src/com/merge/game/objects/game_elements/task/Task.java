@@ -68,14 +68,14 @@ public class Task extends DisplayObject {
         return false;
     }
 
-    private void setTask(Task taskItem, int indexPanel, int tasksCount){
+    private void setTask(TaskItem taskItem, int indexPanel, int tasksCount){
 
         float coeffFit = tasksCount == 1 ? 0.8f : 0.4f;
 
-        taskItem.scaleToFit();
-        taskItem.setSize(getWidth() / _countTask , getHeight());
+        taskItem.scaleToFit(coeffFit, coeffFit);
+        taskItem.setCenterCoeff(0.25f + 0.5f * indexPanel, 0.35f);
         taskItem.setX(indexPanel * taskItem.getWidth());
-        taskItem.init(task.getTexture(), task.count);
+        taskItem.initLabel();
 
     }
 

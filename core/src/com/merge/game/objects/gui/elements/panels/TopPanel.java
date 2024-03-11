@@ -76,4 +76,12 @@ public class TopPanel extends DisplayObject {
         button.scaleToFit(0.8f, 0.8f);
         button.setCenterCoeff(0.5f, 0.5f);
     }
+
+    public int fun(int x, int y){
+        if(y != 0){
+            return x / y;
+        }
+
+        return 0;
+    }
 }
