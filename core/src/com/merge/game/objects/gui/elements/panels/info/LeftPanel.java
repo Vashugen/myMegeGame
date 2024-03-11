@@ -2,7 +2,7 @@ package com.merge.game.objects.gui.elements.panels.info;
 
 import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
-import com.merge.game.objects.game_elements.Task;
+import com.merge.game.objects.game_elements.task.Task;
 import com.merge.game.objects.gui.elements.panels.TaskArea;
 import com.merge.game.objects.gui.elements.panels.TaskItem;
 
@@ -12,6 +12,7 @@ public class LeftPanel extends DisplayObject {
 
     public PanelInfo _panelInfo;
 
+    private TaskArea taskArea;
     private ArrayList<TaskItem> tasks = new ArrayList<>();
 
     public ArrayList<TaskItem> getTasks() {
@@ -35,9 +36,9 @@ public class LeftPanel extends DisplayObject {
 
     private void initTasksArea() {
 
-        TaskArea tasksArea = new TaskArea();
-        addChild(tasksArea);
-        tasksArea.init();
+        taskArea = new TaskArea();
+        addChild(taskArea);
+        taskArea.init();
     }
 
     public void updateScore(int quantity) {
@@ -49,6 +50,6 @@ public class LeftPanel extends DisplayObject {
     }
 
     public void setTask(Task task, int indexPanel) {
-
+        taskArea.setTask(task, indexPanel);
     }
 }

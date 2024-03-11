@@ -1,17 +1,18 @@
 package com.merge.game.objects.gui.elements.panels;
 
-import com.merge.game.logic.Tools;
 import com.merge.game.objects.DisplayObject;
-import com.merge.game.objects.game_elements.Task;
+import com.merge.game.objects.game_elements.task.Task;
 import com.merge.game.objects.gui.elements.Button;
 import com.merge.game.resources.textures.TextureItems;
 
 public class TaskItem extends DisplayObject {
 
-    DisplayObject taskPanel;
-    Button taskButton;
-
+    private DisplayObject taskPanel;
+    private Button taskButton;
+    private int _index;
+    
     public void init(int count) {
+        _index = count;
         setSizeOfParent();
         setHeight(getParentHeight() / Task.TASKS_COUNT);
         setY(count * getHeight());
@@ -78,5 +79,10 @@ public class TaskItem extends DisplayObject {
         }
 
         return true;
+    }
+
+    public void addTask(Task task) {
+        taskPanel.addChild(task);
+
     }
 }

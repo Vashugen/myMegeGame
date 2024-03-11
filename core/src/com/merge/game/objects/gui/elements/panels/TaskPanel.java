@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.logic.Globals;
 import com.merge.game.logic.Tools;
 import com.merge.game.objects.DisplayObject;
-import com.merge.game.objects.game_elements.Task;
+import com.merge.game.objects.game_elements.task.Task;
 import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.resources.textures.TextureItems;
 

@@ -7,7 +7,7 @@ import com.merge.game.logic.player_data.Player;
 import com.merge.game.objects.Background;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.GameObjectType;
-import com.merge.game.objects.game_elements.Task;
+import com.merge.game.objects.game_elements.task.Task;
 import com.merge.game.objects.game_elements.Trash;
 import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.objects.grid.GridCell;
