@@ -1,75 +1,32 @@
 package com.merge.game.objects.gui.elements.panels;
 
 import com.merge.game.objects.DisplayObject;
-import com.merge.game.objects.gui.elements.Button;
-import com.merge.game.objects.gui.elements.buttons.TaskButton;
+import com.merge.game.objects.game_elements.task.Task;
+import com.merge.game.objects.gui.elements.panels.info.LeftPanel;
 import com.merge.game.resources.textures.TextureItems;
+
+import java.util.ArrayList;
 
 public class TaskArea extends DisplayObject {
 
-    TaskPanel taskPanel;
-    TaskButton taskButton;
+    private ArrayList<Task> _tasksList = new ArrayList<>();
 
-    public void init(int count) {
+    public void init() {
         setSizeOfParent();
-        setHeight(getParentHeight() / 2);
-        setY(count * getHeight());
-        generateTask();
+        setHeight(parent.getHeight() * 0.9f);
+        setY(((LeftPanel) this.parent).getPanelInfo().getHeight());
+
+        initTasks();
     }
 
-    public TaskPanel getTaskPanel() {
-        return taskPanel;
-    }
-
-    public Button getTaskButton() {
-        return taskButton;
-    }
-
-    public void generateTask(){
-        initTaskPanel();
-        initTaskButton();
-    }
-
-    public void update(){
-        for (int i = 0; i < this.getTaskPanel().getAddedTasks().size(); i++) {
-            this.getTaskPanel().getAddedTasks().get(i).existsCount = 0;
-            this.getTaskPanel().getAddedTasks().get(i).itemsToRemove.clear();
+    private void initTasks() {
+        for (int i = 0; i < Task.TASKS_COUNT; i++) {
+            Task task = new Task(this, i);
+            _tasksList.add(task);
         }
-        inactiveButton();
     }
 
-    private void initTaskPanel() {
-        taskPanel = new TaskPanel(TextureItems.taskField);
-        addChild(taskPanel);
-        taskPanel.init();
-    }
-
-    private void initTaskButton() {
-        taskButton = new TaskButton();
-        addChild(taskButton);
-        taskButton.init();
-    }
-
-    public void inactiveButton() {
-        taskButton.setDisabled();
-    }
-
-    public void activeButton() {
-        taskButton.setAbled();
-    }
-
-    public boolean buttonIsPressed() {
-        return taskButton.isPressed();
-    }
-
-    public boolean tasksComplete() {
-        //проверка количества имеющихся на поле итемсов
-        for (int i = 0; i < taskPanel.getAddedTasks().size(); i++) {
-            if(taskPanel.getAddedTasks().get(i).existsCount < taskPanel.getAddedTasks().get(i).count){
-                return false;
-            }
-        }
-
-        return true;
+    public ArrayList getTasks() {
+        return _tasksList;
     }
 }

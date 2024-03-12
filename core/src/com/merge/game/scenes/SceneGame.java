@@ -7,11 +7,11 @@ import com.merge.game.logic.player_data.Player;
 import com.merge.game.objects.Background;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.GameObjectType;
-import com.merge.game.objects.game_elements.Task;
 import com.merge.game.objects.game_elements.Trash;
+import com.merge.game.objects.game_elements.task.Task;
+import com.merge.game.objects.game_elements.task.TaskItem;
 import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.objects.grid.GridCell;
-import com.merge.game.objects.grid.GridObject;
 import com.merge.game.objects.grid.MergeItem;
 import com.merge.game.objects.gui.WindowGui;
 import com.merge.game.objects.gui.elements.Button;
@@ -19,10 +19,7 @@ import com.merge.game.objects.gui.elements.buttons.bonus.BonusButton;
 import com.merge.game.objects.gui.elements.buttons.bonus.BonusType;
 import com.merge.game.objects.gui.elements.panels.info.LeftPanel;
 import com.merge.game.objects.gui.elements.panels.RightPanel;
-import com.merge.game.objects.gui.elements.panels.TaskArea;
 import com.merge.game.objects.gui.windows.WindowShop;
-import com.merge.game.objects.gui.windows.WindowText;
-import com.merge.game.resources.Fonts;
 import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.TextureItems;
 import com.merge.game.resources.textures.Textures;
@@ -71,7 +68,6 @@ public class SceneGame extends Scene {
         initBonus();
         initTrash();
         initClear();
-        initTasks();
     }
 
     public void update() {
@@ -277,10 +273,6 @@ public class SceneGame extends Scene {
         //_panelBottom.addClearButton(_clearButton);
     }
 
-    private void initTasks() {
-
-    }
-
     private void initBonus() {
         for (int i = 1; i <= BonusType.BONUS_QUANTITY; i++) {
             BonusButton bonusButton = new BonusButton(i);
@@ -377,44 +369,44 @@ public class SceneGame extends Scene {
 
         for (int i = 0; i < _panelLeft.getTasks().size(); i++) {
 
-            TaskArea area = _panelLeft.getTasks().get(i);
+            Task task = _panelLeft.getTasks().get(i);
+            task.updateTaskItemsList();
 
-            area.update();
-            ArrayList<Task> addedTasks = area.getTaskPanel().getAddedTasks();
+            ArrayList<TaskItem> addedTasks = task.getAddedTaskItemsList();
 
             //подсчёт количества подходящих для задания итемсов
             for (int j = 0; j < GRID_COUNT_WIDTH; j++) {
                 for (int k = 0; k < GRID_COUNT_HEIGHT; k++) {
                     if (_items[j][k] != null && _items[j][k].canBeMerge()) {
                         for (int l = 0; l < addedTasks.size(); l++) {
-                            if (addedTasks.get(l).exists(_items[j][k])) {
-                                addedTasks.get(l).existsCount++;
-                                addedTasks.get(l).itemsToRemove.add((_items[j][k]));
+                            if (addedTasks.get(l).equalsTask(_items[j][k])) {
+                                addedTasks.get(l)._existsCount++;
+                                addedTasks.get(l)._itemsToRemove.add((_items[j][k]));
                             }
                         }
                     }
                 }
             }
 
-            if (area.tasksComplete()) {
-                area.activeButton();
+            if (task.taskComplete()) {
+                task.activeButton();
             } else {
-                area.inactiveButton();
+                task.inactiveButton();
             }
 
-            if (area.buttonIsPressed()) {
+            if (task.buttonIsPressed()) {
                 //убираем с поля итемсы из задания
                 for (int j = 0; j < addedTasks.size(); j++) {
-                    Task currentTask = addedTasks.get(j);
-                    for (int k = 0; k < currentTask.count; k++) {
-                        GridObject itemToRemove = currentTask.itemsToRemove.get(k);
+                    TaskItem currentTask = addedTasks.get(j);
+                    for (int k = 0; k < currentTask.getCount(); k++) {
+                        MergeItem itemToRemove = currentTask._itemsToRemove.get(k);
                         removeChild(itemToRemove);
                         _items[itemToRemove.getGridX()][itemToRemove.getGridY()] = null;
                     }
                 }
 
                 //меняем задание
-                area.generateTask();
+                task.updateTasks();
 
                 //получаем золото - подсчёт в зависимости от уровня типа и пр
                 //scoreCount ++;

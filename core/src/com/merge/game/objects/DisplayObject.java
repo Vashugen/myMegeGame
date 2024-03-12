@@ -16,9 +16,6 @@ import com.merge.game.objects.shader_effects.ShaderEffect;
 import com.merge.game.resources.Shaders;
 
 import java.util.ArrayList;
-import java.util.Collection;
-
-import javax.swing.AbstractButton;
 
 public class DisplayObject {
 
@@ -379,4 +376,5 @@ public class DisplayObject {
         label.setCenterCoeff(cx, cy);
         return label;
     }
+
 }
