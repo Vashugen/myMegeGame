@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.merge.game.logic.player_data.Player;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.grid.GenerateItemType;
+import com.merge.game.objects.grid.MergeItem;
 import com.merge.game.objects.gui.elements.labels.Label;
 import com.merge.game.resources.Fonts;
 
@@ -11,11 +12,13 @@ import java.util.ArrayList;
 
 public class TaskItem extends DisplayObject {
 
-    private int _type;
-    private int _level;
+    private int _type, _level, _count;
     private String _generateType;
     private int _count;
     private Label _label;
+
+    private int _existsCount;
+    private ArrayList<MergeItem> _itemsToRemove;
 
     public TaskItem(int type, int level, String generateType, int count) {
         setTexture(getTexture(type, level, generateType));
@@ -23,8 +26,8 @@ public class TaskItem extends DisplayObject {
         _level = level;
         _generateType = generateType;
         _count = count;
-        //this.existsCount = 0;
-        //this.itemsToRemove = new ArrayList<>();
+        _existsCount = 0;
+        _itemsToRemove = new ArrayList<>();
     }
 
     public void initLabel() {

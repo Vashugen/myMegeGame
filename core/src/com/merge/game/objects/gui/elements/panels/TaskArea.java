@@ -25,4 +25,8 @@ public class TaskArea extends DisplayObject {
             _tasksList.add(task);
         }
     }
+
+    public ArrayList getTasks() {
+        return _tasksList;
+    }
 }

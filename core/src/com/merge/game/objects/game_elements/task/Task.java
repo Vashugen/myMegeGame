@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Task extends DisplayObject {
 
     public static final int TASKS_COUNT = 2;
-    private ArrayList<TaskItem> addedTasks = new ArrayList<>();
+    private ArrayList<TaskItem> addedTaskItemsList = new ArrayList<>();
 
 /*    public int existsCount;
     public ArrayList<GridObject> itemsToRemove;*/
@@ -51,7 +51,7 @@ public class Task extends DisplayObject {
             //проверка на дубли в заданиях, TODO check
             if(!taskExists(taskItem)){
                 addChild(taskItem);
-                addedTasks.add(taskItem);
+                addedTaskItemsList.add(taskItem);
                 setTask(taskItem, i, tasksCount);
             }else {
                 i--;
@@ -60,8 +60,8 @@ public class Task extends DisplayObject {
     }
 
     private boolean taskExists(TaskItem taskItem) {
-        for(int j = 0; j < addedTasks.size(); j++){
-            if(addedTasks.get(j).equalsTask(taskItem)){
+        for(int j = 0; j < addedTaskItemsList.size(); j++){
+            if(addedTaskItemsList.get(j).equalsTask(taskItem)){
                 return true;
             }
         }

@@ -8,6 +8,7 @@ import com.merge.game.objects.Background;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.GameObjectType;
 import com.merge.game.objects.game_elements.Trash;
+import com.merge.game.objects.game_elements.task.Task;
 import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.objects.grid.GridCell;
 import com.merge.game.objects.grid.MergeItem;
@@ -364,6 +365,11 @@ public class SceneGame extends Scene {
     }
 
     private void updateTasks() {
+
+        for (int i = 0; i < _panelLeft.getTasks().size(); i++) {
+            Task task = (Task) _panelLeft.getTasks().get(i);
+            task.update();
+        }
 
         for (int i = 0; i < _panelLeft.getTasks().size(); i++) {
 
