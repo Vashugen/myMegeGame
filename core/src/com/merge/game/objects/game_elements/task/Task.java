@@ -12,15 +12,10 @@ import java.util.ArrayList;
 public class Task extends DisplayObject {
 
     public static final int TASKS_COUNT = 2;
-    private ArrayList<TaskItem> addedTaskItemsList = new ArrayList<>();
-
-/*    public int existsCount;
-    public ArrayList<GridObject> itemsToRemove;*/
+    private ArrayList<TaskItem> _addedTaskItemsList = new ArrayList<>();
 
     private int _index;
     private Button _button;
-
-    private ArrayList<TaskItem> taskItemsList;
 
     public Task(DisplayObject parent, int index) {
         parent.addChild(this);
@@ -51,7 +46,7 @@ public class Task extends DisplayObject {
             //проверка на дубли в заданиях, TODO check
             if(!taskExists(taskItem)){
                 addChild(taskItem);
-                addedTaskItemsList.add(taskItem);
+                _addedTaskItemsList.add(taskItem);
                 setTask(taskItem, i, tasksCount);
             }else {
                 i--;
@@ -60,8 +55,8 @@ public class Task extends DisplayObject {
     }
 
     private boolean taskExists(TaskItem taskItem) {
-        for(int j = 0; j < addedTaskItemsList.size(); j++){
-            if(addedTaskItemsList.get(j).equalsTask(taskItem)){
+        for(int j = 0; j < _addedTaskItemsList.size(); j++){
+            if(_addedTaskItemsList.get(j).equalsTask(taskItem)){
                 return true;
             }
         }
@@ -75,10 +70,20 @@ public class Task extends DisplayObject {
 
         taskItem.scaleToFit(coeffFit, coeffFit);
         taskItem.setCenterCoeff(0.25f * coeffCenter + 0.5f * indexPanel, 0.35f);
-        //taskItem.setX(indexPanel * taskItem.getWidth());
         taskItem.initLabel();
 
     }
+    
+    public void updateTaskItemsList() {
+        for (int i = 0; i < _addedTaskItemsList.size(); i++) {
+            _addedTaskItemsList.get(i)._existsCount = 0;
+            _addedTaskItemsList.get(i)._itemsToRemove.clear();
+        }
 
+        _button.setDisabled(TextureItems.taskDisabledButton, true);
+    }
 
+    public ArrayList<TaskItem> getAddedTaskItemsList() {
+        return _addedTaskItemsList;
+    }
 }

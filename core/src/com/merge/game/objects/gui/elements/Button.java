@@ -83,4 +83,9 @@ public class Button extends DisplayObject {
     public void setDisabled(boolean state){
         _isDisabled = state;
     }
+
+    public void setDisabled(TextureRegion texture, boolean state) {
+        setTexture(texture);
+        setDisabled(state);
+    }
 }

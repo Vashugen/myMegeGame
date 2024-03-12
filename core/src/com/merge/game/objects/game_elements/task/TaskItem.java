@@ -14,11 +14,10 @@ public class TaskItem extends DisplayObject {
 
     private int _type, _level, _count;
     private String _generateType;
-    private int _count;
     private Label _label;
 
-    private int _existsCount;
-    private ArrayList<MergeItem> _itemsToRemove;
+    public int _existsCount;
+    public ArrayList<MergeItem> _itemsToRemove;
 
     public TaskItem(int type, int level, String generateType, int count) {
         setTexture(getTexture(type, level, generateType));
@@ -48,5 +47,9 @@ public class TaskItem extends DisplayObject {
 
     public boolean equalsTask(TaskItem taskItem) {
         return _type == taskItem._type && _level == taskItem._level && _generateType.equals(taskItem._generateType);
+    }
+
+    public boolean equalsTask(MergeItem mergeItem) {
+        return _type == mergeItem.getType() && _level == mergeItem.getLevel() && _generateType.equals(mergeItem.getGenerateType());
     }
 }

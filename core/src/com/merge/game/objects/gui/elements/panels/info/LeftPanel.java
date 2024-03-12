@@ -52,7 +52,7 @@ public class LeftPanel extends DisplayObject {
         _panelInfo.updateGold(quantity);
     }
 
-    public ArrayList getTasks() {
+    public ArrayList<Task> getTasks() {
         return taskArea.getTasks();
     }
 

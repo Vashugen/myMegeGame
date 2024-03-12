@@ -9,6 +9,7 @@ import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.GameObjectType;
 import com.merge.game.objects.game_elements.Trash;
 import com.merge.game.objects.game_elements.task.Task;
+import com.merge.game.objects.game_elements.task.TaskItem;
 import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.objects.grid.GridCell;
 import com.merge.game.objects.grid.MergeItem;
@@ -367,8 +368,26 @@ public class SceneGame extends Scene {
     private void updateTasks() {
 
         for (int i = 0; i < _panelLeft.getTasks().size(); i++) {
-            Task task = (Task) _panelLeft.getTasks().get(i);
-            task.update();
+
+            Task task = _panelLeft.getTasks().get(i);
+            task.updateTaskItemsList();
+
+            ArrayList<TaskItem> addedTasks = task.getAddedTaskItemsList();
+
+            //подсчёт количества подходящих для задания итемсов
+            for (int j = 0; j < GRID_COUNT_WIDTH; j++) {
+                for (int k = 0; k < GRID_COUNT_HEIGHT; k++) {
+                    if (_items[j][k] != null && _items[j][k].canBeMerge()) {
+                        for (int l = 0; l < addedTasks.size(); l++) {
+                            if (addedTasks.get(l).equalsTask(_items[j][k])) {
+                                addedTasks.get(l)._existsCount++;
+                                addedTasks.get(l)._itemsToRemove.add((_items[j][k]));
+                            }
+                        }
+                    }
+                }
+            }
+
         }
 
         for (int i = 0; i < _panelLeft.getTasks().size(); i++) {
