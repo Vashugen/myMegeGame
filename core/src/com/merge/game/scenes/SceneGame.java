@@ -398,17 +398,15 @@ public class SceneGame extends Scene {
                 //убираем с поля итемсы из задания
                 for (int j = 0; j < addedTasks.size(); j++) {
                     TaskItem currentTask = addedTasks.get(j);
-                    for (int k = 0; k < currentTask._existsCount; k++) {
+                    for (int k = 0; k < currentTask.getCount(); k++) {
                         MergeItem itemToRemove = currentTask._itemsToRemove.get(k);
                         removeChild(itemToRemove);
                         _items[itemToRemove.getGridX()][itemToRemove.getGridY()] = null;
-                        task.removeChild(currentTask);
-                        task.updateTaskItemsList();
                     }
                 }
 
                 //меняем задание
-                task.createTasks();
+                task.updateTasks();
 
                 //получаем золото - подсчёт в зависимости от уровня типа и пр
                 //scoreCount ++;

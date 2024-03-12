@@ -108,4 +108,12 @@ public class Task extends DisplayObject {
     public boolean buttonIsPressed() {
         return _button.isPressed();
     }
+
+    public void updateTasks() {
+        for (int i = 0; i < _addedTaskItemsList.size(); i++) {
+            removeChild(_addedTaskItemsList.get(i));
+        }
+        _addedTaskItemsList.clear();
+        createTasks();
+    }
 }
