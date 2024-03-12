@@ -29,6 +29,10 @@ public class TaskItem extends DisplayObject {
         _itemsToRemove = new ArrayList<>();
     }
 
+    public int getCount() {
+        return _count;
+    }
+
     public void initLabel() {
         _label = createLabel(Fonts.fontXSmall, "", 0.5f, 1.3f);
         updateLabel();

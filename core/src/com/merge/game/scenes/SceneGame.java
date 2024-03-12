@@ -388,6 +388,32 @@ public class SceneGame extends Scene {
                 }
             }
 
+            if (task.taskComplete()) {
+                task.activeButton();
+            } else {
+                task.inactiveButton();
+            }
+
+            if (task.buttonIsPressed()) {
+                //убираем с поля итемсы из задания
+                for (int j = 0; j < addedTasks.size(); j++) {
+                    Task currentTask = addedTasks.get(j);
+                    for (int k = 0; k < currentTask.count; k++) {
+                        GridObject itemToRemove = currentTask.itemsToRemove.get(k);
+                        removeChild(itemToRemove);
+                        _items[itemToRemove.getGridX()][itemToRemove.getGridY()] = null;
+                    }
+                }
+
+                //меняем задание
+                area.generateTask();
+
+                //получаем золото - подсчёт в зависимости от уровня типа и пр
+                //scoreCount ++;
+
+                //проверка на баллы и расширение поля
+            }
+
         }
 
         for (int i = 0; i < _panelLeft.getTasks().size(); i++) {

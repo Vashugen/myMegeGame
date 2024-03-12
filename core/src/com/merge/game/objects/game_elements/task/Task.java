@@ -86,4 +86,26 @@ public class Task extends DisplayObject {
     public ArrayList<TaskItem> getAddedTaskItemsList() {
         return _addedTaskItemsList;
     }
+
+    public boolean taskComplete() {
+        for (int i = 0; i < _addedTaskItemsList.size(); i++) {
+            if(_addedTaskItemsList.get(i)._existsCount < _addedTaskItemsList.get(i).getCount()){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void activeButton() {
+        _button.setDisabled(TextureItems.taskAbledButton, false);
+    }
+
+    public void inactiveButton() {
+        _button.setDisabled(TextureItems.taskDisabledButton, true);
+    }
+
+    public boolean buttonIsPressed() {
+
+    }
 }
