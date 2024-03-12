@@ -106,6 +106,6 @@ public class Task extends DisplayObject {
     }
 
     public boolean buttonIsPressed() {
-
+        return _button.isPressed();
     }
 }

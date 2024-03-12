@@ -397,9 +397,9 @@ public class SceneGame extends Scene {
             if (task.buttonIsPressed()) {
                 //убираем с поля итемсы из задания
                 for (int j = 0; j < addedTasks.size(); j++) {
-                    Task currentTask = addedTasks.get(j);
-                    for (int k = 0; k < currentTask.count; k++) {
-                        GridObject itemToRemove = currentTask.itemsToRemove.get(k);
+                    TaskItem currentTask = addedTasks.get(j);
+                    for (int k = 0; k < currentTask._existsCount; k++) {
+                        MergeItem itemToRemove = currentTask._itemsToRemove.get(k);
                         removeChild(itemToRemove);
                         _items[itemToRemove.getGridX()][itemToRemove.getGridY()] = null;
                     }
@@ -414,54 +414,6 @@ public class SceneGame extends Scene {
                 //проверка на баллы и расширение поля
             }
 
-        }
-
-        for (int i = 0; i < _panelLeft.getTasks().size(); i++) {
-
-            TaskItem area = _panelLeft.getTasks().get(i);
-
-            area.update();
-            ArrayList<Task> addedTasks = area.getTaskPanel().getAddedTasks();
-
-            //подсчёт количества подходящих для задания итемсов
-            for (int j = 0; j < GRID_COUNT_WIDTH; j++) {
-                for (int k = 0; k < GRID_COUNT_HEIGHT; k++) {
-                    if (_items[j][k] != null && _items[j][k].canBeMerge()) {
-                        for (int l = 0; l < addedTasks.size(); l++) {
-                            if (addedTasks.get(l).exists(_items[j][k])) {
-                                addedTasks.get(l).existsCount++;
-                                addedTasks.get(l).itemsToRemove.add((_items[j][k]));
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (area.tasksComplete()) {
-                area.activeButton();
-            } else {
-                area.inactiveButton();
-            }
-
-            if (area.buttonIsPressed()) {
-                //убираем с поля итемсы из задания
-                for (int j = 0; j < addedTasks.size(); j++) {
-                    Task currentTask = addedTasks.get(j);
-                    for (int k = 0; k < currentTask.count; k++) {
-                        GridObject itemToRemove = currentTask.itemsToRemove.get(k);
-                        removeChild(itemToRemove);
-                        _items[itemToRemove.getGridX()][itemToRemove.getGridY()] = null;
-                    }
-                }
-
-                //меняем задание
-                area.generateTask();
-
-                //получаем золото - подсчёт в зависимости от уровня типа и пр
-                //scoreCount ++;
-
-                //проверка на баллы и расширение поля
-            }
         }
     }
 
