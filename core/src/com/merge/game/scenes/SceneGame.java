@@ -406,7 +406,7 @@ public class SceneGame extends Scene {
                 }
 
                 //меняем задание
-                area.generateTask();
+                task.createTasks();
 
                 //получаем золото - подсчёт в зависимости от уровня типа и пр
                 //scoreCount ++;

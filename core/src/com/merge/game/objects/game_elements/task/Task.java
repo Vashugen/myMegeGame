@@ -34,7 +34,7 @@ public class Task extends DisplayObject {
         _button = createButton(TextureItems.taskDisabledButton, 0.4f, 0.5f, 1.05f);
     }
 
-    private void createTasks() {
+    public void createTasks() {
         int type, level, count;
         int tasksCount = Tools.randomInt(1, 3);
         for (int i = 0; i < tasksCount; i++){
