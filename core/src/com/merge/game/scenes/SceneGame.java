@@ -403,6 +403,7 @@ public class SceneGame extends Scene {
                         removeChild(itemToRemove);
                         _items[itemToRemove.getGridX()][itemToRemove.getGridY()] = null;
                         task.removeChild(currentTask);
+                        task.updateTaskItemsList();
                     }
                 }
 
@@ -414,7 +415,6 @@ public class SceneGame extends Scene {
 
                 //проверка на баллы и расширение поля
             }
-
         }
     }
 
