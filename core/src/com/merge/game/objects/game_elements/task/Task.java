@@ -5,7 +5,6 @@ import com.merge.game.logic.Tools;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.objects.gui.elements.Button;
-import com.merge.game.objects.gui.elements.panels.TaskItem2;
 import com.merge.game.resources.textures.TextureItems;
 
 import java.util.ArrayList;
@@ -25,10 +24,11 @@ public class Task extends DisplayObject {
 
     public Task(DisplayObject parent, int index) {
         parent.addChild(this);
-        setTexture(TextureItems.taskField);
-        scaleToFit(0.9f, 0.9f);
-        setCenterCoeff(0.5f, 0.4f);
         _index = index;
+        setTexture(TextureItems.taskField);
+        scaleToWidth(0.8f);
+        setCenterCoeff(0.5f, 0.25f + index * 0.5f);
+
         initButton();
         createTasks();
         //this.existsCount = 0;
@@ -36,7 +36,7 @@ public class Task extends DisplayObject {
     }
 
     private void initButton() {
-        _button = createButton(TextureItems.taskDisabledButton, 0.10f, 0.5f, 1.3f);
+        _button = createButton(TextureItems.taskDisabledButton, 0.4f, 0.5f, 1.05f);
     }
 
     private void createTasks() {
@@ -70,11 +70,12 @@ public class Task extends DisplayObject {
 
     private void setTask(TaskItem taskItem, int indexPanel, int tasksCount){
 
-        float coeffFit = tasksCount == 1 ? 0.8f : 0.4f;
+        float coeffFit = tasksCount == 1 ? 0.7f : 0.4f;
+        float coeffCenter = tasksCount == 1 ? 2 : 1;
 
         taskItem.scaleToFit(coeffFit, coeffFit);
-        taskItem.setCenterCoeff(0.25f + 0.5f * indexPanel, 0.35f);
-        taskItem.setX(indexPanel * taskItem.getWidth());
+        taskItem.setCenterCoeff(0.25f * coeffCenter + 0.5f * indexPanel, 0.35f);
+        //taskItem.setX(indexPanel * taskItem.getWidth());
         taskItem.initLabel();
 
     }

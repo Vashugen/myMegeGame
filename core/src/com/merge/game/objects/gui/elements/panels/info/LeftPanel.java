@@ -2,9 +2,7 @@ package com.merge.game.objects.gui.elements.panels.info;
 
 import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
-import com.merge.game.objects.game_elements.task.Task;
 import com.merge.game.objects.gui.elements.panels.TaskArea;
-import com.merge.game.objects.gui.elements.panels.TaskItem;
 
 import java.util.ArrayList;
 
@@ -13,11 +11,11 @@ public class LeftPanel extends DisplayObject {
     public PanelInfo _panelInfo;
 
     private TaskArea taskArea;
-    private ArrayList<TaskItem> tasks = new ArrayList<>();
+    //private ArrayList<TaskItem> tasks = new ArrayList<>();
 
-    public ArrayList<TaskItem> getTasks() {
+/*    public ArrayList<TaskItem> getTasks() {
         return tasks;
-    }
+    }*/
 
     public void init() {
         setWidth(Globals.offsetX);
@@ -26,6 +24,10 @@ public class LeftPanel extends DisplayObject {
 
         initGoldEnergyArea();
         initTasksArea();
+    }
+
+    public PanelInfo getPanelInfo() {
+        return _panelInfo;
     }
 
     private void initGoldEnergyArea() {
@@ -48,7 +50,7 @@ public class LeftPanel extends DisplayObject {
         _panelInfo.updateGold(quantity);
     }
 
-    public void setTask(TaskItem task, int indexPanel, int tasksCount) {
+/*    public void setTask(TaskItem task, int indexPanel, int tasksCount) {
         taskArea.setTask(task, indexPanel);
-    }
+    }*/
 }

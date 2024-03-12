@@ -23,13 +23,12 @@ public class TaskItem extends DisplayObject {
         _level = level;
         _generateType = generateType;
         _count = count;
-        initLabel();
         //this.existsCount = 0;
         //this.itemsToRemove = new ArrayList<>();
     }
 
     public void initLabel() {
-        _label = createLabel(Fonts.fontMedium, "", 0.5f, 1.3f);
+        _label = createLabel(Fonts.fontXSmall, "", 0.5f, 1.3f);
         updateLabel();
     }
 

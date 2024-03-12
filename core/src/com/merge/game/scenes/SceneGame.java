@@ -7,11 +7,9 @@ import com.merge.game.logic.player_data.Player;
 import com.merge.game.objects.Background;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.GameObjectType;
-import com.merge.game.objects.game_elements.task.Task;
 import com.merge.game.objects.game_elements.Trash;
 import com.merge.game.objects.grid.GenerateItemType;
 import com.merge.game.objects.grid.GridCell;
-import com.merge.game.objects.grid.GridObject;
 import com.merge.game.objects.grid.MergeItem;
 import com.merge.game.objects.gui.WindowGui;
 import com.merge.game.objects.gui.elements.Button;
@@ -19,7 +17,6 @@ import com.merge.game.objects.gui.elements.buttons.bonus.BonusButton;
 import com.merge.game.objects.gui.elements.buttons.bonus.BonusType;
 import com.merge.game.objects.gui.elements.panels.info.LeftPanel;
 import com.merge.game.objects.gui.elements.panels.RightPanel;
-import com.merge.game.objects.gui.elements.panels.TaskItem;
 import com.merge.game.objects.gui.windows.WindowShop;
 import com.merge.game.resources.GameSound;
 import com.merge.game.resources.textures.TextureItems;
@@ -69,7 +66,6 @@ public class SceneGame extends Scene {
         initBonus();
         initTrash();
         initClear();
-        initTasks();
     }
 
     public void update() {
@@ -273,12 +269,6 @@ public class SceneGame extends Scene {
     private void initClear() {
         _clearButton = new Button(TextureItems.clear);
         //_panelBottom.addClearButton(_clearButton);
-    }
-
-    private void initTasks() {
-        for (int i = 0; i < Task.TASKS_COUNT; i++) {
-            createTasks();
-        }
     }
 
     private void initBonus() {

@@ -2,6 +2,8 @@ package com.merge.game.objects.gui.elements.panels;
 
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.game_elements.task.Task;
+import com.merge.game.objects.gui.elements.panels.info.LeftPanel;
+import com.merge.game.resources.textures.TextureItems;
 
 import java.util.ArrayList;
 
@@ -12,7 +14,7 @@ public class TaskArea extends DisplayObject {
     public void init() {
         setSizeOfParent();
         setHeight(parent.getHeight() * 0.9f);
-        setY(parent.getHeight());
+        setY(((LeftPanel) this.parent).getPanelInfo().getHeight());
 
         initTasks();
     }
@@ -23,17 +25,4 @@ public class TaskArea extends DisplayObject {
             _tasksList.add(task);
         }
     }
-
-    public void setTask(TaskItem task, int index, int tasksCount) {
-
-    }
-
-/*    public void setTask(Task task, int indexPanel) {
-        _tasksList.get(indexPanel).addTask(task);
-        TaskItem2 taskItem = new TaskItem2();
-        addChild(taskItem);
-        taskItem.setSize(getWidth() / _countTask ,getHeight());
-        taskItem.setX(indexPanel * taskItem.getWidth());
-        taskItem.init(task.getTexture(), task.count);
-    }*/
 }

@@ -1,3 +1,4 @@
+/*
 package com.merge.game.objects.gui.elements.panels;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -90,3 +91,4 @@ public class TaskItem extends DisplayObject {
 
 
 }
+*/
