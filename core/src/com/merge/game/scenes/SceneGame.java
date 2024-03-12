@@ -402,6 +402,7 @@ public class SceneGame extends Scene {
                         MergeItem itemToRemove = currentTask._itemsToRemove.get(k);
                         removeChild(itemToRemove);
                         _items[itemToRemove.getGridX()][itemToRemove.getGridY()] = null;
+                        task.removeChild(currentTask);
                     }
                 }
 

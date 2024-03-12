@@ -56,7 +56,4 @@ public class LeftPanel extends DisplayObject {
         return taskArea.getTasks();
     }
 
-/*    public void setTask(TaskItem task, int indexPanel, int tasksCount) {
-        taskArea.setTask(task, indexPanel);
-    }*/
 }
