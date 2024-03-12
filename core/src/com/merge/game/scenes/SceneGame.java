@@ -489,10 +489,15 @@ public class SceneGame extends Scene {
     }
 
     private void updateGlobal() {
+
         for (int i = 0; i < GRID_COUNT_WIDTH; i++) {
             for (int j = 0; j < GRID_COUNT_HEIGHT; j++) {
-                if (_items[i][j] != null && _items[i][j].isGenerate()) {
-                    Globals.updateGenerateList(_items[i][j].getGenerateType());
+                if(_items[i][j] != null){
+                    if (_items[i][j].isGenerate()){
+                        Globals.updateGenerateList(_items[i][j].getGenerateType());
+                    }else {
+                        Globals.updateMergeLevelList(_items[i][j]);
+                    }
                 }
             }
         }
