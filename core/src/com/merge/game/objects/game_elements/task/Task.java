@@ -40,7 +40,7 @@ public class Task extends DisplayObject {
         for (int i = 0; i < tasksCount; i++){
             String generateItemType = Globals.generateExists.get(Tools.randomInt(0, Globals.generateExists.size()));
             type = Tools.randomInt(1, GenerateItemType.getTexture(generateItemType, 1).length);
-            level = Tools.randomInt(1, Globals.getMaxExistsLevel(generateItemType)); //TODO потом изменить на ОТ поднимать в зависимости от уровня
+            level = Tools.randomInt(1, Globals.getMaxExistsLevel(generateItemType) + 1); //TODO потом изменить на ОТ поднимать в зависимости от уровня
             count = Tools.randomInt(1, 3);
             TaskItem taskItem  = new TaskItem(type, level, generateItemType, count);
             //проверка на дубли в заданиях, TODO check
