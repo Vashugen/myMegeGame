@@ -9,7 +9,7 @@ public class TextureItems {
             taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel, window, windowShop, buttonClose, buttonBuy, panelBonusCount;
     public static TextureRegion bonusPanel, bonusSquare, bonusCount, bonusFixGenerate, bonusMaxItem, bonusMagicGenerator, bonusRandomGenerator;
     public static TextureRegion mainScenePanel, mainScenePlay, mainSceneShop, mainSceneRewards;
-    public static TextureRegion[] numbers;
+    public static TextureRegion goldEnergyPanel;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
     public static TextureRegion[] amulet1, amulet2, amulet3, amulet4;
     public static TextureRegion[] potion1, potion2, potion3, potion4;
@@ -18,6 +18,7 @@ public class TextureItems {
     public static TextureRegion[] magic1;
 
     public static void initItems(){
+        initTextureItems();
         initFields();
         initMain();
         initBonus();
@@ -25,7 +26,12 @@ public class TextureItems {
         initMergeItems();
         initGameItems();
         initTasks();
-        initNumbers();
+    }
+
+    private static void initTextureItems() {
+        Texture texture = Textures.textureItems;
+        bonusPanel = new TextureRegion(texture, 0, 0, 200, 421);
+        goldEnergyPanel = new TextureRegion(texture, 185, 5, 429, 154);
     }
 
     private static void initFields() {
@@ -241,15 +247,16 @@ public class TextureItems {
 
     private static void initTasks() {
         Texture texture = Textures.panels;
-        taskField = new TextureRegion(texture, 197, 616, 114, 107);
+        //taskField = new TextureRegion(texture, 197, 616, 114, 107);
+        taskField = new TextureRegion(texture, 814, 0, 203, 258);
         taskAbledButton = new TextureRegion(texture, 309, 448, 246, 121);
         taskDisabledButton = new TextureRegion(texture, 316, 568, 231, 114);
     }
 
     private static void initBonus() {
         Texture texture = Textures.panels;
-        bonusPanel = new TextureRegion(texture, 9, 219, 171, 390);
-        bonusSquare = new TextureRegion(texture, 803,6, 120, 120);
+        //bonusPanel = new TextureRegion(texture, 9, 219, 171, 390);
+        bonusSquare = new TextureRegion(texture, 839,270, 120, 120);
         bonusCount = new TextureRegion(texture, 685, 0, 120, 120);
         bonusFixGenerate = new TextureRegion(texture, 0, 852, 170, 170);
         bonusMaxItem = new TextureRegion(texture, 171, 852, 170, 170);
@@ -263,14 +270,6 @@ public class TextureItems {
         gridCell = new TextureRegion[3];
         for (int i = 0; i < 3; i++) {
             gridCell[i] = new TextureRegion(texture, 497 + (i * 168), 715, 168, 168);
-        }
-    }
-
-    private static void initNumbers() {
-        Texture texture = Textures.panels;
-        numbers = new TextureRegion[10];
-        for (int i = 0; i < 10; i++) {
-            numbers[i] = new TextureRegion(texture, 184 + (i * 120), 219, 120, 120);
         }
     }
 }

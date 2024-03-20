@@ -21,7 +21,7 @@ public class Task extends DisplayObject {
         parent.addChild(this);
         _index = index;
         setTexture(TextureItems.taskField);
-        scaleToWidth(0.8f);
+        scaleToFit(0.5f, 0.5f);
         setCenterCoeff(0.5f, 0.25f + index * 0.5f);
 
         initButton();
@@ -65,7 +65,7 @@ public class Task extends DisplayObject {
 
     private void setTask(TaskItem taskItem, int indexPanel, int tasksCount){
 
-        float coeffFit = tasksCount == 1 ? 0.7f : 0.4f;
+        float coeffFit = tasksCount == 1 ? 0.7f : 0.35f;
         float coeffCenter = tasksCount == 1 ? 2 : 1;
 
         taskItem.scaleToFit(coeffFit, coeffFit);

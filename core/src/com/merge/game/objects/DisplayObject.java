@@ -354,7 +354,7 @@ public class DisplayObject {
         return _alpha;
     }
 
-    protected DisplayObject createObject(TextureRegion texture, float scaleWidth, float cx, float cy){
+    public DisplayObject createObject(TextureRegion texture, float scaleWidth, float cx, float cy){
         DisplayObject object = new DisplayObject(texture);
         addChild(object);
         object.scaleToWidth(scaleWidth);

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.merge.game.objects.grid.GenerateItemType;
 
 public class Textures {
+    public static Texture textureItems;
     public static Texture texDisplacement;
     public static Texture TexBackground, TexBackgroundMain, TexBackgroundGame;
     public static Texture fields, panels, mainScene, items, amulet, potion, box, book;
@@ -13,6 +14,7 @@ public class Textures {
 
     public static void loadTextures(){
 
+        textureItems = loadTexture("textures/TextureItems.png", true);
         texDisplacement = loadTexture("scenes/game/Displacement.jpg", true);
         TexBackground = loadTextureMipmap("scenes/start/background.jpg", true);
         TexBackgroundMain =  loadTextureMipmap("scenes/main/background2.jpg", true);

@@ -1,41 +1,34 @@
-package com.merge.game.objects.gui.elements.panels.info;
+package com.merge.game.objects.gui.elements.panels;
 
 import com.merge.game.logic.Globals;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.game_elements.task.Task;
-import com.merge.game.objects.gui.elements.panels.TaskArea;
+import com.merge.game.objects.gui.elements.panels.info.InfoArea;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class LeftPanel extends DisplayObject {
 
-    public PanelInfo _panelInfo;
-
+    public InfoArea _infoArea;
     private TaskArea taskArea;
-    //private ArrayList<TaskItem> tasks = new ArrayList<>();
-
-/*    public ArrayList<TaskItem> getTasks() {
-        return tasks;
-    }*/
 
     public void init() {
         setWidth(Globals.offsetX);
         setHeight(Globals.screenHeight - Globals.offsetY - Globals.offsetTop);
         setY(Globals.offsetTop);
 
-        initGoldEnergyArea();
+        initInfoArea();
         initTasksArea();
     }
 
-    public PanelInfo getPanelInfo() {
-        return _panelInfo;
+    public InfoArea getPanelInfo() {
+        return _infoArea;
     }
 
-    private void initGoldEnergyArea() {
-        _panelInfo = new PanelInfo();
-        addChild(_panelInfo);
-        _panelInfo.init();
+    private void initInfoArea() {
+        _infoArea = new InfoArea();
+        addChild(_infoArea);
+        _infoArea.init();
     }
 
     private void initTasksArea() {
@@ -45,11 +38,11 @@ public class LeftPanel extends DisplayObject {
     }
 
     public void updateScore(int quantity) {
-        _panelInfo.updateScore(quantity);
+        _infoArea.updateScore(quantity);
     }
 
     public void updateGold(int quantity) {
-        _panelInfo.updateGold(quantity);
+        _infoArea.updateGold(quantity);
     }
 
     public ArrayList<Task> getTasks() {

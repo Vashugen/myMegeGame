@@ -20,6 +20,7 @@ public class RightPanel extends DisplayObject {
         setY(Globals.offsetTop);
 
         initBonusPanel();
+        initPrizePanel();
         initTrashPanel();
     }
 
@@ -33,6 +34,10 @@ public class RightPanel extends DisplayObject {
 
     private void initBonusPanel() {
         _panelBonus = new PanelBonus(this, TextureItems.bonusPanel, 0.7f, 0.8f);
+    }
+
+    private void initPrizePanel() {
+
     }
 
     private void initTrashPanel() {

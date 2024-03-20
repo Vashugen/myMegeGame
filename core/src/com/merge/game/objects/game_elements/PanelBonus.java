@@ -15,11 +15,11 @@ public class PanelBonus extends DisplayObject {
     public PanelBonus(DisplayObject parent, TextureRegion textureRegion, float coeffW, float coeffH) {
         setTexture(textureRegion);
         parent.addChild(this);
-        setWidth(parent.width * 0.7f);
-        setHeight(parent.height * 0.6f);
+        setWidth(parent.width * 0.35f);
+        setHeight(parent.height * 0.7f);
         //scaleToFit(coeffW, coeffH);
         //setHeight(coeffH);
-        setCenterCoeffX(0.5f);
+        setCenterCoeff(0.25f, 0.5f);
         setY(0);
         initBonusSquare();
         //initBonusButtons();

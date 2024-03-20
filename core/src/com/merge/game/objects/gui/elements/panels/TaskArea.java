@@ -2,8 +2,6 @@ package com.merge.game.objects.gui.elements.panels;
 
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.game_elements.task.Task;
-import com.merge.game.objects.gui.elements.panels.info.LeftPanel;
-import com.merge.game.resources.textures.TextureItems;
 
 import java.util.ArrayList;
 

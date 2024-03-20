@@ -17,7 +17,7 @@ import com.merge.game.objects.gui.WindowGui;
 import com.merge.game.objects.gui.elements.Button;
 import com.merge.game.objects.gui.elements.buttons.bonus.BonusButton;
 import com.merge.game.objects.gui.elements.buttons.bonus.BonusType;
-import com.merge.game.objects.gui.elements.panels.info.LeftPanel;
+import com.merge.game.objects.gui.elements.panels.LeftPanel;
 import com.merge.game.objects.gui.elements.panels.RightPanel;
 import com.merge.game.objects.gui.windows.WindowShop;
 import com.merge.game.resources.GameSound;
@@ -33,8 +33,8 @@ public class SceneGame extends Scene {
 
     private static final int ITEM_START_COUNT = 21;
 
-    private static final float GRID_COEF_WIDTH = 0.7f;
-    private static final float GRID_COEF_HEIGHT = 0.7f;
+    private static final float GRID_COEF_WIDTH = 0.8f;
+    private static final float GRID_COEF_HEIGHT = 0.8f;
 
     private Background _background;
     private static float gridWidth, gridHeight;
@@ -78,8 +78,8 @@ public class SceneGame extends Scene {
         updateEffects();
         updateActiveObject();
         updateItems();
-        updateTopPanel();
-        updatePanelInfo();
+        //updateTopPanel();
+        //updatePanelInfo();
         updateTasks();
         updateClearButton();
         updateBonusButtons();
