@@ -27,9 +27,9 @@ public class Window extends DisplayObject {
         setAlpha(0);
     }
 
-    public Window(float scaleToWidth, float cx, float cy, boolean buttonClose){
+    public Window(float scaleToHeight, float cx, float cy, boolean buttonClose){
         setTexture(TextureItems.windowShop);
-        scaleToWidth(scaleToWidth);
+        scaleToHeight(scaleToHeight);
         setCenterCoeff(cx, cy);
         if(buttonClose){
             addButtonCloseDefault();

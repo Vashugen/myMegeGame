@@ -32,13 +32,13 @@ public class ShopItem extends DisplayObject {
 
     private void initButtonBuy() {
         _buttonBuy = createButton(TextureItems.buttonBuy, 1.05f, 0.5f, 1.3f);
-        _buttonBuy.setLabel(Fonts.fontMedium, "" + BonusType.getItemCost(_bonusType));
+        _buttonBuy.setLabel(Fonts.fontXXSmall, "" + BonusType.getItemCost(_bonusType));
 
     }
 
     private void initLabelCount() {
         DisplayObject frame = createObject(TextureItems.panelBonusCount, 0.98f, 0.5f, -0.3f);
-        _labelCount = frame.createLabel(Fonts.fontMedium, "", 0, 0);
+        _labelCount = frame.createLabel(Fonts.fontXXSmall, "", 0, 0);
         updateLabel();
 
     }
