@@ -11,11 +11,12 @@ import com.merge.game.objects.gui.elements.labels.Label;
 public class Fonts {
 
     private static final float BASE_DEVICE_WIDTH = 768.0f;
-    public static BitmapFont fontXSmall, fontMedium, fontLarge;
+    public static BitmapFont fontXXSmall, fontXSmall, fontMedium, fontLarge;
 
     @SuppressWarnings("unused")
     public static void loadFonts() {
         float m = Globals.screenWidth / BASE_DEVICE_WIDTH;
+        fontXXSmall = loadFont("comic/comic.ttf", 20 * m, 1);
         fontXSmall = loadFont("comic/comic.ttf", 32 * m, 1);
         fontMedium = loadFont("comic/comic.ttf", 46 * m, 2);
         fontLarge = loadFont("comic/comic.ttf", 62 * m, 3);

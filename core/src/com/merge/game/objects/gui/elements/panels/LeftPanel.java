@@ -37,12 +37,12 @@ public class LeftPanel extends DisplayObject {
         taskArea.init();
     }
 
-    public void updateScore(int quantity) {
-        _infoArea.updateScore(quantity);
+    public void updateScore() {
+        _infoArea.updateScore();
     }
 
-    public void updateGold(int quantity) {
-        _infoArea.updateGold(quantity);
+    public void updateGold() {
+        _infoArea.updateGold();
     }
 
     public ArrayList<Task> getTasks() {

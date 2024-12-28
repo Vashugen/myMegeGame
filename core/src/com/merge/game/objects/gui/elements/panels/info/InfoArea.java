@@ -1,19 +1,20 @@
 package com.merge.game.objects.gui.elements.panels.info;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.merge.game.logic.player_data.Player;
+import com.merge.game.logic.player_data.PlayerItem;
 import com.merge.game.objects.DisplayObject;
 import com.merge.game.objects.gui.elements.labels.Label;
 import com.merge.game.objects.gui.elements.panels.PLPanel;
 import com.merge.game.resources.textures.TextureItems;
 
+import java.util.ArrayList;
+
 public class InfoArea extends DisplayObject {
 
     private static final int PANELS_COUNT = 2;
-
     private DisplayObject _panel;
-
-    PLPanel _panelScore;
-    PLPanel _panelGold;
+    private ArrayList<InfoItem> _infoItems = new ArrayList<>();
 
     public void init(){
         setSizeOfParent();
@@ -30,6 +31,7 @@ public class InfoArea extends DisplayObject {
         for (int i = 0; i < 2; i++) {
             InfoItem item = new InfoItem(_panel, 0.2f, i);
             item.setCenterCoeff(0.16f + itemNum * 0.5f, 0.5f);
+            _infoItems.add(i, item);
             itemNum ++;
         }
     }
@@ -38,20 +40,13 @@ public class InfoArea extends DisplayObject {
         _panel = createObject(TextureItems.goldEnergyPanel,0.8f, 0.5f, 0.5f);
     }
 
-    private PLPanel initPanel(TextureRegion texture, int indexPanel) {
-        PLPanel panel = new PLPanel();
-        addChild(panel);
-        panel.setSize(getWidth() / PANELS_COUNT ,getHeight());
-        panel.setX(indexPanel * panel.getWidth());
-        panel.init(texture, 0);
-        return panel;
+    public void updateGold() {
+        InfoItem item = _infoItems.get(PlayerItem.GOLD);
+        item.updateLabel();
     }
 
-    public void updateScore(int quantity) {
-        _panelScore.updateLabel(quantity);
-    }
-
-    public void updateGold(int quantity) {
-        _panelGold.updateLabel(quantity);
+    public void updateScore() {
+        InfoItem item = _infoItems.get(PlayerItem.SCORE);
+        item.updateLabel();
     }
 }

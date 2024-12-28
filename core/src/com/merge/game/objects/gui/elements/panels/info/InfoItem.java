@@ -11,26 +11,32 @@ import com.merge.game.resources.textures.TextureItems;
 public class InfoItem extends DisplayObject {
 
     private Label _label;
+    private int _infoType;
 
     public InfoItem(DisplayObject parent, float scaleToWidth, int infoType) {
         parent.addChild(this);
-        setTexture(getInfoTexture(infoType));
+        _infoType = infoType;
+        setTexture(getInfoTexture());
         scaleToWidth(scaleToWidth);
 
         initLabel();
     }
 
     private void initLabel() {
-        _label = createLabel(Fonts.fontMedium, "", 0, 0);
+        _label = createLabel(Fonts.fontXXSmall, "", 0, 0);
         updateLabel();
     }
 
-    private void updateLabel() {
-        _label.setText(Player.get().getGold() + "");
-        _label.
+    public void updateLabel() {
+        _label.setText(getInfoCount() + "");
+        _label.setCenterCoeff(1.5f,0.5f);
     }
 
-    private TextureRegion getInfoTexture(int infoType) {
-        return infoType == 0 ? TextureItems.gold : TextureItems.score;
+    private int getInfoCount() {
+        return _infoType == 0 ? Player.get().getGold() : Player.get().getScore();
+    }
+
+    private TextureRegion getInfoTexture() {
+        return _infoType == 0 ? TextureItems.gold : TextureItems.score;
     }
 }

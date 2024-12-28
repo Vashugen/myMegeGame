@@ -79,7 +79,7 @@ public class SceneGame extends Scene {
         updateActiveObject();
         updateItems();
         //updateTopPanel();
-        //updatePanelInfo();
+        updatePanelInfo();
         updateTasks();
         updateClearButton();
         updateBonusButtons();
@@ -331,8 +331,8 @@ public class SceneGame extends Scene {
     }
 
     private void updatePanelInfo() {
-        _panelLeft.updateScore(_scoreCount);
-        _panelLeft.updateGold(_goldCount);
+        _panelLeft.updateScore();
+        _panelLeft.updateGold();
     }
 
     private void updateTasks() {
