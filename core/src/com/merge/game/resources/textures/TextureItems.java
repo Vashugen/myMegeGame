@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class TextureItems {
 
     public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear,
-            taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel, window, windowShop, buttonClose, buttonBuy, panelBonusCount;
+            taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel, window, windowShop, buttonClose, buttonBuy, panelBonusCount, panelPlayerGold;
+    public static TextureRegion coinsBuySmall, coinsBuyMedium, coinsBuyLarge;
     public static TextureRegion bonusPanel, bonusSquare, bonusCount, bonusFixGenerate, bonusMaxItem, bonusMagicGenerator, bonusRandomGenerator;
     public static TextureRegion mainScenePanel, mainScenePlay, mainSceneShop, mainSceneRewards;
     public static TextureRegion goldEnergyPanel;
@@ -32,6 +33,9 @@ public class TextureItems {
         Texture texture = Textures.textureItems;
         bonusPanel = new TextureRegion(texture, 0, 0, 200, 421);
         goldEnergyPanel = new TextureRegion(texture, 185, 5, 429, 154);
+        coinsBuySmall = new TextureRegion(texture, 183, 158, 200, 200);
+        coinsBuyMedium = new TextureRegion(texture, 383, 158, 200, 200);
+        coinsBuyLarge = new TextureRegion(texture, 583, 158, 200, 200);
     }
 
     private static void initFields() {
@@ -44,6 +48,7 @@ public class TextureItems {
         buttonClose = new TextureRegion(texture, 309, 211, 200, 200);
         buttonBuy = new TextureRegion(texture, 21, 628, 200, 106);
         panelBonusCount = new TextureRegion(texture, 315, 690, 200, 99);
+        panelPlayerGold = new TextureRegion(texture, 200, 0, 358, 142);
 
         texture = Textures.gridPanel;
         gridPanel = new TextureRegion(texture);

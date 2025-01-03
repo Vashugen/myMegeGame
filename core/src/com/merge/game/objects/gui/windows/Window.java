@@ -66,13 +66,13 @@ public class Window extends DisplayObject {
         }
     }
 
-    private void updateWindow() {
+    protected void updateWindow() {
         if(_buttonClose != null && _buttonClose.isPressed()){
             disappear();
         }
     }
 
-    private void disappear() {
+    public void disappear() {
         _state = STATE_DISAPPEARING;
     }
 
