@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TextureItems {
 
-    public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear,
+    public static TextureRegion buttonStart, generateKettle, score, gold, level, trash, clear, plus,
             taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel, window, windowShop, buttonClose, buttonBuy, panelBonusCount, panelPlayerGold;
     public static TextureRegion coinsBuySmall, coinsBuyMedium, coinsBuyLarge;
     public static TextureRegion bonusPanel, bonusSquare, bonusCount, bonusFixGenerate, bonusMaxItem, bonusMagicGenerator, bonusRandomGenerator;
@@ -248,6 +248,7 @@ public class TextureItems {
         level = new TextureRegion(texture, 784, 0, 116, 116);
         trash = new TextureRegion(texture, 896, 0, 109, 109);
         clear = new TextureRegion(texture, 560, 132, 112, 112);
+        plus = new TextureRegion(texture, 674, 130, 120, 120);
     }
 
     private static void initTasks() {

@@ -362,7 +362,7 @@ public class DisplayObject {
         return object;
     }
 
-    protected Button createButton(TextureRegion texture, float widthCoeff, float cx, float cy) {
+    public Button createButton(TextureRegion texture, float widthCoeff, float cx, float cy) {
         Button button = new Button(texture);
         addChild(button);
         button.scaleToWidth(widthCoeff);

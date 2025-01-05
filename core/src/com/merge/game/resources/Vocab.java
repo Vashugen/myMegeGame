@@ -6,5 +6,13 @@ public class Vocab {
     public static final int RUSSIAN = 1;
     public static int lang = ENGLISH;
 
-    public static final String[] textGold = {"Coins", "Золото"};
+    public static final String[] textGold = {
+            "Coins",
+            "Золото"
+    };
+
+    public static final String[] textShop = {
+            "Shop",
+            "Магазин"
+    };
 }

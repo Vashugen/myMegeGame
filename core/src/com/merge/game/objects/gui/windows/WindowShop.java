@@ -7,6 +7,7 @@ import com.merge.game.objects.gui.elements.Button;
 import com.merge.game.objects.gui.elements.labels.Label;
 import com.merge.game.objects.gui.windows.elements.ShopItem;
 import com.merge.game.resources.Fonts;
+import com.merge.game.resources.Vocab;
 import com.merge.game.resources.textures.TextureItems;
 
 public class WindowShop extends Window {
@@ -17,6 +18,7 @@ public class WindowShop extends Window {
     public WindowShop(boolean canShowRewardVideo) {
         super(0.95f, 0.5f, 0.45f, true);
         initShopItems();
+        setTitle(Vocab.textShop[Vocab.lang].toUpperCase());
         initPlayerCoins();
     }
 
@@ -36,6 +38,8 @@ public class WindowShop extends Window {
         DisplayObject frame = createObject(TextureItems.panelPlayerGold, 0.32f, 0.59f, 0.84f);
         _labelCoins = frame.createLabel(Fonts.fontXXSmall, "", 0, 0);
         updateLabelCoins();
+
+        _buttonAddGold = frame.createButton(TextureItems.plus, 0.39f, 1.05f, 0.5f);
     }
 
     @Override
