@@ -2,6 +2,7 @@ package com.merge.game.objects.gui.windows;
 
 import com.merge.game.logic.api.InAppApi;
 import com.merge.game.objects.gui.elements.labels.Label;
+import com.merge.game.objects.gui.windows.elements.ShopItemGold;
 
 public class WindowShopGold extends Window {
 
@@ -27,7 +28,8 @@ public class WindowShopGold extends Window {
                     inApp = InAppApi.ID_GOLD_5_DOLLAR;
                     break;
             }
-
+            ShopItemGold item = new ShopItemGold(this,  0.18f, inApp);
+            item.setCenterCoeff(0.27f + 0.23f * i, 0.57f);
         }
 
     }
