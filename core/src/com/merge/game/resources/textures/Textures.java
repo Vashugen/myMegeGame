@@ -8,7 +8,7 @@ public class Textures {
     public static Texture textureItems;
     public static Texture texDisplacement;
     public static Texture TexBackground, TexBackgroundMain, TexBackgroundGame;
-    public static Texture fields, panels, mainScene, items, amulet, potion, box, book;
+    public static Texture fields, panels, startScene, items, amulet, potion, box, book;
     public static Texture gridPanel;
 
 
@@ -21,7 +21,7 @@ public class Textures {
         TexBackgroundGame = loadTextureMipmap("scenes/game/background.jpg", true);
         fields = loadTextureMipmap("scenes/game/Fields.png", true);
         panels = loadTextureMipmap("scenes/game/Panels.png", true);
-        mainScene = loadTextureMipmap("scenes/main/items.png", true);
+        startScene = loadTextureMipmap("scenes/start/items.png", true);
         items = loadTextureMipmap("scenes/game/MergeItems.png", true);
         amulet = loadTextureMipmap("scenes/game/AmuletItems.png", true);
         potion = loadTextureMipmap("scenes/game/PotionItems.png", true);

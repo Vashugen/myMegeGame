@@ -9,8 +9,6 @@ public class SceneFactory {
                 return new SceneStart();
             case SceneType.SCENE_GAME:
                 return new SceneGame();
-            case SceneType.SCENE_MAIN:
-                return new SceneMain();
             default:
                 throw new Error("Сцена не найдена");
         }

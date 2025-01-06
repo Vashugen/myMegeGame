@@ -9,7 +9,7 @@ public class TextureItems {
             taskField, taskAbledButton, taskDisabledButton, fade, broken, gridPanel, window, windowShop, buttonClose, buttonBuy, panelBonusCount, panelPlayerGold;
     public static TextureRegion coinsBuySmall, coinsBuyMedium, coinsBuyLarge;
     public static TextureRegion bonusPanel, bonusSquare, bonusCount, bonusFixGenerate, bonusMaxItem, bonusMagicGenerator, bonusRandomGenerator;
-    public static TextureRegion mainScenePanel, mainScenePlay, mainSceneShop, mainSceneRewards;
+    public static TextureRegion startScenePanel, startScenePlay, startSceneShop, startSceneMagic;
     public static TextureRegion goldEnergyPanel;
     public static TextureRegion[] gridCell, kettle1, kettle2, kettle3, kettle4, kettle5;
     public static TextureRegion[] amulet1, amulet2, amulet3, amulet4;
@@ -55,11 +55,11 @@ public class TextureItems {
     }
 
     private static void initMain(){
-        Texture texture = Textures.mainScene;
-        mainScenePanel = new TextureRegion(texture, 0, 209, 832, 320);
-        mainScenePlay = new TextureRegion(texture, 0, 0, 210, 210);
-        mainSceneShop = new TextureRegion(texture, 210 * 1, 0, 210, 210);
-        mainSceneRewards = new TextureRegion(texture, 210 * 2, 0, 210, 210);
+        Texture texture = Textures.startScene;
+        startScenePanel = new TextureRegion(texture, 0, 207, 634, 395);
+        startScenePlay = new TextureRegion(texture, 0, 0, 210, 210);
+        startSceneShop = new TextureRegion(texture, 210 * 1, 0, 210, 210);
+        startSceneMagic = new TextureRegion(texture, 210 * 2, 0, 210, 210);
     }
 
     private static void initMergeItems() {
